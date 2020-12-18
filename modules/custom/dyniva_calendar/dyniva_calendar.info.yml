@@ -1,8 +1,0 @@
-name: 'Dyniva Calendar'
-type: module
-description: 'calendar custom pager'
-package: Dyniva
-core: 8.x
-dependencies:
-  - calendar
-version: 8.x-1.0-alpha

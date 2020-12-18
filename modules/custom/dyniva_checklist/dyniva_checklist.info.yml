@@ -1,8 +1,0 @@
-name: 'Dyniva Checklist'
-description: 'Dyniva checklist module base on checklistapi.'
-type: module
-core: 8.x
-package: Dyniva
-dependencies:
-  - 'drupal:checklistapi'
-version: 8.x-1.0-alpha

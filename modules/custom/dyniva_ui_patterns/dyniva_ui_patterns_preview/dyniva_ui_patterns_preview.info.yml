@@ -1,6 +1,0 @@
-name: 'Dyniva Ui Preview'
-type: module
-description: 'sub mobulde for ui preview'
-package: Dyniva
-core: 8.x
-version: 8.x-1.0-alpha

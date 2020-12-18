@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: block_type_attribute
-label: 'Block Type Attribute'
-created: false
-changed: false
-uid: false
-title: false

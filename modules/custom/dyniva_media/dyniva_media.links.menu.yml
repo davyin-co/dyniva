@@ -1,5 +1,0 @@
-dyniva_media.admin_settings:
-  title: 'Media settings'
-  description: ''
-  parent: system.admin_config_media
-  route_name: dyniva_media.admin_settings

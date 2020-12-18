@@ -1,4 +1,0 @@
-excluded:
-  - block.block.views_block__content_recent_block_1
-  - block.block.views_block__private_message_block_all
-required: true

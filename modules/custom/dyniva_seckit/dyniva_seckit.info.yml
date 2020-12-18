@@ -1,6 +1,0 @@
-name: 'Dyniva Security Kit'
-type: module
-description: 启用强密码策略
-package: Dyniva
-core: 8.x
-version: 8.x-1.0-alpha

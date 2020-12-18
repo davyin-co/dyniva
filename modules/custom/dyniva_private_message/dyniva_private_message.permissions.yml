@@ -1,6 +1,0 @@
-create private message:
-  title: 'Create private message'
-  description: 'Allows users to send private messages'
-set private message notifier:
-  title: 'Set private message notifiers'
-  description: 'Allows users to set notifiers when create private message'

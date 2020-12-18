@@ -1,5 +1,0 @@
-dyniva_content_access.filter_config:
-  title: 'Dyniva content access'
-  parent: system.admin_config_content
-  description: 'Dyniva content access settings.'
-  route_name: dyniva_content_access.filter_config

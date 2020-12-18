@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  module:
-    - private_message
-id: private_message_thread.preview
-label: Preview
-targetEntityType: private_message_thread
-cache: true

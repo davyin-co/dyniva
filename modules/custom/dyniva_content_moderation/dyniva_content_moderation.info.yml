@@ -1,8 +1,0 @@
-name: 'Dyniva Content Moderation'
-type: module
-description: 'Content Moderation Enhancement'
-core: 8.x
-package: Dyniva
-dependencies:
-  - content_moderation
-version: 8.x-1.0-alpha

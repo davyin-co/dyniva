@@ -1,4 +1,0 @@
-services:
-  plugin.manager.prompt_rule_plugin:
-    class: Drupal\dyniva_prompt_message\Plugin\PromptRulePluginManager
-    parent: default_plugin_manager

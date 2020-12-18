@@ -1,6 +1,0 @@
-services:
-  dyniva_media.route_subscriber:
-    class: Drupal\dyniva_media\Routing\MediaRouteSubscriber
-    arguments: ['@entity_type.manager']
-    tags:
-      - { name: event_subscriber }

@@ -1,8 +1,0 @@
-name: 'Dyniva Content Access Control'
-type: module
-description: 'Content Access Control'
-core: 8.x
-package: Dyniva
-version: 8.x-1.0-alpha
-dependencies:
-  - dyniva_core

@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.paragraph_type_image
-name: 'Paragraph Type Image'
-type: paragraph_type_image
-description: ''

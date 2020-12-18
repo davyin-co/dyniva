@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: paragraph_type_image
-label: 'Paragraph Type Image'
-created: false
-changed: false
-uid: false
-title: false

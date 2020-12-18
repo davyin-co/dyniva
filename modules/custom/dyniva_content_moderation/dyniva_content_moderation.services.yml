@@ -1,9 +1,0 @@
-services:
-  dyniva_content_moderation.toolbar:
-    class: Drupal\dyniva_content_moderation\Toolbar
-    arguments: []
-
-  ccms.capture:
-    class: Drupal\dyniva_content_moderation\Capture
-    arguments: ['@config.factory']
-    

@@ -1,5 +1,0 @@
-dyniva_message.admin_settings:
-  title: 'Message settings'
-  description: ''
-  parent: message.main_settings
-  route_name: dyniva_message.settings

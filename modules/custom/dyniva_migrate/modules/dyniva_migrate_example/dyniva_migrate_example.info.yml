@@ -1,8 +1,0 @@
-name: 'Dyniva Migrate example'
-type: module
-description: 'Dyniva Migrate example module.'
-core: 8.x
-package: 'Common CMS'
-dependencies:
-  - dyniva_migrate
-version: 8.x-1.0-alpha

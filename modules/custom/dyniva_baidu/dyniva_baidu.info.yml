@@ -1,6 +1,0 @@
-name: 'Dyniva Baidu'
-type: module
-description: 'baidu map for text'
-package: Dyniva
-core: 8.x
-version: 8.x-1.0-alpha

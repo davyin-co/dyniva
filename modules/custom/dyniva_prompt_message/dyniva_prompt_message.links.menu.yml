@@ -1,4 +1,0 @@
-entity.prompt_rule.collection:
-  title: 'Prompt Message Rules'
-  route_name: entity.prompt_rule.collection
-  parent: system.admin_structure

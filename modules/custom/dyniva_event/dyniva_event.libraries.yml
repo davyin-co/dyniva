@@ -1,6 +1,0 @@
-form_widget:
-  js:
-    form_widget.js: {}
-  dependencies:
-    - core/jquery
-    - core/jquery.once

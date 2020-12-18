@@ -1,8 +1,0 @@
-<header class="privatemessage-manage-header">
-  <h2>{{'Private Message'|t}}</h2>
-  {% if can_create %}
-  <div class="privatemessage-manage-top">
-    <a class="button button--primary js-form-submit form-submit" href="{{path('dyniva_message.manage.private_message_create')}}?destination={{path('dyniva_message.manage.private_message_list')}}">{{'New Message'|t}}</a>
-  </div>
-  {% endif %}
-</header>

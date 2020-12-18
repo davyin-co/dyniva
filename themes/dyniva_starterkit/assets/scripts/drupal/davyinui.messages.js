@@ -1,1 +1,0 @@
-module.exports = require('bootstrap/js/alert');

@@ -1,3 +1,0 @@
-dyniva_core.managed_entity.task_links_add:
-  deriver: \Drupal\dyniva_core\Plugin\Derivative\ManagedEntityLocalTask
-  weight: 100

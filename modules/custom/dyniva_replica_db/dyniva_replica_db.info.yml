@@ -1,6 +1,0 @@
-name: 'Dyniva Replica Database'
-type: module
-description: 'Overwrite db query to replica database'
-package: Dyniva
-core: 8.x
-version: 8.x-1.0-alpha

@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: panelizer_display_attribute
-label: 'Panelizer display attribute'
-created: true
-changed: true
-uid: true
-title: false

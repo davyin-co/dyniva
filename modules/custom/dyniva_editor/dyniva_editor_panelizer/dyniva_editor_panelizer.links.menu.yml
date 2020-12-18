@@ -1,5 +1,0 @@
-dyniva_editor_panelizer.settings:
-  title: 'Dyniva Panelizer Settings'
-  route_name: dyniva_editor_panelizer.settings
-  parent: system.admin_config_content
-  weight: 99

@@ -1,5 +1,0 @@
-dyniva_message.user.message_notifier:
-  title: 'Message Notifiers'
-  route_name: dyniva_message.user.form
-  base_route: entity.user.canonical
-  weight: 10

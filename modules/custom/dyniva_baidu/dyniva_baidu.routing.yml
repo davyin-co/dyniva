@@ -1,7 +1,0 @@
-dyniva_baidu.baidu.map:
-  path: '/baidu-map/{text}'
-  defaults:
-    _title: 'Baidu Map'
-    _controller: '\Drupal\dyniva_baidu\Controller\DynivaBaiduController::baiduMap'
-  requirements:
-    _permission: 'access content'

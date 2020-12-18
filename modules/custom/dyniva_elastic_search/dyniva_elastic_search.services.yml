@@ -1,5 +1,0 @@
-services:
-  dyniva_elastic_search.elastic_connector_subscriber:
-    class: '\Drupal\dyniva_elastic_search\EventSubscriber\ElasticConnectorSubscriber'
-    tags:
-      - { name: 'event_subscriber' }

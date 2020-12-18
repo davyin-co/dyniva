@@ -1,6 +1,0 @@
-videojs:
-  js:
-    assets/video.min.js: {}
-  css:
-    component:
-      assets/video-js.min.css: {}

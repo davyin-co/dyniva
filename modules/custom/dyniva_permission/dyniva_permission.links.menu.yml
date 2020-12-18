@@ -1,6 +1,0 @@
-dyniva_permission.admin_settings:
-  title: 'Dyniva Permission Settings'
-  route_name: dyniva_permission.admin_settings
-  parent: user.admin_index
-  weight: 99
-

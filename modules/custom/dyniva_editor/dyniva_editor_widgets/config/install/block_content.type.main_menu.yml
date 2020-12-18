@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: main_menu
-label: 'Main Menu'
-revision: 1
-description: ''

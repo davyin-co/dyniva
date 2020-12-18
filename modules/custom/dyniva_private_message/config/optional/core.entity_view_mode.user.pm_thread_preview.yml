@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  module:
-    - user
-id: user.pm_thread_preview
-label: 'PM Thread Preview'
-targetEntityType: user
-cache: true

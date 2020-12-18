@@ -1,7 +1,0 @@
-# Schema for the views filter value.
-views.filter.content_moderation_state_select:
-  type: views.filter.in_operator
-  label: 'Moderation state'
-  
-views.filter_value.content_moderation_state_select:
-  type: views.filter_value.in_operator

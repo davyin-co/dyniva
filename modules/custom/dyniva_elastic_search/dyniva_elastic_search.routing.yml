@@ -1,7 +1,0 @@
-dyniva_elastic_search.settings:
-  path: '/admin/config/services/dyniva-elastic'
-  defaults:
-    _title: 'Dyniva elastic search'
-    _form: '\Drupal\dyniva_elastic_search\Form\SettingsForm'
-  requirements:
-    _permission: 'access administration pages'

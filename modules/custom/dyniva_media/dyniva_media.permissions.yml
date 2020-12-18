@@ -1,2 +1,0 @@
-permission_callbacks:
-  - \Drupal\dyniva_media\MediaPermissions::getPermissions

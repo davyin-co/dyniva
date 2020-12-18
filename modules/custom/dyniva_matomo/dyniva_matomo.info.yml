@@ -1,9 +1,0 @@
-name: 'Dyniva Matomo'
-type: module
-description: 'Dyniva Matomo Intergration'
-core: 8.x
-package: Dyniva
-dependencies:
-  - 'matomo_reporting_api:matomo_reporting_api'
-  - 'dyniva_content_hub:dyniva_content_hub'
-version: 8.x-1.0-alpha

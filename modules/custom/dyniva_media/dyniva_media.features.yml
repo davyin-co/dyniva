@@ -1,3 +1,0 @@
-excluded:
-  - entity_browser.browser.image_browser
-required: true

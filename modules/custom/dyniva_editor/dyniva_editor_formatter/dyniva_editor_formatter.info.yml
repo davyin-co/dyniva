@@ -1,6 +1,0 @@
-name: 'Dyniva Editor Formatter'
-description: ''
-type: module
-package: Dyniva
-core: 8.x
-version: 8.x-1.0-alpha

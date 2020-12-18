@@ -112,7 +112,40 @@
 		"php-http/guzzle6-adapter": "^1.1",
 		"woohoolabs/yang": "^1.4",
 		"oomphinc/composer-installers-extender": "^2.0",
-		"drupal/facets": "^1.6"
+		"drupal/facets": "^1.6",
+		"davyin/dyniva_admin": "1.x-dev",
+		"davyin/dyniva_ui": "1.x-dev",
+		"davyin/dyniva_examples": "1.x-dev",
+		"davyin/dyniva_content_access": "1.x-dev",
+		"davyin/dyniva_content_agent": "1.x-dev",
+		"davyin/dyniva_elastic_search": "1.x-dev",
+		"davyin/dyniva_migrate": "1.x-dev",
+		"davyin/dyniva_replica_db": "1.x-dev",
+		"davyin/dyniva_connect": "1.x-dev",
+		"davyin/dyniva_event": "1.x-dev",
+		"davyin/dyniva_flowchart": "1.x-dev",
+		"davyin/dyniva_media": "1.x-dev",
+		"davyin/dyniva_ui_patterns": "1.x-dev",
+		"davyin/dyniva_calendar": "1.x-dev",
+		"davyin/dyniva_content_receiver": "1.x-dev",
+		"davyin/dyniva_matomo_tracker": "1.x-dev",
+		"davyin/dyniva_baidu": "1.x-dev",
+		"davyin/dyniva_checklist": "1.x-dev",
+		"davyin/dyniva_core": "1.x-dev",
+		"davyin/dyniva_scheduled_updates": "1.x-dev",
+		"davyin/dyniva_seckit": "1.x-dev",
+		"davyin/dyniva_content_hub": "1.x-dev",
+		"davyin/dyniva_prompt_message": "1.x-dev",
+		"davyin/dyniva_comment": "1.x-dev",
+		"davyin/dyniva_message": "1.x-dev",
+		"davyin/dyniva_permission": "1.x-dev",
+		"davyin/dyniva_content_sync": "1.x-dev",
+		"davyin/dyniva_private_message": "1.x-dev",
+		"davyin/dyniva_content_moderation": "1.x-dev",
+		"davyin/dyniva_connect_wechat": "1.x-dev",
+		"davyin/dyniva_editor": "1.x-dev",
+		"davyin/component_hub": "1.x-dev",
+		"davyin/dyniva_matomo": "1.x-dev"
 	},
     "autoload": {
         "psr-4": {
@@ -174,11 +207,17 @@
 			"docroot/modules/contrib/{$name}": [
 				"type:drupal-module"
 			],
+			"docroot/modules/custom/{$name}": [
+				"type:drupal-custom-module"
+			],
 			"docroot/profiles/contrib/{$name}": [
 				"type:drupal-profile"
 			],
 			"docroot/themes/contrib/{$name}": [
 				"type:drupal-theme"
+			],
+			"docroot/themes/custom/{$name}": [
+				"type:drupal-custom-theme"
 			],
 			"drush/contrib/{$name}": [
 				"type:drupal-drush"

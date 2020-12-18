@@ -1,7 +1,0 @@
-subscribe_message_template:
-  content_moderation: content_moderation
-notify_plugin:
-  email: email
-force_notifiers:
-  dyniva_log: dyniva_log
-content_moderation_notification: 1

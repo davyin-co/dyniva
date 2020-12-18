@@ -1,7 +1,0 @@
-dyniva_content_access.filter_config:
-  path: '/admin/config/content/dyniva-content-access'
-  defaults:
-    _form: '\Drupal\dyniva_content_access\Form\FilterConfigForm'
-    _title: 'Dyniva content access settings'
-  requirements:
-    _permission: 'dyniva content access settings'

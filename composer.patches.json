@@ -108,9 +108,6 @@
     "drupal/shs": {
       "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
       "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"
-    },
-    "drupal/ace_editor": {
-      "drupal-library-installer-plugin not compatible with composer 2": "https://www.drupal.org/files/issues/2020-10-27/3179273-remove-asset-packagist-as-requirement.patch"
     }
   }
 }

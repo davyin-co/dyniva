@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50ff95ff48079737a4c0cb1757768f45",
+    "content-hash": "9d66a2ae10b7775334091c7f8061a16e",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -279,7 +279,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -312,6 +312,66 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "caxy/php-htmldiff",
+            "version": "v0.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caxy/php-htmldiff.git",
+                "reference": "4bad5c6a4ecc76954d37764e6a29273b6b7bf1f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/4bad5c6a4ecc76954d37764e6a29273b6b7bf1f8",
+                "reference": "4bad5c6a4ecc76954d37764e6a29273b6b7bf1f8",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "^4.7",
+                "kub-at/php-simple-html-dom-parser": "^1.7",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.0",
+                "phpunit/phpunit": "~5.0"
+            },
+            "suggest": {
+                "doctrine/cache": "Used for caching the calculated diffs using a Doctrine Cache Provider"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Caxy\\HtmlDiff": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Schroeder",
+                    "email": "jschroeder@caxy.com",
+                    "homepage": "http://www.caxy.com"
+                }
+            ],
+            "description": "A library for comparing two HTML files/snippets and highlighting the differences using simple HTML.",
+            "homepage": "https://github.com/caxy/php-htmldiff",
+            "keywords": [
+                "diff",
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/caxy/php-htmldiff/issues",
+                "source": "https://github.com/caxy/php-htmldiff/tree/v0.1.9"
+            },
+            "time": "2019-02-20T18:52:14+00:00"
         },
         {
             "name": "clue/graph",
@@ -908,6 +968,43 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
             },
             "time": "2020-10-02T16:03:48+00:00"
+        },
+        {
+            "name": "davyin/boost",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davyin-co/boost.git",
+                "reference": "d51b9cb769e6861992f9e5e66954997ff096489b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davyin-co/boost/zipball/d51b9cb769e6861992f9e5e66954997ff096489b",
+                "reference": "d51b9cb769e6861992f9e5e66954997ff096489b",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/core": "^8.6"
+            },
+            "default-branch": true,
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Provides a mechanism for modules to automatically generate aliases for the content they manage.",
+            "homepage": "https://github.com/davyin-co/boost",
+            "support": {
+                "documentation": "https://www.drupal.org/docs/8/modules/boost",
+                "issues": "https://github.com/davyin-co/boost/issues",
+                "source": "https://github.com/davyin-co/boost"
+            },
+            "time": "2020-10-28T07:14:43+00:00"
         },
         {
             "name": "davyin/component_hub",
@@ -2908,6 +3005,88 @@
             "time": "2019-06-27T14:05:00+00:00"
         },
         {
+            "name": "drupal/ace_editor",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ace_editor.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ace_editor-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "ed413a79a930ee2e24fa8d0d12786888dc297035"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0",
+                "drupal/core": "^8.8 || ^9",
+                "npm-asset/ace-builds": "~1.0",
+                "oomphinc/composer-installers-extender": "~1.0 || ~2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1606706502",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "installer-types": [
+                    "bower-asset",
+                    "npm-asset"
+                ],
+                "installer-paths": {
+                    "libraries/ace": [
+                        "npm-asset/ace-builds"
+                    ]
+                },
+                "drupal-libraries": {
+                    "libraries": [
+                        {
+                            "name": "ace",
+                            "package": "npm-asset/ace-builds"
+                        }
+                    ]
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Growiel",
+                    "homepage": "https://www.drupal.org/user/2490940"
+                },
+                {
+                    "name": "interdruper",
+                    "homepage": "https://www.drupal.org/user/2437374"
+                },
+                {
+                    "name": "kiritoly",
+                    "homepage": "https://www.drupal.org/user/3222840"
+                },
+                {
+                    "name": "nylin",
+                    "homepage": "https://www.drupal.org/user/816040"
+                }
+            ],
+            "description": "Ace is an embeddable code editor providing syntax highlighting and much more. See https://ace.c9.io/.",
+            "homepage": "https://www.drupal.org/project/ace_editor",
+            "keywords": [
+                "ACE",
+                "Drupal",
+                "Editor"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/ace_editor",
+                "issues": "https://www.drupal.org/project/issues/ace_editor"
+            }
+        },
+        {
             "name": "drupal/acquia_connector",
             "version": "1.23.0",
             "source": {
@@ -4100,6 +4279,106 @@
             }
         },
         {
+            "name": "drupal/ckeditor_autosave",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_autosave.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_autosave-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "c4b272924677166301fcd1eccbd84022b416a83b"
+            },
+            "require": {
+                "drupal/core": "^8.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1541482680",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "catcat811",
+                    "homepage": "https://www.drupal.org/user/1461284"
+                },
+                {
+                    "name": "ipumpkin",
+                    "homepage": "https://www.drupal.org/user/2279442"
+                },
+                {
+                    "name": "rogical",
+                    "homepage": "https://www.drupal.org/user/1161802"
+                }
+            ],
+            "description": "Provides integration of the CKEditor Autosave plugin with the Drupal 8 CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor_autosave",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_autosave"
+            }
+        },
+        {
+            "name": "drupal/ckeditor_copyformatting",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_copyformatting.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_copyformatting-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "549156bbfe273eceb57c6f216bf892f894ad74a7"
+            },
+            "require": {
+                "drupal/core": "^8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1558770785",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "gokulnk",
+                    "homepage": "https://www.drupal.org/user/523264"
+                },
+                {
+                    "name": "neerajskydiver",
+                    "homepage": "https://www.drupal.org/user/227792"
+                }
+            ],
+            "description": "Integrates the CKEditor \"Copy Formatting\" plugin.",
+            "homepage": "https://www.drupal.org/project/ckeditor_copyformatting",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_copyformatting"
+            }
+        },
+        {
             "name": "drupal/ckeditor_font",
             "version": "1.1.0",
             "source": {
@@ -4158,6 +4437,195 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/ckeditor_font",
                 "issues": "http://drupal.org/project/issues/ckeditor_font"
+            }
+        },
+        {
+            "name": "drupal/ckeditor_lineheight",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_lineheight.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_lineheight-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "395452b8857cfa1fb5089b7aeb45303ffdab9eed"
+            },
+            "require": {
+                "drupal/core": "^8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1508488445",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mihai7221",
+                    "homepage": "https://www.drupal.org/user/2001736"
+                }
+            ],
+            "description": "Adds the functionality to set the line-height property of an element similar to the font-size to CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor_lineheight",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_lineheight"
+            }
+        },
+        {
+            "name": "drupal/ckeditor_pasteexcel",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_pasteexcel.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_pasteexcel-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "d1880f72482156dc592024ff05386853bb6237f8"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1603975066",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dadi.don",
+                    "homepage": "https://www.drupal.org/user/3564084"
+                }
+            ],
+            "description": "Provides integration of the CKEditor Paste Excel plugin with the Drupal 8 CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor_pasteexcel",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_pasteexcel"
+            }
+        },
+        {
+            "name": "drupal/ckeditor_pasteimage",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_pasteimage.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_pasteimage-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "8a5b925cee75489b4b3d6d9c39337093a6626324"
+            },
+            "require": {
+                "drupal/ckeditor_uploadimage": "*",
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1603965609",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TammyCao",
+                    "homepage": "https://www.drupal.org/user/3564101"
+                },
+                {
+                    "name": "zterry95",
+                    "homepage": "https://www.drupal.org/user/1952394"
+                }
+            ],
+            "description": "Provides integration of the CKEditor Paste Image plugin with the Drupal 8 CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor_pasteimage",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_pasteimage"
+            }
+        },
+        {
+            "name": "drupal/ckeditor_textindent",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor_textindent.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_textindent-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "d301e570c27ebccabf9bd4b3287bf5f20acbee72"
+            },
+            "require": {
+                "drupal/core": "^8.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1542946684",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "catcat811",
+                    "homepage": "https://www.drupal.org/user/1461284"
+                },
+                {
+                    "name": "ipumpkin",
+                    "homepage": "https://www.drupal.org/user/2279442"
+                },
+                {
+                    "name": "rogical",
+                    "homepage": "https://www.drupal.org/user/1161802"
+                }
+            ],
+            "description": "Provides integration of the CKEditor TextIndent plugin with the Drupal 8 CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor_textindent",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor_textindent"
             }
         },
         {
@@ -5795,6 +6263,93 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/devel_php",
                 "issues": "https://drupal.org/project/issues/devel_php"
+            }
+        },
+        {
+            "name": "drupal/diff",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/diff.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "7106ca30b7b10343fbf79a0c42fc7981b109095f"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9",
+                "mkalkbrenner/php-htmldiff-advanced": "~0.0.8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1578322688",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Miro Dietiker (miro_dietiker)",
+                    "homepage": "https://www.drupal.org/u/miro_dietiker",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Juampy NR (juampynr)",
+                    "homepage": "https://www.drupal.org/u/juampynr",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Lucian Hangea (lhangea)",
+                    "homepage": "https://www.drupal.org/u/lhangea",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Alan D.",
+                    "homepage": "https://www.drupal.org/u/alan-d.",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Brian Gilbert (realityloop).",
+                    "homepage": "https://www.drupal.org/u/realityloop",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "miro_dietiker",
+                    "homepage": "https://www.drupal.org/user/227761"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                },
+                {
+                    "name": "realityloop",
+                    "homepage": "https://www.drupal.org/user/139189"
+                },
+                {
+                    "name": "rötzi",
+                    "homepage": "https://www.drupal.org/user/73064"
+                },
+                {
+                    "name": "yhahn",
+                    "homepage": "https://www.drupal.org/user/264833"
+                }
+            ],
+            "description": "Compares two entity revisions",
+            "homepage": "https://www.drupal.org/project/diff",
+            "support": {
+                "source": "http://cgit.drupalcode.org/diff",
+                "issues": "https://www.drupal.org/project/issues/diff"
             }
         },
         {
@@ -14287,6 +14842,60 @@
             "time": "2020-02-14T23:51:21+00:00"
         },
         {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
+            },
+            "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
             "name": "fortawesome/font-awesome",
             "version": "v4.7.0",
             "source": {
@@ -14863,6 +15472,56 @@
                 "source": "https://github.com/khanamiryan/php-qrcode-detector-decoder/tree/1.0.4"
             },
             "time": "2020-11-29T18:50:26+00:00"
+        },
+        {
+            "name": "kub-at/php-simple-html-dom-parser",
+            "version": "1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kub-AT/php-simple-html-dom-parser.git",
+                "reference": "ff22f98bfd9235115c128059076f3eb740d66913"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kub-AT/php-simple-html-dom-parser/zipball/ff22f98bfd9235115c128059076f3eb740d66913",
+                "reference": "ff22f98bfd9235115c128059076f3eb740d66913",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "KubAT\\PhpSimple\\HtmlDomParser": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "S.C. Chen",
+                    "email": "me578022@gmail.com"
+                },
+                {
+                    "name": "Jakub Stawowy",
+                    "email": "Kub-AT@users.noreply.github.com"
+                }
+            ],
+            "description": "PHP Simple HTML DOM Parser with namespace and PHP 7.3 compatible",
+            "homepage": "http://simplehtmldom.sourceforge.net/",
+            "keywords": [
+                "Simple",
+                "dom",
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/Kub-AT/php-simple-html-dom-parser/issues",
+                "source": "https://github.com/Kub-AT/php-simple-html-dom-parser/tree/master"
+            },
+            "time": "2019-10-25T12:34:43+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -15866,6 +16525,47 @@
             "time": "2020-10-01T13:52:52+00:00"
         },
         {
+            "name": "mkalkbrenner/php-htmldiff-advanced",
+            "version": "0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mkalkbrenner/php-htmldiff.git",
+                "reference": "3a714b48c9c3d3730baaf6d3949691e654cd37c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mkalkbrenner/php-htmldiff/zipball/3a714b48c9c3d3730baaf6d3949691e654cd37c9",
+                "reference": "3a714b48c9c3d3730baaf6d3949691e654cd37c9",
+                "shasum": ""
+            },
+            "require": {
+                "caxy/php-htmldiff": ">=0.0.6",
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/HtmlDiffAdvancedInterface.php",
+                    "src/HtmlDiffAdvanced.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU General Public License V2"
+            ],
+            "description": "An add-on for the php-htmldiff library for comparing two HTML files/snippets and highlighting the differences using simple HTML.",
+            "homepage": "https://github.com/mkalkbrenner/php-htmldiff",
+            "keywords": [
+                "diff",
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/mkalkbrenner/php-htmldiff/issues",
+                "source": "https://github.com/mkalkbrenner/php-htmldiff/tree/master"
+            },
+            "time": "2016-07-25T17:07:32+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.26.0",
             "source": {
@@ -16063,6 +16763,18 @@
                 "source": "https://github.com/nodespark/des-connector"
             },
             "time": "2019-08-06T06:19:40+00:00"
+        },
+        {
+            "name": "npm-asset/ace-builds",
+            "version": "1.4.12",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/ace-builds/-/ace-builds-1.4.12.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "BSD-3-Clause"
+            ]
         },
         {
             "name": "nyholm/dsn",
@@ -21503,29 +22215,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/calendar": 20,
-        "drupal/footable": 20,
-        "drupal/field_name_prefix_remove": 20,
-        "drupal/library": 10,
-        "drupal/purge": 10,
-        "drupal/purge_purger_http": 10,
-        "drupal/baidu_analytics": 20,
-        "drupal/password_policy": 15,
-        "drupal/r4032login": 10,
-        "drupal/context": 10,
-        "drupal/message_notify": 10,
-        "drupal/message_subscribe": 10,
-        "drupal/confirm_leave": 10,
-        "drupal/styleguide": 15,
-        "drupal/relaxed": 10,
-        "drupal/production_checklist": 15,
-        "drupal/scheduled_updates": 15,
-        "drupal/xmlsitemap": 15,
-        "drupal/elasticsearch_connector": 15,
-        "drupal/views_entity_form_field": 10,
-        "drupal/matomo_reporting_api": 15,
         "davyin/dyniva_admin": 20,
         "davyin/dyniva_ui": 20,
+        "davyin/boost": 20,
         "davyin/dyniva_examples": 20,
         "davyin/dyniva_content_access": 20,
         "davyin/dyniva_content_agent": 20,
@@ -21556,7 +22248,32 @@
         "davyin/dyniva_content_moderation": 20,
         "davyin/dyniva_connect_wechat": 20,
         "davyin/dyniva_editor": 20,
-        "davyin/component_hub": 20
+        "davyin/component_hub": 20,
+        "drupal/calendar": 20,
+        "drupal/footable": 20,
+        "drupal/field_name_prefix_remove": 20,
+        "drupal/library": 10,
+        "drupal/purge": 10,
+        "drupal/purge_purger_http": 10,
+        "drupal/baidu_analytics": 20,
+        "drupal/password_policy": 15,
+        "drupal/r4032login": 10,
+        "drupal/context": 10,
+        "drupal/message_notify": 10,
+        "drupal/message_subscribe": 10,
+        "drupal/confirm_leave": 10,
+        "drupal/styleguide": 15,
+        "drupal/relaxed": 10,
+        "drupal/production_checklist": 15,
+        "drupal/scheduled_updates": 15,
+        "drupal/xmlsitemap": 15,
+        "drupal/elasticsearch_connector": 15,
+        "drupal/views_entity_form_field": 10,
+        "drupal/matomo_reporting_api": 15,
+        "drupal/ckeditor_pasteimage": 15,
+        "drupal/ckeditor_pasteexcel": 15,
+        "drupal/ckeditor_autosave": 10,
+        "drupal/ckeditor_textindent": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

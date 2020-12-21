@@ -19,11 +19,11 @@
       "add stale file threshold settings": "patches/core_performance_form_add_stale_file_threshold_settings.patch",
       "content moderaton views langcode relationship": "patches/content_moderation_views_langcode_relationship.patch",
       "status message render modify": "patches/core_status_message_render_modify.patch",
-      "layout builder enitty field error": "https://www.drupal.org/files/issues/2018-07-16/2985882-entityfield-2.patch",
       "content sync import patch": "patches/content_sync_import_error_fix.patch",
       "no bundle filter when bundle equals entity id": "patches/no-bundle-filter-when-bundle-equals-entity-id.patch",
       "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
       "css agg cache with base_path ": "patches/core_css_agg_with_base_path.patch",
+      "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
       "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch"
     },
     "drupal/panels": {

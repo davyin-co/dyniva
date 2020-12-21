@@ -49,17 +49,11 @@ install:
   - lightning_media
   - lightning_workflow
   - lightning_page
-  - lightning_roles
-  - lightning_search
-  - lightning_landing_page
   - lightning_media_audio
   - lightning_media_bulk_upload
   - lightning_media_document
   - lightning_media_image
-  - lightning_media_slideshow
   - lightning_media_video
-  - lightning_scheduler
-  - lightning_banner_block
   - lightning_map_block
   - dyniva_core
 themes:

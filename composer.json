@@ -20,6 +20,7 @@
 		"drupal/eck": "^1.0",
 		"drupal/mailsystem": "^4.3",
 		"drupal/message": "1.0.0-rc2",
+		"drupal/message_ui": "^1.0",
 		"drupal/menu_multilingual": "^1.0",
 		"drupal/fontawesome": "^1.2",
 		"drupal/fontawesome_iconpicker": "^1.0",
@@ -129,6 +130,7 @@
 		"davyin/dyniva_ui_patterns": "1.x-dev",
 		"davyin/dyniva_calendar": "1.x-dev",
 		"davyin/dyniva_content_receiver": "1.x-dev",
+		"davyin/dyniva_matomo": "1.x-dev",
 		"davyin/dyniva_matomo_tracker": "1.x-dev",
 		"davyin/dyniva_baidu": "1.x-dev",
 		"davyin/dyniva_checklist": "1.x-dev",
@@ -145,8 +147,7 @@
 		"davyin/dyniva_content_moderation": "1.x-dev",
 		"davyin/dyniva_connect_wechat": "1.x-dev",
 		"davyin/dyniva_editor": "1.x-dev",
-		"davyin/component_hub": "1.x-dev",
-		"davyin/dyniva_matomo": "1.x-dev"
+		"davyin/component_hub": "1.x-dev"
 	},
     "autoload": {
         "psr-4": {

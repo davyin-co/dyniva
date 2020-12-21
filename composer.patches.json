@@ -33,7 +33,7 @@
       "preview node bug": "patches/preview_bug_when_node_is_new.patch"
     },
     "drupal/multiversion": {
-      "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.":"https://www.drupal.org/files/issues/2020-01-10/       multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
+      "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.":"https://www.drupal.org/files/issues/2020-01-10/multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
       "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch"
     },
     "drupal/paragraphs": {
@@ -86,9 +86,6 @@
     "drupal/lightning_media": {
       "media type document replace file": "patches/lightning_media_use_document.patch"
     },
-    "drupal/colorbutton": {
-      "library path": "patches/ckeditor_colorbutton.patch"
-    },
     "drupal/ckeditor_uploadimage": {
       "image size": "patches/ckeditor_uploadimage_original_size.patch"
     },
@@ -108,18 +105,12 @@
       "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",
       "Updating core 8.7 -> 8.8 with pathauto not possible":"https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
     },
-    "drupal/smsframework": {
-      "Error: Call to member function getStatus() on bool": "https://www.drupal.org/files/issues/2019-11-08/3069588-status-on-bool-6.patch"
-    },
     "drupal/shs": {
       "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
       "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"
     },
     "drupal/ace_editor": {
       "drupal-library-installer-plugin not compatible with composer 2": "https://www.drupal.org/files/issues/2020-10-27/3179273-remove-asset-packagist-as-requirement.patch"
-    },
-    "drupal/calendar": {
-      "Variable passed to _calc_indents() function is enforcing calendar object to be an array": "https://www.drupal.org/files/issues/2020-11-27/Variable-passed-to_calc_indents-3175873.patch"
     }
   }
 }

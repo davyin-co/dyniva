@@ -9,8 +9,8 @@
 		"cweagans/composer-patches": "^1.7",
 		"acquia/lightning": "~4.1.5",
 		"drupal/swiftmailer": "^2.0",
-		"drupal/conflict": "^2.0.0",
-		"drupal/multiversion": "^1.0.0",
+		"drupal/conflict": "^1.0",
+		"drupal/multiversion": "1.0-beta34",
 		"drupal/key_value": "^1.1",
 		"drupal/replication": "^1.0",
 		"drupal/workspace": "^1.0",
@@ -149,6 +149,9 @@
 		"davyin/dyniva_editor": "1.x-dev",
 		"davyin/component_hub": "1.x-dev"
 	},
+    "replace": {
+        "drupal/lightning_workflow": "*"
+    },
     "autoload": {
         "psr-4": {
             "Davyin\\Dyniva\\": "src"

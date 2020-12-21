@@ -47,7 +47,6 @@ install:
   - lightning_api
   - lightning_layout
   - lightning_media
-  - lightning_workflow
   - lightning_page
   - lightning_media_audio
   - lightning_media_bulk_upload

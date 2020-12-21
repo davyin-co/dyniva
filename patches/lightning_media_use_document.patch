@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/EntityBrowser/Widget/EntityFormProxy.php b/src/Plugin/EntityBrowser/Widget/EntityFormProxy.php
+index 50b414213..3c36c2376 100644
+--- a/src/Plugin/EntityBrowser/Widget/EntityFormProxy.php
++++ b/src/Plugin/EntityBrowser/Widget/EntityFormProxy.php
+@@ -218,6 +218,10 @@ protected function getAllowedTypes() {
+       ->getStorage('media_type')
+       ->loadMultiple($this->configuration['target_bundles'] ?: NULL);
+ 
++      $types = array_filter($types, [$this, 'isAllowedType']);
++      if(in_array('file', array_keys($types)) && in_array('document', array_keys($types))){
++        unset($types['file']);
++      }
+     return array_filter($types, [$this, 'isAllowedType']);
+   }
+ 

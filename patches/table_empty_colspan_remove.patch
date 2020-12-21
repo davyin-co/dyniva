@@ -1,0 +1,36 @@
+diff --git a/footable.module b/footable.module
+index 70d0f6b..7f2fa15 100644
+--- a/footable.module
++++ b/footable.module
+@@ -10,6 +10,7 @@ use Drupal\Component\Utility\Html;
+ use Drupal\Component\Utility\Unicode;
+ use Drupal\field\Entity\FieldStorageConfig;
+ use Drupal\footable\Entity\FooTableBreakpoint;
++use Drupal\Core\Template\Attribute;
+ 
+ /**
+  * Display a view as a FooTable style.
+@@ -45,10 +46,10 @@ function template_preprocess_views_view_footable(&$variables) {
+     if ($info && $info->getType() == 'datetime') {
+       $variables['header'][$field]['attributes']['data-type'] = 'date';
+     }
+-    elseif (is_numeric($field_handler->last_render)) {
++    elseif (!empty($field_handler->last_render) && is_numeric($field_handler->last_render)) {
+       $variables['header'][$field]['attributes']['data-type'] = 'numeric';
+     }
+-    elseif (!empty($field_handler->last_render) && Unicode::strlen($field_handler->last_render->__toString()) != Unicode::strlen(strip_tags($field_handler->last_render->__toString()))) {
++    elseif (!empty($field_handler->last_render) && Unicode::strlen($field_handler->last_render . '') != Unicode::strlen(strip_tags($field_handler->last_render . ''))) {
+       $variables['header'][$field]['attributes']['data-type'] = 'html';
+     }
+     else {
+@@ -174,4 +175,10 @@ function template_preprocess_views_view_footable(&$variables) {
+   $library = $config->get('footable_plugin_type') . '_' . $config->get('footable_plugin_compression');
+   $variables['view']->element['#attached']['library'][] = 'footable/footable';
+   $variables['view']->element['#attached']['library'][] = 'footable/footable_' . $library;
++
++  if(empty($view->result)){
++    $variables['rows'][0]['columns'][0]['attributes'] = new Attribute([
++      'class' => ['views-empty'],
++    ]);
++  }
+ }

@@ -1,0 +1,49 @@
+diff --git a/src/Entity/EckEntityType.php b/src/Entity/EckEntityType.php
+index 1221ea7ca..2d4b8b396 100644
+--- a/src/Entity/EckEntityType.php
++++ b/src/Entity/EckEntityType.php
+@@ -92,33 +92,23 @@ public function preSave(EntityStorageInterface $storage) {
+   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+     parent::postSave($storage, $update);
+ 
+-    // Clear the router cache to prevent RouteNotFoundException while creating
+-    // the edit link.
+-    \Drupal::service('router.builder')->rebuild();
+-    $edit_link = $this->link(t('Edit entity type'));
+-
++    $this->entityTypeManager()->clearCachedDefinitions();
+     if ($update) {
+-      $this->logger($this->id())->notice(
+-        'Entity type %label has been updated.',
+-        ['%label' => $this->label(), 'link' => $edit_link]
+-      );
++      // Notify storage to update the database schema.
++      $entity_type = $this->entityTypeManager()->getDefinition("{$this->id()}_type");
++      \Drupal::entityDefinitionUpdateManager()->updateEntityType($entity_type);
++
++      $entity_type = $this->entityTypeManager()->getDefinition($this->id());
++      \Drupal::entityDefinitionUpdateManager()->updateEntityType($entity_type);
+     }
+     else {
+-      // Clear caches first.
+-      $this->entityTypeManager()->clearCachedDefinitions();
+-
+       // Notify storage to create the database schema.
+-      $entity_type = $this->entityTypeManager()->getDefinition($this->id());
+-      \Drupal::service('entity_type.listener')
+-        ->onEntityTypeCreate($entity_type);
++      $entity_type = $this->entityTypeManager()->getDefinition("{$this->id()}_type");
++      \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+ 
+-      $this->logger($this->id())->notice(
+-        'Entity type %label has been added.',
+-        ['%label' => $this->label(), 'link' => $edit_link]
+-      );
++      $entity_type = $this->entityTypeManager()->getDefinition($this->id());
++      \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+     }
+-
+-    \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+   }
+ 
+   /**

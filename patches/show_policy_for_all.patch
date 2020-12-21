@@ -1,0 +1,12 @@
+diff --git a/password_policy.module b/password_policy.module
+index 7b957034e..d395075c9 100644
+--- a/password_policy.module
++++ b/password_policy.module
+@@ -81,6 +81,7 @@ function password_policy_element_info_alter(array &$types) {
+  *   Result of whether the password policy should be shown.
+  */
+ function _password_policy_show_policy() {
++  return TRUE;
+   $account = \Drupal::currentUser();
+   $config = \Drupal::config('user.settings');
+   $show_password_policy_status = TRUE;

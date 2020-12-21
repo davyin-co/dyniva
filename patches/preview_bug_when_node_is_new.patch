@@ -1,0 +1,19 @@
+diff --git a/panelizer.module b/panelizer.module
+index badc90d..f4b2625 100644
+--- a/panelizer.module
++++ b/panelizer.module
+@@ -397,9 +397,11 @@ function template_preprocess_panelizer_view_mode(&$variables) {
+ 
+   // Setup the defaults.
+   $variables['title_element'] = 'h2';
+-  $variables['entity_url'] = $entity->toUrl('canonical', [
+-    'language' => $entity->language(),
+-  ]);
++  if($entity->id()){
++    $variables['entity_url'] = $entity->toUrl('canonical', [
++      'language' => $entity->language(),
++    ]);
++  }
+ 
+   // Allow the Panelizer entity plugin to do additional preprocessing.
+   $panelizer_plugin->preprocessViewMode($variables, $entity, $panels_display, $view_mode);

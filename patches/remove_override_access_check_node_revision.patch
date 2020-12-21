@@ -1,0 +1,27 @@
+diff --git a/src/MultiversionServiceProvider.php b/src/MultiversionServiceProvider.php
+index 6eabce854..8ca6295e6 100644
+--- a/src/MultiversionServiceProvider.php
++++ b/src/MultiversionServiceProvider.php
+@@ -37,14 +37,14 @@ public function alter(ContainerBuilder $container) {
+       // Do nothing, Redirect module is not installed.
+     }
+ 
+-    // Override the access_check.node.revision class with a new class.
+-    try {
+-      $definition = $container->getDefinition('access_check.node.revision');
+-      $definition->setClass('Drupal\multiversion\Access\NodeRevisionAccessCheck');
+-    }
+-    catch (InvalidArgumentException $e) {
+-      // Do nothing, Node module is not installed.
+-    }
++//     // Override the access_check.node.revision class with a new class.
++//     try {
++//       $definition = $container->getDefinition('access_check.node.revision');
++//       $definition->setClass('Drupal\multiversion\Access\NodeRevisionAccessCheck');
++//     }
++//     catch (InvalidArgumentException $e) {
++//       // Do nothing, Node module is not installed.
++//     }
+   }
+ 
+ }

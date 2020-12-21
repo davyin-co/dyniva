@@ -1,0 +1,21 @@
+diff --git a/src/Controller/EntityResource.php b/src/Controller/EntityResource.php
+index 8ec5290..2d32bd9 100644
+--- a/src/Controller/EntityResource.php
++++ b/src/Controller/EntityResource.php
+@@ -153,6 +153,16 @@ class EntityResource {
+     // changes.
+     $violations->filterByFieldAccess();
+ 
++    $resource_type = \Drupal::service('jsonapi.resource_type.repository')->get($entity->getEntityTypeId(),$entity->bundle());
++    $disabled_fields = [];
++    foreach ($violations->getFieldNames() as $field_name) {
++      // Skip any disabled field.
++      if (!$resource_type->isFieldEnabled($field_name)) {
++        $disabled_fields[] = $field_name;
++      }
++    }
++    $violations->filterByFields($disabled_fields);
++
+     if (count($violations) > 0) {
+       // Instead of returning a generic 400 response we use the more specific
+       // 422 Unprocessable Entity code from RFC 4918. That way clients can

@@ -1,0 +1,324 @@
+diff --git a/modules/statistics/src/TaxonomyStatisticsDatabaseStorage.php b/modules/statistics/src/TaxonomyStatisticsDatabaseStorage.php
+index e69de29bb2..26c35b0f6a 100644
+--- a/modules/statistics/src/TaxonomyStatisticsDatabaseStorage.php
++++ b/modules/statistics/src/TaxonomyStatisticsDatabaseStorage.php
+@@ -0,0 +1,148 @@
++<?php
++
++namespace Drupal\statistics;
++
++use Drupal\Core\Database\Connection;
++use Drupal\Core\State\StateInterface;
++use Symfony\Component\HttpFoundation\RequestStack;
++
++/**
++ * Provides the default database storage backend for statistics.
++ */
++class TaxonomyStatisticsDatabaseStorage implements StatisticsStorageInterface {
++
++  /**
++  * The database connection used.
++  *
++  * @var \Drupal\Core\Database\Connection
++  */
++  protected $connection;
++
++  /**
++   * The state service.
++   *
++   * @var \Drupal\Core\State\StateInterface
++   */
++  protected $state;
++
++  /**
++   * The request stack.
++   *
++   * @var \Symfony\Component\HttpFoundation\RequestStack
++   */
++  protected $requestStack;
++
++  /**
++   * Constructs the statistics storage.
++   *
++   * @param \Drupal\Core\Database\Connection $connection
++   *   The database connection for the taxonomy view storage.
++   * @param \Drupal\Core\State\StateInterface $state
++   *   The state service.
++   */
++  public function __construct(Connection $connection, StateInterface $state, RequestStack $request_stack) {
++    $this->connection = $connection;
++    $this->state = $state;
++    $this->requestStack = $request_stack;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function recordView($id) {
++    return (bool) $this->connection
++      ->merge('taxonomy_counter')
++      ->key('tid', $id)
++      ->fields([
++        'daycount' => 1,
++        'totalcount' => 1,
++        'timestamp' => $this->getRequestTime(),
++      ])
++      ->expression('daycount', 'daycount + 1')
++      ->expression('totalcount', 'totalcount + 1')
++      ->execute();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function fetchViews($ids) {
++    $views = $this->connection
++      ->select('taxonomy_counter', 'nc')
++      ->fields('nc', ['totalcount', 'daycount', 'timestamp'])
++      ->condition('tid', $ids, 'IN')
++      ->execute()
++      ->fetchAll();
++    foreach ($views as $id => $view) {
++      $views[$id] = new StatisticsViewsResult($view->totalcount, $view->daycount, $view->timestamp);
++    }
++    return $views;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function fetchView($id) {
++    $views = $this->fetchViews([$id]);
++    return reset($views);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function fetchAll($order = 'totalcount', $limit = 5) {
++    assert(in_array($order, ['totalcount', 'daycount', 'timestamp']), "Invalid order argument.");
++
++    return $this->connection
++      ->select('taxonomy_counter', 'nc')
++      ->fields('nc', ['tid'])
++      ->orderBy($order, 'DESC')
++      ->range(0, $limit)
++      ->execute()
++      ->fetchCol();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function deleteViews($id) {
++    return (bool) $this->connection
++      ->delete('taxonomy_counter')
++      ->condition('tid', $id)
++      ->execute();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function resetDayCount() {
++    $statistics_timestamp = $this->state->get('statistics.day_timestamp') ?: 0;
++    if (($this->getRequestTime() - $statistics_timestamp) >= 86400) {
++      $this->state->set('statistics.day_timestamp', $this->getRequestTime());
++      $this->connection->update('taxonomy_counter')
++        ->fields(['daycount' => 0])
++        ->execute();
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function maxTotalCount() {
++    $query = $this->connection->select('taxonomy_counter', 'nc');
++    $query->addExpression('MAX(totalcount)');
++    $max_total_count = (int)$query->execute()->fetchField();
++    return $max_total_count;
++  }
++
++  /**
++   * Get current request time.
++   *
++   * @return int
++   *   Unix timestamp for current server request time.
++   */
++  protected function getRequestTime() {
++    return $this->requestStack->getCurrentRequest()->server->get('REQUEST_TIME');
++  }
++
++}
+diff --git a/modules/statistics/statistics.install b/modules/statistics/statistics.install
+index deac9010a4..31bc540214 100644
+--- a/modules/statistics/statistics.install
++++ b/modules/statistics/statistics.install
+@@ -4,12 +4,13 @@
+  * @file
+  * Install and update functions for the Statistics module.
+  */
+-
++use Drupal\Core\Database\Database;
+ /**
+  * Implements hook_uninstall().
+  */
+ function statistics_uninstall() {
+   // Remove states.
++  \Drupal::state()->delete('statistics.taxonomy_counter_scale');
+   \Drupal::state()->delete('statistics.node_counter_scale');
+   \Drupal::state()->delete('statistics.day_timestamp');
+ }
+@@ -54,7 +55,43 @@ function statistics_schema() {
+     ],
+     'primary key' => ['nid'],
+   ];
+-
++  
++  $schema['taxonomy_counter'] = [
++    'description' => 'Access statistics for {taxonomy}s.',
++    'fields' => [
++      'tid' => [
++        'description' => 'The {taxonomy}.tid for these statistics.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++      ],
++      'totalcount' => [
++        'description' => 'The total number of times the {taxonomy} has been viewed.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++        'size' => 'big',
++      ],
++      'daycount' => [
++        'description' => 'The total number of times the {taxonomy} has been viewed today.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++        'size' => 'medium',
++      ],
++      'timestamp' => [
++        'description' => 'The most recent time the {taxonomy} has been viewed.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++      ],
++    ],
++    'primary key' => ['tid'],
++  ];
+   return $schema;
+ }
+ 
+@@ -86,3 +123,46 @@ function statistics_update_8002() {
+ function statistics_update_8300() {
+   \Drupal::configFactory()->getEditable('statistics.settings')->clear('access_log')->save();
+ }
++
++/**
++ * Add taxonomy_counter table.
++ */
++function statistics_update_8500() {
++  $schema = [
++    'description' => 'Access statistics for {taxonomy}s.',
++    'fields' => [
++      'tid' => [
++        'description' => 'The {taxonomy}.tid for these statistics.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++      ],
++      'totalcount' => [
++        'description' => 'The total number of times the {taxonomy} has been viewed.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++        'size' => 'big',
++      ],
++      'daycount' => [
++        'description' => 'The total number of times the {taxonomy} has been viewed today.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++        'size' => 'medium',
++      ],
++      'timestamp' => [
++        'description' => 'The most recent time the {taxonomy} has been viewed.',
++        'type' => 'int',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++        'default' => 0,
++      ],
++    ],
++    'primary key' => ['tid'],
++  ];
++  Database::getConnection()->schema()->createTable('taxonomy_counter', $schema); 
++}
+\ No newline at end of file
+diff --git a/modules/statistics/statistics.module b/modules/statistics/statistics.module
+index 4d7f42a33c..4e9bb06afd 100644
+--- a/modules/statistics/statistics.module
++++ b/modules/statistics/statistics.module
+@@ -75,6 +75,10 @@ function statistics_cron() {
+   $storage->resetDayCount();
+   $max_total_count = $storage->maxTotalCount();
+   \Drupal::state()->set('statistics.node_counter_scale', 1.0 / max(1.0, $max_total_count));
++  $storagetaxonomy = \Drupal::service('statistics.storage.taxonomy');
++  $storagetaxonomy->resetDayCount();
++  $max_total_counttaxonomy = $storagetaxonomy->maxTotalCount();
++  \Drupal::state()->set('statistics.taxonomy_counter_scale', 1.0 / max(1.0, $max_total_counttaxonomy));
+ }
+ 
+ /**
+@@ -150,6 +154,15 @@ function statistics_node_predelete(EntityInterface $node) {
+ }
+ 
+ /**
++ * Implements hook_ENTITY_TYPE_predelete() for node entities.
++ */
++function statistics_taxonomy_term_predelete(EntityInterface $taxonomy) {
++  // Clean up statistics table when node is deleted.
++  $id = $taxonomy->id();
++  return \Drupal::service('statistics.storage.taxonomy')->deleteViews($id);
++}
++
++/**
+  * Implements hook_ranking().
+  */
+ function statistics_ranking() {
+diff --git a/modules/statistics/statistics.php b/modules/statistics/statistics.php
+index a43509eaf8..797e54fc06 100644
+--- a/modules/statistics/statistics.php
++++ b/modules/statistics/statistics.php
+@@ -27,4 +27,9 @@
+     $container->get('request_stack')->push(Request::createFromGlobals());
+     $container->get('statistics.storage.node')->recordView($nid);
+   }
++  $tid = filter_input(INPUT_POST, 'tid', FILTER_VALIDATE_INT);
++  if ($tid) {
++    $container->get('request_stack')->push(Request::createFromGlobals());
++    $container->get('statistics.storage.taxonomy')->recordView($tid);
++  }
+ }
+diff --git a/modules/statistics/statistics.services.yml b/modules/statistics/statistics.services.yml
+index cf15573024..6f67d14305 100644
+--- a/modules/statistics/statistics.services.yml
++++ b/modules/statistics/statistics.services.yml
+@@ -4,3 +4,8 @@ services:
+     arguments: ['@database', '@state', '@request_stack']
+     tags:
+       - { name: backend_overridable }
++  statistics.storage.taxonomy:
++    class: Drupal\statistics\TaxonomyStatisticsDatabaseStorage
++    arguments: ['@database', '@state', '@request_stack']
++    tags:
++      - { name: backend_overridable }
+\ No newline at end of file

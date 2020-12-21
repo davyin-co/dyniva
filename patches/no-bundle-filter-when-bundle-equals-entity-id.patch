@@ -1,0 +1,13 @@
+diff --git a/modules/jsonapi/src/Controller/EntityResource.php b/modules/jsonapi/src/Controller/EntityResource.php
+index 5c43d3ee..709f6ae1 100644
+--- a/modules/jsonapi/src/Controller/EntityResource.php
++++ b/modules/jsonapi/src/Controller/EntityResource.php
+@@ -882,7 +882,7 @@ class EntityResource {
+ 
+     // Limit this query to the bundle type for this resource.
+     $bundle = $resource_type->getBundle();
+-    if ($bundle && ($bundle_key = $entity_type->getKey('bundle'))) {
++    if ($bundle && $bundle !== $resource_type->getEntityTypeId() && ($bundle_key = $entity_type->getKey('bundle'))) {
+       $query->condition(
+         $bundle_key, $bundle
+       );

@@ -1,0 +1,13 @@
+diff --git a/lib/Drupal/Core/Entity/ContentEntityBase.php b/lib/Drupal/Core/Entity/ContentEntityBase.php
+index 2bf1372b6..8d7a2ef5e 100644
+--- a/lib/Drupal/Core/Entity/ContentEntityBase.php
++++ b/lib/Drupal/Core/Entity/ContentEntityBase.php
+@@ -804,7 +804,7 @@ public function onChange($name) {
+         if ($this->isDefaultTranslation()) {
+           // Update the default internal language cache.
+           $this->setDefaultLangcode();
+-          if (isset($this->translations[$this->defaultLangcode])) {
++          if (isset($this->translations[$this->defaultLangcode]) && \Drupal::routeMatch()->getRouteName() != 'dyniva_content_sync.import_form') {
+             $message = new FormattableMarkup('A translation already exists for the specified language (@langcode).', ['@langcode' => $this->defaultLangcode]);
+             throw new \InvalidArgumentException($message);
+           }

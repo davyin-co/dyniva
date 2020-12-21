@@ -1,0 +1,17 @@
+diff --git a/src/Plugin/search_api/processor/Highlight.php b/src/Plugin/search_api/processor/Highlight.php
+index 067b295b..6d59cda5 100644
+--- a/src/Plugin/search_api/processor/Highlight.php
++++ b/src/Plugin/search_api/processor/Highlight.php
+@@ -535,6 +535,12 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
+           if ($before !== FALSE && $before <= $found_position) {
+             if ($text_length > $found_position + $context_length) {
+               $after = mb_strrpos(mb_substr($text, 0, $found_position + $context_length), ' ', $found_position);
++              if (empty($after)) {
++                $after = $found_position + $context_length;
++                if (!mb_strrpos(mb_substr($text, $found_position + mb_strlen($key)), $key)) {
++                  $after = $text_length;
++                }
++              }
+             }
+             else {
+               $after = $text_length;

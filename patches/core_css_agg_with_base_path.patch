@@ -1,0 +1,43 @@
+diff --git a/lib/Drupal/Core/Asset/AssetDumper.php b/lib/Drupal/Core/Asset/AssetDumper.php
+index a5228992e..c38ee83cb 100644
+--- a/lib/Drupal/Core/Asset/AssetDumper.php
++++ b/lib/Drupal/Core/Asset/AssetDumper.php
+@@ -38,7 +38,8 @@ public function __construct(FileSystemInterface $file_system = NULL) {
+   public function dump($data, $file_extension) {
+     // Prefix filename to prevent blocking by firewalls which reject files
+     // starting with "ad*".
+-    $filename = $file_extension . '_' . Crypt::hashBase64($data) . '.' . $file_extension;
++    $base_path = base_path();
++    $filename = $file_extension . '_' . Crypt::hashBase64($data . $base_path) . '.' . $file_extension;
+     // Create the css/ or js/ path within the files folder.
+     $path = 'public://' . $file_extension;
+     $uri = $path . '/' . $filename;
+diff --git a/lib/Drupal/Core/Asset/AssetResolver.php b/lib/Drupal/Core/Asset/AssetResolver.php
+index c0b0f26fa..cc810b50e 100644
+--- a/lib/Drupal/Core/Asset/AssetResolver.php
++++ b/lib/Drupal/Core/Asset/AssetResolver.php
+@@ -114,8 +114,9 @@ public function getCssAssets(AttachedAssetsInterface $assets, $optimize) {
+     // Add the theme name to the cache key since themes may implement
+     // hook_library_info_alter().
+     $libraries_to_load = $this->getLibrariesToLoad($assets);
+-    $cid = 'css:' . $theme_info->getName() . ':' . Crypt::hashBase64(serialize($libraries_to_load)) . (int) $optimize;
++    $base_path = base_path();
++    $cid = 'css:' . $theme_info->getName() . ':' . Crypt::hashBase64(serialize($libraries_to_load) . $base_path) . (int) $optimize;
+     if ($cached = $this->cache->get($cid)) {
+       return $cached->data;
+     }
+
+diff --git a/lib/Drupal/Core/Asset/CssCollectionOptimizer.php b/lib/Drupal/Core/Asset/CssCollectionOptimizer.php
+index 94712188b..2f9bb9914 100644
+--- a/lib/Drupal/Core/Asset/CssCollectionOptimizer.php
++++ b/lib/Drupal/Core/Asset/CssCollectionOptimizer.php
+@@ -174,7 +174,8 @@ protected function generateHash(array $css_group) {
+     foreach ($css_group['items'] as $css_file) {
+       $css_data[] = $css_file['data'];
+     }
+-    return hash('sha256', serialize($css_data));
++    $base_path = base_path();
++    return hash('sha256', serialize($css_data) . $base_path);
+   }
+
+   /**

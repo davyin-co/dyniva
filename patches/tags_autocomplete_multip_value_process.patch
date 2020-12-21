@@ -1,0 +1,22 @@
+diff --git a/lib/Drupal/Core/Entity/Element/EntityAutocomplete.php b/lib/Drupal/Core/Entity/Element/EntityAutocomplete.php
+index 84019085b..ffde5abf7 100644
+--- a/lib/Drupal/Core/Entity/Element/EntityAutocomplete.php
++++ b/lib/Drupal/Core/Entity/Element/EntityAutocomplete.php
+@@ -281,6 +281,17 @@ protected static function matchEntityByTitle(SelectionInterface $handler, $input
+     ];
+ 
+     $count = count($entities);
++    if ($count > 1) {
++      if (in_array($input, $entities)) {
++        foreach ($entities as $key => $entity){
++          if ($input == $entity) {
++            return $key;
++          }
++        }
++      } else {
++        return key($entities);
++      }
++    }
+     switch ($count) {
+       case 0:
+         if ($strict) {

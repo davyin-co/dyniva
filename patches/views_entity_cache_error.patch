@@ -1,0 +1,30 @@
+diff --git a/modules/views/src/Plugin/views/cache/CachePluginBase.php b/modules/views/src/Plugin/views/cache/CachePluginBase.php
+index 36b8e19c9c..cecc3e5be4 100644
+--- a/modules/views/src/Plugin/views/cache/CachePluginBase.php
++++ b/modules/views/src/Plugin/views/cache/CachePluginBase.php
+@@ -303,7 +303,9 @@ public function getRowCacheTags(ResultRow $row) {
+ 
+     if (!empty($row->_relationship_entities)) {
+       foreach ($row->_relationship_entities as $entity) {
+-        $tags = Cache::mergeTags($tags, $entity->getCacheTags());
++        if($entity){
++          $tags = Cache::mergeTags($tags, $entity->getCacheTags());
++        }
+       }
+     }
+ 
+diff --git a/modules/views/src/Plugin/views/query/Sql.php b/modules/views/src/Plugin/views/query/Sql.php
+index 1210c1c72d..14ff585ddf 100644
+--- a/modules/views/src/Plugin/views/query/Sql.php
++++ b/modules/views/src/Plugin/views/query/Sql.php
+@@ -1650,7 +1650,9 @@ protected function getAllEntities() {
+         $entities[] = $row->_entity;
+       }
+       foreach ($row->_relationship_entities as $entity) {
+-        $entities[] = $entity;
++        if($entity){
++          $entities[] = $entity;
++        }
+       }
+     }
+ 

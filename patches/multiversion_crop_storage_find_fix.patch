@@ -1,0 +1,29 @@
+diff --git a/src/Entity/Storage/Sql/CropStorage.php b/src/Entity/Storage/Sql/CropStorage.php
+index 2b40bdc0b..e5cb88a09 100644
+--- a/src/Entity/Storage/Sql/CropStorage.php
++++ b/src/Entity/Storage/Sql/CropStorage.php
+@@ -13,4 +13,24 @@ class CropStorage extends ContribCropStorage implements ContentEntityStorageInte
+ 
+   use ContentEntityStorageTrait;
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function getCrop($uri, $type) {
++    $query = $this->database->select('crop_field_data', 'cfd');
++    $query->addField('cfd', 'cid');
++    $query->condition('cfd.uri', $uri, 'LIKE');
++
++    if ($type) {
++      $query->condition('cfd.type', $type);
++    }
++    $query->condition('cfd.workspace', $this->getWorkspaceId());
++    $query->condition('cfd._deleted', 0);
++
++    $query->range(0, 1);
++
++    $cid = $query->execute()->fetchField();
++    return $cid ? $this->load($cid) : NULL;
++  }
++
+ }

@@ -1,0 +1,13 @@
+diff --git a/src/Plugin/CKEditorPlugin/ColorButton.php b/src/Plugin/CKEditorPlugin/ColorButton.php
+index def1dd1..44f4914 100644
+--- a/src/Plugin/CKEditorPlugin/ColorButton.php
++++ b/src/Plugin/CKEditorPlugin/ColorButton.php
+@@ -21,7 +21,7 @@ class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurab
+    * Get path to library folder.
+    */
+   public function getLibraryPath() {
+-    $path = '/libraries/colorbutton';
++    $path = 'libraries/colorbutton';
+     if (\Drupal::moduleHandler()->moduleExists('libraries')) {
+       $path = libraries_get_path('colorbutton');
+     }

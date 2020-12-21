@@ -1,0 +1,22 @@
+diff --git a/modules/content_moderation/src/ViewsData.php b/modules/content_moderation/src/ViewsData.php
+index 40be3031a..c47168489 100644
+--- a/modules/content_moderation/src/ViewsData.php
++++ b/modules/content_moderation/src/ViewsData.php
+@@ -109,6 +109,17 @@ public function getViewsData() {
+         ],
+         'filter' => ['id' => 'moderation_state_filter', 'allow empty' => TRUE],
+       ];
++
++      if ($entity_langcode_key = $entity_type->getKey('langcode')) {
++        $data[$table]['moderation_state']['relationship']['extra'][] = [
++          'field' => 'langcode',
++          'left_field' => $entity_langcode_key,
++        ];
++        $data[$revision_table]['moderation_state']['relationship']['extra'][] = [
++          'field' => 'langcode',
++          'left_field' => $entity_langcode_key,
++        ];
++      }
+     }
+ 
+     return $data;

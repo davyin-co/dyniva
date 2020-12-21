@@ -1,0 +1,14 @@
+diff --git a/modules/options/options.module b/modules/options/options.module
+index 7cf3635529..9ac36c376b 100644
+--- a/modules/options/options.module
++++ b/modules/options/options.module
+@@ -91,6 +91,9 @@ function options_allowed_values(FieldStorageDefinitionInterface $definition, Fie
+       $values = $definition->getSetting('allowed_values');
+     }
+ 
++    foreach ($values as $key => $label){
++      $values[$key] = \Drupal::token()->replace($label);
++    }
+     if ($cacheable) {
+       $allowed_values[$cache_id] = $values;
+     }

@@ -1,0 +1,357 @@
+diff --git a/src/Plugin/Field/FieldWidget/EntityReferenceBrowserWidget.php b/src/Plugin/Field/FieldWidget/EntityReferenceBrowserWidget.php
+index c2096b5..6607dc4 100644
+--- a/src/Plugin/Field/FieldWidget/EntityReferenceBrowserWidget.php
++++ b/src/Plugin/Field/FieldWidget/EntityReferenceBrowserWidget.php
+@@ -23,6 +23,7 @@ use Symfony\Component\Validator\ConstraintViolation;
+ use Symfony\Component\Validator\ConstraintViolationListInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Session\AccountInterface;
++use Drupal\Component\Utility\SortArray;
+ 
+ /**
+  * Plugin implementation of the 'entity_reference' widget for entity browser.
+@@ -136,6 +137,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
+       'field_widget_display' => 'label',
+       'field_widget_edit' => TRUE,
+       'field_widget_remove' => TRUE,
++      'show_as_table' => FALSE,
+       'field_widget_display_settings' => [],
+       'selection_mode' => EntityBrowserElement::SELECTION_MODE_APPEND,
+     ] + parent::defaultSettings();
+@@ -200,6 +202,11 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
+       '#type' => 'checkbox',
+       '#default_value' => $this->getSetting('field_widget_remove'),
+     ];
++    $element['show_as_table'] = [
++      '#title' => $this->t('Display Selected As Table'),
++      '#type' => 'checkbox',
++      '#default_value' => $this->getSetting('show_as_table'),
++    ];
+ 
+     $element['open'] = [
+       '#title' => $this->t('Show widget details as open by default'),
+@@ -406,13 +413,27 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
+    * {@inheritdoc}
+    */
+   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+-    $entities = empty($values['target_id']) ? [] : explode(' ', trim($values['target_id']));
++    $ids = empty($values['target_id']) ? [] : explode(' ', trim($values['target_id']));
+     $return = [];
+-    foreach ($entities as $entity) {
+-      $return[]['target_id'] = explode(':', $entity)[1];
++    foreach ($ids as $id) {
++      $id = explode(':', $id)[1];
++      if (is_array($values['current']) && isset($values['current'][$id])) {
++        $item_values = [
++          'target_id' => $id,
++          '_weight' => $values['current'][$id]['_weight'],
++        ];
++        $return[] = $item_values;
++      }else{
++        $return[]['target_id'] = $id;
++      }
+     }
+ 
+-    return $return;
++    // Return ourself as the structure doesn't match the default.
++    usort($return, function ($a, $b) {
++      return SortArray::sortByKeyInt($a, $b, '_weight');
++    });
++
++    return array_values($return);
+   }
+ 
+   /**
+@@ -458,6 +479,10 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
+       $parents = array_slice($triggering_element['#parents'], 0, -static::$deleteDepth);
+       $array_parents = array_slice($triggering_element['#array_parents'], 0, -static::$deleteDepth);
+ 
++      if(empty($array_parents) || empty($parents)){
++        $parents = array_slice($triggering_element['#parents'], 0, -static::$deleteDepth + 1);
++        $array_parents = array_slice($triggering_element['#array_parents'], 0, -static::$deleteDepth + 1);
++      }
+       // Find and remove correct entity.
+       $values = explode(' ', $form_state->getValue(array_merge($parents, ['target_id'])));
+       foreach ($values as $index => $item) {
+@@ -493,81 +518,226 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
+    *   The render array for the current selection.
+    */
+   protected function displayCurrentSelection($details_id, $field_parents, $entities) {
+-
+     $field_widget_display = $this->fieldDisplayManager->createInstance(
+       $this->getSetting('field_widget_display'),
+       $this->getSetting('field_widget_display_settings') + ['entity_type' => $this->fieldDefinition->getFieldStorageDefinition()->getSetting('target_type')]
+     );
+ 
++    $field_machine_name = $this->fieldDefinition->getName();
++    
+     $classes = ['entities-list'];
+     if ($this->fieldDefinition->getFieldStorageDefinition()->getCardinality() != 1) {
+       $classes[] = 'sortable';
+     }
+-
+-    return [
+-      '#theme_wrappers' => ['container'],
+-      '#attributes' => ['class' => $classes],
+-      'items' => array_map(
+-        function (ContentEntityInterface $entity, $row_id) use ($field_widget_display, $details_id, $field_parents) {
+-          $display = $field_widget_display->view($entity);
+-          $edit_button_access = $this->getSetting('field_widget_edit') && $entity->access('update', $this->currentUser);
+-          if ($entity->getEntityTypeId() == 'file') {
+-            // On file entities, the "edit" button shouldn't be visible unless
+-            // the module "file_entity" is present, which will allow them to be
+-            // edited on their own form.
+-            $edit_button_access &= $this->moduleHandler->moduleExists('file_entity');
+-          }
+-          if (is_string($display)) {
+-            $display = ['#markup' => $display];
++    if($this->getSetting('show_as_table')){
++      $delta = 0;
++      
++      $order_class = $field_machine_name . '-delta-order';
++      
++      $current = [
++        '#type' => 'table',
++        '#empty' => $this->t('No Entitys yet'),
++        '#prefix' => '<p>' . $this->getCardinalityMessage($entities) . '</p>',
++        '#attributes' => ['class' => ['entities-list']],
++        '#tabledrag' => [
++          [
++            'action' => 'order',
++            'relationship' => 'sibling',
++            'group' => $order_class,
++          ],
++        ],
++      ];
++      
++      $current['#header'][] = $this->t('Preview');
++      $current['#header'][] = ['data' => $this->t('Operations'), 'colspan' => 2];
++      $current['#header'][] = $this->t('Order', [], ['context' => 'Sort order']);
++      
++      foreach ($entities as $entity) {
++        
++        $entity_id = $entity->id();
++        $weight = $delta;
++        foreach ($this->items as $item) {
++          if ($item->target_id == $entity_id) {
++            $weight = $item->_weight ?: $delta;
+           }
+-          return [
+-            '#theme_wrappers' => ['container'],
++        }
++        
++        $display = $field_widget_display->view($entity);
++        $edit_button_access = $this->getSetting('field_widget_edit') && $entity->access('update', $this->currentUser);
++        if ($entity->getEntityTypeId() == 'file') {
++          // On file entities, the "edit" button shouldn't be visible unless
++          // the module "file_entity" is present, which will allow them to be
++          // edited on their own form.
++          $edit_button_access &= $this->moduleHandler->moduleExists('file_entity');
++        }
++        if (is_string($display)) {
++          $display = ['#markup' => $display];
++        }
++        
++        $current[$entity_id] = [
++          '#attributes' => [
++            'class' => ['draggable'],
++            'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity_id,
++            'data-row-id' => $delta,
++          ],
++        ];
++        
++        $current[$entity_id] += [
++          'display' => $display,
++          'remove_button' => [
++            '#type' => 'submit',
++            '#value' => $this->t('Remove'),
++            '#ajax' => [
++              'callback' => [get_class($this), 'updateWidgetCallback'],
++              'wrapper' => $details_id,
++            ],
++            '#submit' => [[get_class($this), 'removeItemSubmit']],
++            '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $delta . '_' . md5(json_encode($field_parents)),
++            '#limit_validation_errors' => [array_merge($field_parents, [$this->fieldDefinition->getName()])],
+             '#attributes' => [
+-              'class' => ['item-container', Html::getClass($field_widget_display->getPluginId())],
+               'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
+-              'data-row-id' => $row_id,
+-            ],
+-            'display' => $display,
+-            'remove_button' => [
+-              '#type' => 'submit',
+-              '#value' => $this->t('Remove'),
+-              '#ajax' => [
+-                'callback' => [get_class($this), 'updateWidgetCallback'],
+-                'wrapper' => $details_id,
+-              ],
+-              '#submit' => [[get_class($this), 'removeItemSubmit']],
+-              '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $row_id . '_' . md5(json_encode($field_parents)),
+-              '#limit_validation_errors' => [array_merge($field_parents, [$this->fieldDefinition->getName()])],
+-              '#attributes' => [
+-                'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
+-                'data-row-id' => $row_id,
+-              ],
+-              '#access' => (bool) $this->getSetting('field_widget_remove'),
++              'data-row-id' => $delta,
+             ],
+-            'edit_button' => [
+-              '#type' => 'submit',
+-              '#value' => $this->t('Edit'),
+-              '#ajax' => [
+-                'url' => Url::fromRoute(
++            '#access' => (bool) $this->getSetting('field_widget_remove'),
++          ],
++          'edit_button' => [
++            '#type' => 'submit',
++            '#value' => $this->t('Edit'),
++            '#ajax' => [
++              'url' => Url::fromRoute(
+                   'entity_browser.edit_form', [
+                     'entity_type' => $entity->getEntityTypeId(),
+                     'entity' => $entity->id(),
+                   ]
+-                ),
+-                'options' => [
+-                  'query' => [
+-                    'details_id' => $details_id,
+-                  ],
++                  ),
++              'options' => [
++                'query' => [
++                  'details_id' => $details_id,
+                 ],
+               ],
+-              '#access' => $edit_button_access,
+             ],
+-          ];
+-        },
+-        $entities,
+-        empty($entities) ? [] : range(0, count($entities) - 1)
+-      ),
+-    ];
++            '#access' => $edit_button_access,
++          ],
++          '_weight' => [
++            '#type' => 'weight',
++            '#title' => $this->t('Weight for row @number', ['@number' => $delta + 1]),
++            '#title_display' => 'invisible',
++            // Note: this 'delta' is the FAPI #type 'weight' element's property.
++            '#delta' => count($entities),
++            '#default_value' => $weight,
++            '#attributes' => ['class' => [$order_class]],
++          ],
++        ];
++        
++        $current['#attached']['library'][] = 'entity_browser/file_browser';
++        
++        $delta++;
++      }
++      
++      return $current;
++    }else{
++      return [
++        '#theme_wrappers' => ['container'],
++        '#attributes' => ['class' => $classes],
++        '#prefix' => '<p>' . $this->getCardinalityMessage($entities) . '</p>',
++        'items' => array_map(
++            function (ContentEntityInterface $entity, $row_id) use ($field_widget_display, $details_id, $field_parents) {
++              $display = $field_widget_display->view($entity);
++              $edit_button_access = $this->getSetting('field_widget_edit') && $entity->access('update', $this->currentUser);
++              if ($entity->getEntityTypeId() == 'file') {
++                // On file entities, the "edit" button shouldn't be visible unless
++                // the module "file_entity" is present, which will allow them to be
++                // edited on their own form.
++                $edit_button_access &= $this->moduleHandler->moduleExists('file_entity');
++              }
++              if (is_string($display)) {
++                $display = ['#markup' => $display];
++              }
++              return [
++                '#theme_wrappers' => ['container'],
++                '#attributes' => [
++                  'class' => ['item-container', Html::getClass($field_widget_display->getPluginId())],
++                  'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
++                  'data-row-id' => $row_id,
++                ],
++                'display' => $display,
++                'remove_button' => [
++                  '#type' => 'submit',
++                  '#value' => $this->t('Remove'),
++                  '#ajax' => [
++                    'callback' => [get_class($this), 'updateWidgetCallback'],
++                    'wrapper' => $details_id,
++                  ],
++                  '#submit' => [[get_class($this), 'removeItemSubmit']],
++                  '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $row_id . '_' . md5(json_encode($field_parents)),
++                  '#limit_validation_errors' => [array_merge($field_parents, [$this->fieldDefinition->getName()])],
++                  '#attributes' => [
++                    'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
++                    'data-row-id' => $row_id,
++                  ],
++                  '#access' => (bool) $this->getSetting('field_widget_remove'),
++                ],
++                'edit_button' => [
++                  '#type' => 'submit',
++                  '#value' => $this->t('Edit'),
++                  '#ajax' => [
++                    'url' => Url::fromRoute(
++                        'entity_browser.edit_form', [
++                          'entity_type' => $entity->getEntityTypeId(),
++                          'entity' => $entity->id(),
++                        ]
++                        ),
++                    'options' => [
++                      'query' => [
++                        'details_id' => $details_id,
++                      ],
++                    ],
++                  ],
++                  '#access' => $edit_button_access,
++                ],
++              ];
++            },
++            $entities,
++            empty($entities) ? [] : range(0, count($entities) - 1)
++          ),
++        ];
++    }
++  }
++
++  /**
++   * Generates a message informing the user how many more items they can choose.
++   *
++   * @param array|int $selected
++   *   The current selections, or how many items are selected.
++   *
++   * @return string
++   *   A message informing the user who many more items they can select.
++   */
++  protected function getCardinalityMessage($selected) {
++    $message = NULL;
++
++    $storage = $this->fieldDefinition->getFieldStorageDefinition();
++    $cardinality = $storage->getCardinality();
++    $target_type = $storage->getSetting('target_type');
++    $target_type = $this->entityTypeManager->getDefinition($target_type);
++
++    if (is_array($selected)) {
++      $selected = count($selected);
++    }
++
++    if ($cardinality === 1 && $selected === 0) {
++      $message = t('You can select one @entity_type.', [
++        '@entity_type' => $target_type->getSingularLabel(),
++      ]);
++    }
++    elseif ($cardinality >= $selected) {
++      $message = t('You can select up to @maximum @entity_type (@remaining left).', [
++        '@maximum' => $cardinality,
++        '@entity_type' => $target_type->getPluralLabel(),
++        '@remaining' => $cardinality - $selected,
++      ]);
++    }
++    return (string) $message;
+   }
+ 
+   /**

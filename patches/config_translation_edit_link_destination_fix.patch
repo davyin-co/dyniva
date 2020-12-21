@@ -1,0 +1,13 @@
+diff --git a/modules/config_translation/src/Controller/ConfigTranslationController.php b/modules/config_translation/src/Controller/ConfigTranslationController.php
+index a8c426ae0e..56cda0b251 100644
+--- a/modules/config_translation/src/Controller/ConfigTranslationController.php
++++ b/modules/config_translation/src/Controller/ConfigTranslationController.php
+@@ -209,7 +209,7 @@ public function itemPage(Request $request, RouteMatchInterface $route_match, $pl
+         if ($edit_access) {
+           $operations['edit'] = [
+             'title' => $this->t('Edit'),
+-            'url' => Url::fromRoute($mapper->getBaseRouteName(), $mapper->getBaseRouteParameters(), ['query' => ['destination' => $mapper->getOverviewPath()]]),
++            'url' => Url::fromRoute($mapper->getBaseRouteName(), $mapper->getBaseRouteParameters(), ['query' => ['destination' => '/' . $mapper->getOverviewPath()]]),
+           ];
+         }
+       }

@@ -1,0 +1,15 @@
+diff --git a/modules/content_moderation/src/EntityOperations.php b/modules/content_moderation/src/EntityOperations.php
+index e2688601df..af47afe6d7 100644
+--- a/modules/content_moderation/src/EntityOperations.php
++++ b/modules/content_moderation/src/EntityOperations.php
+@@ -117,6 +117,10 @@ public function entityPresave(EntityInterface $entity) {
+         || $current_state->isDefaultRevisionState()
+         || !$this->moderationInfo->isDefaultRevisionPublished($entity);
+ 
++      if(\Drupal::moduleHandler()->moduleExists('multiversion') && !empty($entity->_deleted->value)){
++        $update_default_revision = true;
++      }
++
+       // Fire per-entity-type logic for handling the save process.
+       $this->entityTypeManager
+         ->getHandler($entity->getEntityTypeId(), 'moderation')

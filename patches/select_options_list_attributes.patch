@@ -1,0 +1,32 @@
+diff --git a/includes/form.inc b/includes/form.inc
+index 05f2a9e1fc..388e1036e2 100644
+--- a/includes/form.inc
++++ b/includes/form.inc
+@@ -98,6 +98,7 @@ function form_select_options($element, $choices = NULL) {
+   // Check if the element is multiple select and no value has been selected.
+   $empty_value = (empty($element['#value']) && !empty($element['#multiple']));
+   $options = [];
++  $options_attributes = isset($element['#options_attributes'])?$element['#options_attributes']:[];
+   foreach ($choices as $key => $choice) {
+     if (is_array($choice)) {
+       $options[] = [
+@@ -122,6 +123,7 @@ function form_select_options($element, $choices = NULL) {
+       $option['type'] = 'option';
+       $option['value'] = $key;
+       $option['label'] = $choice;
++      $option['attributes'] = new Attribute(isset($options_attributes[$key])?$options_attributes[$key]:[]);
+       $options[] = $option;
+     }
+   }
+diff --git a/lib/Drupal/Core/Field/Plugin/Field/FieldWidget/OptionsSelectWidget.php b/lib/Drupal/Core/Field/Plugin/Field/FieldWidget/OptionsSelectWidget.php
+index b623c8755e..187cef965e 100644
+--- a/lib/Drupal/Core/Field/Plugin/Field/FieldWidget/OptionsSelectWidget.php
++++ b/lib/Drupal/Core/Field/Plugin/Field/FieldWidget/OptionsSelectWidget.php
+@@ -32,6 +32,7 @@ public function formElement(FieldItemListInterface $items, $delta, array $elemen
+     $element += [
+       '#type' => 'select',
+       '#options' => $this->getOptions($items->getEntity()),
++      '#options_attributes' => [],
+       '#default_value' => $this->getSelectedOptions($items),
+       // Do not display a 'multiple' select box if there is only one option.
+       '#multiple' => $this->multiple && count($this->options) > 1,

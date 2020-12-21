@@ -1,0 +1,12 @@
+diff --git a/src/Plugin/EntityReferenceSelection/ParagraphSelection.php b/src/Plugin/EntityReferenceSelection/ParagraphSelection.php
+index 3d8e4e2..ac83ea4 100644
+--- a/src/Plugin/EntityReferenceSelection/ParagraphSelection.php
++++ b/src/Plugin/EntityReferenceSelection/ParagraphSelection.php
+@@ -166,7 +166,6 @@ class ParagraphSelection extends DefaultSelection {
+       $form['target_bundles_drag_drop'][$bundle_name]['weight'] = array(
+         '#type' => 'weight',
+         '#default_value' => (int) $bundle_info['weight'],
+-        '#delta' => $weight_delta,
+         '#title' => $this->t('Weight for type @type', array('@type' => $bundle_info['label'])),
+         '#title_display' => 'invisible',
+         '#attributes' => array(

@@ -1,0 +1,1360 @@
+diff --git a/modules/datetime/datetime.views.inc b/modules/datetime/datetime.views.inc
+index 93d6cd4d30..1512dcce49 100644
+--- a/modules/datetime/datetime.views.inc
++++ b/modules/datetime/datetime.views.inc
+@@ -11,18 +11,42 @@
+  * Implements hook_field_views_data().
+  */
+ function datetime_field_views_data(FieldStorageConfigInterface $field_storage) {
++  return datetime_type_field_views_data_helper($field_storage, [], $field_storage->getMainPropertyName());
++}
++
++/**
++ * Provides Views integration for any datetime-based fields.
++ *
++ * Overrides the default Views data for datetime-based fields, adding datetime
++ * views plugins. Modules defining new datetime-based fields may use this
++ * function to simplify Views integration.
++ *
++ * @param \Drupal\field\FieldStorageConfigInterface $field_storage
++ *   The field storage config entity.
++ * @param array $data
++ *   Field view data or views_field_default_views_data($field_storage) if empty.
++ * @param string $column_name
++ *   The schema column name with the datetime value.
++ *
++ * @return array
++ *   The array of field views data with the datetime plugin.
++ *
++ * @see datetime_field_views_data()
++ * @see datetime_range_field_views_data()
++ */
++function datetime_type_field_views_data_helper(FieldStorageConfigInterface $field_storage, array $data, $column_name) {
+   // @todo This code only covers configurable fields, handle base table fields
+   //   in https://www.drupal.org/node/2489476.
+-  $data = views_field_default_views_data($field_storage);
++  $data = empty($data) ? views_field_default_views_data($field_storage) : $data;
+   foreach ($data as $table_name => $table_data) {
+     // Set the 'datetime' filter type.
+-    $data[$table_name][$field_storage->getName() . '_value']['filter']['id'] = 'datetime';
++    $data[$table_name][$field_storage->getName() . '_' . $column_name]['filter']['id'] = 'datetime';
+ 
+     // Set the 'datetime' argument type.
+-    $data[$table_name][$field_storage->getName() . '_value']['argument']['id'] = 'datetime';
++    $data[$table_name][$field_storage->getName() . '_' . $column_name]['argument']['id'] = 'datetime';
+ 
+     // Create year, month, and day arguments.
+-    $group = $data[$table_name][$field_storage->getName() . '_value']['group'];
++    $group = $data[$table_name][$field_storage->getName() . '_' . $column_name]['group'];
+     $arguments = [
+       // Argument type => help text.
+       'year' => t('Date in the form of YYYY.'),
+@@ -33,11 +57,16 @@ function datetime_field_views_data(FieldStorageConfigInterface $field_storage) {
+       'full_date' => t('Date in the form of CCYYMMDD.'),
+     ];
+     foreach ($arguments as $argument_type => $help_text) {
+-      $data[$table_name][$field_storage->getName() . '_value_' . $argument_type] = [
+-        'title' => $field_storage->getLabel() . ' (' . $argument_type . ')',
++      $column_name_text = $column_name === $field_storage->getMainPropertyName() ? '' : ':' . $column_name;
++      $data[$table_name][$field_storage->getName() . '_' . $column_name . '_' . $argument_type] = [
++        'title' => t('@label@column (@argument)', [
++          '@label' => $field_storage->getLabel(),
++          '@column' => $column_name_text,
++          '@argument' => $argument_type,
++        ]),
+         'help' => $help_text,
+         'argument' => [
+-          'field' => $field_storage->getName() . '_value',
++          'field' => $field_storage->getName() . '_' . $column_name,
+           'id' => 'datetime_' . $argument_type,
+           'entity_type' => $field_storage->getTargetEntityTypeId(),
+           'field_name' => $field_storage->getName(),
+@@ -47,7 +76,7 @@ function datetime_field_views_data(FieldStorageConfigInterface $field_storage) {
+     }
+ 
+     // Set the 'datetime' sort handler.
+-    $data[$table_name][$field_storage->getName() . '_value']['sort']['id'] = 'datetime';
++    $data[$table_name][$field_storage->getName() . '_' . $column_name]['sort']['id'] = 'datetime';
+   }
+ 
+   return $data;
+diff --git a/modules/datetime/tests/src/Kernel/Views/DateTimeHandlerTestBase.php b/modules/datetime/tests/src/Kernel/Views/DateTimeHandlerTestBase.php
+index 20a3542319..de236c9080 100644
+--- a/modules/datetime/tests/src/Kernel/Views/DateTimeHandlerTestBase.php
++++ b/modules/datetime/tests/src/Kernel/Views/DateTimeHandlerTestBase.php
+@@ -2,7 +2,9 @@
+ 
+ namespace Drupal\Tests\datetime\Kernel\Views;
+ 
++use Drupal\Component\Datetime\DateTimePlus;
+ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
++use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+ use Drupal\field\Entity\FieldConfig;
+ use Drupal\node\Entity\NodeType;
+ use Drupal\Tests\views\Kernel\ViewsKernelTestBase;
+@@ -28,6 +30,13 @@
+    */
+   protected static $field_name = 'field_date';
+ 
++  /**
++   * Type of the field.
++   *
++   * @var string
++   */
++  protected static $field_type = 'datetime';
++
+   /**
+    * Nodes to test.
+    *
+@@ -54,7 +63,7 @@ protected function setUp($import_test_views = TRUE) {
+     $fieldStorage = FieldStorageConfig::create([
+       'field_name' => static::$field_name,
+       'entity_type' => 'node',
+-      'type' => 'datetime',
++      'type' => static::$field_type,
+       'settings' => ['datetime_type' => DateTimeItem::DATETIME_TYPE_DATETIME],
+     ]);
+     $fieldStorage->save();
+@@ -91,4 +100,42 @@ protected function setSiteTimezone($timezone) {
+       ->save();
+   }
+ 
++  /**
++   * Returns UTC timestamp of user's TZ 'now'.
++   *
++   * The date field stores date_only values without conversion, considering them
++   * already as UTC. This method returns the UTC equivalent of user's 'now' as a
++   * unix timestamp, so they match using Y-m-d format.
++   *
++   * @return int
++   *   Unix timestamp.
++   */
++  protected function getUTCEquivalentOfUserNowAsTimestamp() {
++    $user_now = new DateTimePlus('now', new \DateTimeZone(drupal_get_user_timezone()));
++    $utc_equivalent = new DateTimePlus($user_now->format('Y-m-d H:i:s'), new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
++
++    return $utc_equivalent->getTimestamp();
++  }
++
++  /**
++   * Returns an array formatted date_only values relative to timestamp.
++   *
++   * @param int $timestamp
++   *   Unix Timestamp used as 'today'.
++   *
++   * @return array
++   *   An array of DateTimeItemInterface::DATE_STORAGE_FORMAT date values. In
++   *   order tomorrow, today and yesterday.
++   */
++  protected function getRelativeDateValuesFromTimestamp($timestamp) {
++    return [
++      // Tomorrow.
++      \Drupal::service('date.formatter')->format($timestamp + 86400, 'custom', DateTimeItemInterface::DATE_STORAGE_FORMAT, DateTimeItemInterface::STORAGE_TIMEZONE),
++      // Today.
++      \Drupal::service('date.formatter')->format($timestamp, 'custom', DateTimeItemInterface::DATE_STORAGE_FORMAT, DateTimeItemInterface::STORAGE_TIMEZONE),
++      // Yesterday.
++      \Drupal::service('date.formatter')->format($timestamp - 86400, 'custom', DateTimeItemInterface::DATE_STORAGE_FORMAT, DateTimeItemInterface::STORAGE_TIMEZONE),
++    ];
++  }
++
+ }
+diff --git a/modules/datetime/tests/src/Kernel/Views/FilterDateTest.php b/modules/datetime/tests/src/Kernel/Views/FilterDateTest.php
+index f4a6342956..f7386cc2c7 100644
+--- a/modules/datetime/tests/src/Kernel/Views/FilterDateTest.php
++++ b/modules/datetime/tests/src/Kernel/Views/FilterDateTest.php
+@@ -2,7 +2,6 @@
+ 
+ namespace Drupal\Tests\datetime\Kernel\Views;
+ 
+-use Drupal\Component\Datetime\DateTimePlus;
+ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
+ use Drupal\field\Entity\FieldStorageConfig;
+ use Drupal\node\Entity\Node;
+@@ -182,44 +181,6 @@ public function testDateIs() {
+     }
+   }
+ 
+-  /**
+-   * Returns UTC timestamp of user's TZ 'now'.
+-   *
+-   * The date field stores date_only values without conversion, considering them
+-   * already as UTC. This method returns the UTC equivalent of user's 'now' as a
+-   * unix timestamp, so they match using Y-m-d format.
+-   *
+-   * @return int
+-   *   Unix timestamp.
+-   */
+-  protected function getUTCEquivalentOfUserNowAsTimestamp() {
+-    $user_now = new DateTimePlus('now', new \DateTimeZone(drupal_get_user_timezone()));
+-    $utc_equivalent = new DateTimePlus($user_now->format('Y-m-d H:i:s'), new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+-
+-    return $utc_equivalent->getTimestamp();
+-  }
+-
+-  /**
+-   * Returns an array formatted date_only values.
+-   *
+-   * @param int $timestamp
+-   *   Unix Timestamp equivalent to user's "now".
+-   *
+-   * @return array
+-   *   An array of DATETIME_DATE_STORAGE_FORMAT date values. In order tomorrow,
+-   *   today and yesterday.
+-   */
+-  protected function getRelativeDateValuesFromTimestamp($timestamp) {
+-    return [
+-      // Tomorrow.
+-      \Drupal::service('date.formatter')->format($timestamp + 86400, 'custom', DATETIME_DATE_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE),
+-      // Today.
+-      \Drupal::service('date.formatter')->format($timestamp, 'custom', DATETIME_DATE_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE),
+-      // Yesterday.
+-      \Drupal::service('date.formatter')->format($timestamp - 86400, 'custom', DATETIME_DATE_STORAGE_FORMAT, DATETIME_STORAGE_TIMEZONE),
+-    ];
+-  }
+-
+   /**
+    * Updates tests nodes date fields values.
+    *
+diff --git a/modules/datetime_range/datetime_range.module b/modules/datetime_range/datetime_range.module
+index b2b87dae7a..99d0e89c2e 100644
+--- a/modules/datetime_range/datetime_range.module
++++ b/modules/datetime_range/datetime_range.module
+@@ -6,6 +6,8 @@
+  */
+ 
+ use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\views\Views;
++use Drupal\views\ViewEntityInterface;
+ 
+ /**
+  * Implements hook_help().
+@@ -26,3 +28,133 @@ function datetime_range_help($route_name, RouteMatchInterface $route_match) {
+       return $output;
+   }
+ }
++
++/**
++ * Implements hook_view_presave().
++ *
++ * When a view is saved using the old string or standard plugin format for
++ * Datetime Range filters or sorts, they will automatically be updated to
++ * Datetime filters or sorts. Old plugins usage must to be considered
++ * deprecated and must be converted before 9.0.0, when this updating layer will
++ * be removed.
++ *
++ * @deprecated in Drupal 8.5.x and will be removed before 9.0.0.
++ *
++ * @see https://www.drupal.org/node/2857691
++ */
++function datetime_range_view_presave(ViewEntityInterface $view) {
++  $config_factory = \Drupal::configFactory();
++  $displays = $view->get('display');
++  $changed = FALSE;
++
++  foreach ($displays as $display_name => &$display) {
++
++    // Update datetime_range filters.
++    if (isset($display['display_options']['filters'])) {
++      foreach ($display['display_options']['filters'] as $field_name => &$filter) {
++        if ($filter['plugin_id'] === 'string') {
++
++          // Get field config.
++          $filter_views_data = Views::viewsData()->get($filter['table'])[$filter['field']]['filter'];
++          if (!isset($filter_views_data['entity_type']) || !isset($filter_views_data['field_name'])) {
++            continue;
++          }
++          $field_storage_name = 'field.storage.' . $filter_views_data['entity_type'] . '.' . $filter_views_data['field_name'];
++          $field_configuration = $config_factory->get($field_storage_name);
++
++          if ($field_configuration->get('type') === 'daterange') {
++
++            // Set entity_type if missing.
++            if (!isset($filter['entity_type'])) {
++              $filter['entity_type'] = $filter_views_data['entity_type'];
++            }
++
++            // Set datetime plugin_id.
++            $filter['plugin_id'] = 'datetime';
++
++            // Create datetime value array.
++            $datetime_value = [
++              'min' => '',
++              'max' => '',
++              'value' => $filter['value'],
++              'type' => 'date',
++            ];
++
++            // Map string operator/value to numeric equivalent.
++            switch ($filter['operator']) {
++              case '=':
++              case 'empty':
++              case 'not empty':
++                $operator = $filter['operator'];
++                break;
++
++              case '!=':
++              case 'not':
++                $operator = '!=';
++                break;
++
++              case 'starts':
++                $operator = 'regular_expression';
++                $datetime_value['value'] = '^' . preg_quote($datetime_value['value']);
++                break;
++
++              case 'ends':
++                $operator = 'regular_expression';
++                $datetime_value['value'] = preg_quote($datetime_value['value']) . '$';
++                break;
++
++              default:
++                $operator = 'regular_expression';
++                // Add .* to prevent blank regexes.
++                if (empty($datetime_value['value'])) {
++                  $datetime_value['value'] = '.*';
++                }
++                else {
++                  $datetime_value['value'] = preg_quote($datetime_value['value']);
++                }
++            }
++
++            // Set value and operator.
++            $filter['value'] = $datetime_value;
++            $filter['operator'] = $operator;
++            $changed = TRUE;
++            @trigger_error('Use of string filters for datetime_range fields is deprecated. Use the datetime filters instead. See https://www.drupal.org/node/2857691', E_USER_DEPRECATED);
++          }
++        }
++      }
++    }
++
++    // Update datetime_range sort handlers.
++    if (isset($display['display_options']['sorts'])) {
++      foreach ($display['display_options']['sorts'] as $field_name => &$sort) {
++        if ($sort['plugin_id'] === 'standard') {
++
++          // Get field config.
++          $sort_views_data = Views::viewsData()->get($sort['table'])[$sort['field']]['sort'];
++          if (!isset($sort_views_data['entity_type']) || !isset($sort_views_data['field_name'])) {
++            continue;
++          }
++          $field_storage_name = 'field.storage.' . $sort_views_data['entity_type'] . '.' . $sort_views_data['field_name'];
++          $field_configuration = $config_factory->get($field_storage_name);
++
++          if ($field_configuration->get('type') === 'daterange') {
++
++            // Set entity_type if missing.
++            if (!isset($sort['entity_type'])) {
++              $sort['entity_type'] = $sort_views_data['entity_type'];
++            }
++
++            // Set datetime plugin_id.
++            $sort['plugin_id'] = 'datetime';
++            $changed = TRUE;
++            @trigger_error('Use of standard sort handlers for datetime_range fields is deprecated. Use the datetime sort handlers instead. See https://www.drupal.org/node/2857691', E_USER_DEPRECATED);
++          }
++        }
++      }
++    }
++  }
++
++  if ($changed) {
++    $view->set('display', $displays);
++  }
++}
+diff --git a/modules/datetime_range/datetime_range.post_update.php b/modules/datetime_range/datetime_range.post_update.php
+index b5f3f5d310..8cd82c8670 100644
+--- a/modules/datetime_range/datetime_range.post_update.php
++++ b/modules/datetime_range/datetime_range.post_update.php
+@@ -5,9 +5,88 @@
+  * Post-update functions for Datetime Range module.
+  */
+ 
++use Drupal\views\Views;
++
+ /**
+  * Clear caches to ensure schema changes are read.
+  */
+ function datetime_range_post_update_translatable_separator() {
+   // Empty post-update hook to cause a cache rebuild.
+ }
++
++/**
++ * Update existing views using datetime_range fields.
++ */
++function datetime_range_post_update_views_string_plugin_id() {
++
++  /* @var \Drupal\views\Entity\View[] $views */
++  $views = \Drupal::entityTypeManager()->getStorage('view')->loadMultiple();
++  $config_factory = \Drupal::configFactory();
++  $message = NULL;
++  $ids = [];
++
++  foreach ($views as $view) {
++    $displays = $view->get('display');
++    $needs_bc_layer_update = FALSE;
++
++    foreach ($displays as $display_name => $display) {
++
++      // Check if datetime_range filters need updates.
++      if (!$needs_bc_layer_update && isset($display['display_options']['filters'])) {
++        foreach ($display['display_options']['filters'] as $field_name => $filter) {
++          if ($filter['plugin_id'] == 'string') {
++
++            // Get field config.
++            $filter_views_data = Views::viewsData()->get($filter['table'])[$filter['field']]['filter'];
++            if (!isset($filter_views_data['entity_type']) || !isset($filter_views_data['field_name'])) {
++              continue;
++            }
++            $field_storage_name = 'field.storage.' . $filter_views_data['entity_type'] . '.' . $filter_views_data['field_name'];
++            $field_configuration = $config_factory->get($field_storage_name);
++
++            if ($field_configuration->get('type') == 'daterange') {
++              // Trigger the BC layer control.
++              $needs_bc_layer_update = TRUE;
++              continue 2;
++            }
++          }
++        }
++      }
++
++      // Check if datetime_range sort handlers need updates.
++      if (!$needs_bc_layer_update && isset($display['display_options']['sorts'])) {
++        foreach ($display['display_options']['sorts'] as $field_name => $sort) {
++          if ($sort['plugin_id'] == 'standard') {
++
++            // Get field config.
++            $sort_views_data = Views::viewsData()->get($sort['table'])[$sort['field']]['sort'];
++            if (!isset($sort_views_data['entity_type']) || !isset($sort_views_data['field_name'])) {
++              continue;
++            }
++            $field_storage_name = 'field.storage.' . $sort_views_data['entity_type'] . '.' . $sort_views_data['field_name'];
++            $field_configuration = $config_factory->get($field_storage_name);
++
++            if ($field_configuration->get('type') == 'daterange') {
++              // Trigger the BC layer control.
++              $needs_bc_layer_update = TRUE;
++              continue 2;
++            }
++          }
++        }
++      }
++    }
++
++    // If current view needs BC layer updates save it and the hook view_presave
++    // will do the rest.
++    if ($needs_bc_layer_update) {
++      $view->save();
++      $ids[] = $view->id();
++    }
++  }
++
++  if (!empty($ids)) {
++    $message = \Drupal::translation()->translate('Updated datetime_range filter/sort plugins for views: @ids', ['@ids' => implode(', ', array_unique($ids))]);
++  }
++
++  return $message;
++}
+diff --git a/modules/datetime_range/datetime_range.views.inc b/modules/datetime_range/datetime_range.views.inc
+new file mode 100644
+index 0000000000..6892ab244e
+--- /dev/null
++++ b/modules/datetime_range/datetime_range.views.inc
+@@ -0,0 +1,24 @@
++<?php
++
++/**
++ * @file
++ * Provides views data for the datetime_range module.
++ */
++
++use Drupal\field\FieldStorageConfigInterface;
++
++/**
++ * Implements hook_field_views_data().
++ */
++function datetime_range_field_views_data(FieldStorageConfigInterface $field_storage) {
++
++  // Include datetime.views.inc file in order for helper function
++  // datetime_type_field_views_data_helper() to be available.
++  \Drupal::moduleHandler()->loadInclude('datetime', 'inc', 'datetime.views');
++
++  // Get datetime field data for value and end_value.
++  $data = datetime_type_field_views_data_helper($field_storage, [], 'value');
++  $data = datetime_type_field_views_data_helper($field_storage, $data, 'end_value');
++
++  return $data;
++}
+diff --git a/modules/datetime_range/tests/fixtures/update/datetime_range-filter-values.php b/modules/datetime_range/tests/fixtures/update/datetime_range-filter-values.php
+new file mode 100644
+index 0000000000..952e67a16c
+--- /dev/null
++++ b/modules/datetime_range/tests/fixtures/update/datetime_range-filter-values.php
+@@ -0,0 +1,332 @@
++<?php
++// @codingStandardsIgnoreFile
++
++/**
++ * @file
++ * Contains database additions to drupal-8.bare.standard.php.gz for testing the
++ * upgrade path of https://www.drupal.org/node/2786577.
++ */
++
++use Drupal\Core\Database\Database;
++use Drupal\Core\Serialization\Yaml;
++
++$connection = Database::getConnection();
++
++// Configuration for an datetime_range field storage.
++$field_storage_datetime_range = Yaml::decode(file_get_contents(__DIR__ . '/field.storage.node.field_range.yml'));
++
++// Configuration for a datetime_range field on 'page' node bundle.
++$field_datetime_range = Yaml::decode(file_get_contents(__DIR__ . '/field.field.node.page.field_range.yml'));
++
++// Configuration for a View using datetime_range plugins.
++$views_datetime_range = Yaml::decode(file_get_contents(__DIR__ . '/views.view.test_datetime_range_filter_values.yml'));
++
++// Update core.entity_form_display.node.page.default
++$data = $connection->select('config')
++  ->fields('config', ['data'])
++  ->condition('collection', '')
++  ->condition('name', 'core.entity_form_display.node.page.default')
++  ->execute()
++  ->fetchField();
++
++$data = unserialize($data);
++$data['dependencies']['config'][] = 'field.field.' . $field_datetime_range['id'];
++$data['dependencies']['module'][] = 'datetime_range';
++$data['content'][$field_datetime_range['field_name']] = array(
++    "weight"=> 27,
++    "settings" => array(),
++    "third_party_settings" => array(),
++    "type" => "daterange_default",
++    "region" => "content"
++);
++$connection->update('config')
++  ->fields([
++    'data' => serialize($data),
++  ])
++  ->condition('collection', '')
++  ->condition('name', 'core.entity_form_display.node.page.default')
++  ->execute();
++
++// Update core.entity_view_display.node.page.default
++$data = $connection->select('config')
++  ->fields('config', ['data'])
++  ->condition('collection', '')
++  ->condition('name', 'core.entity_view_display.node.page.default')
++  ->execute()
++  ->fetchField();
++
++$data = unserialize($data);
++$data['dependencies']['config'][] = 'field.field.' . $field_datetime_range['id'];
++$data['dependencies']['module'][] = 'datetime_range';
++$data['content'][$field_datetime_range['field_name']] = array(
++    "weight"=> 102,
++    "label"=> "above",
++    "settings" => array("separator"=> "-", "format_type" => "medium", "timezone_override" => ""),
++    "third_party_settings" => array(),
++    "type" => "daterange_default",
++    "region" => "content"
++);
++$connection->update('config')
++  ->fields([
++    'data' => serialize($data),
++  ])
++  ->condition('collection', '')
++  ->condition('name', 'core.entity_view_display.node.page.default')
++  ->execute();
++
++$connection->insert('config')
++->fields(array(
++  'collection',
++  'name',
++  'data',
++))
++->values(array(
++  'collection' => '',
++  'name' => 'field.field.' . $field_datetime_range['id'],
++  'data' => serialize($field_datetime_range),
++))
++->values(array(
++  'collection' => '',
++  'name' => 'field.storage.' . $field_storage_datetime_range['id'],
++  'data' => serialize($field_storage_datetime_range),
++))
++->values(array(
++  'collection' => '',
++  'name' => 'views.view.' . $views_datetime_range['id'],
++  'data' => serialize($views_datetime_range),
++))
++->execute();
++
++// Update core.extension.
++$extensions = $connection->select('config')
++  ->fields('config', ['data'])
++  ->condition('collection', '')
++  ->condition('name', 'core.extension')
++  ->execute()
++  ->fetchField();
++$extensions = unserialize($extensions);
++$extensions['module']['datetime_range'] = 0;
++$connection->update('config')
++  ->fields([
++    'data' => serialize($extensions),
++  ])
++  ->condition('collection', '')
++  ->condition('name', 'core.extension')
++  ->execute();
++
++$connection->insert('key_value')
++->fields(array(
++  'collection',
++  'name',
++  'value',
++))
++->values(array(
++  'collection' => 'config.entity.key_store.field_config',
++  'name' => 'uuid:87dc4221-8d56-4112-8a7f-7a855ac35d08',
++  'value' => 'a:1:{i:0;s:33:"field.field.' . $field_datetime_range['id'] . '";}',
++))
++->values(array(
++  'collection' => 'config.entity.key_store.field_storage_config',
++  'name' => 'uuid:2190ad8c-39dd-4eb1-b189-1bfc0c244a40',
++  'value' => 'a:1:{i:0;s:30:"field.storage.' . $field_storage_datetime_range['id'] . '";}',
++))
++->values(array(
++  'collection' => 'config.entity.key_store.view',
++  'name' => 'uuid:d20760b6-7cc4-4844-ae04-96da7225a46f',
++  'value' => 'a:1:{i:0;s:44:"views.view.' . $views_datetime_range['id'] . '";}',
++))
++->values(array(
++  'collection' => 'entity.storage_schema.sql',
++  'name' => 'node.field_schema_data.field_range',
++  'value' => 'a:2:{s:17:"node__field_range";a:4:{s:11:"description";s:40:"Data storage for node field field_range.";s:6:"fields";a:8:{s:6:"bundle";a:5:{s:4:"type";s:13:"varchar_ascii";s:6:"length";i:128;s:8:"not null";b:1;s:7:"default";s:0:"";s:11:"description";s:88:"The field instance bundle to which this row belongs, used when deleting a field instance";}s:7:"deleted";a:5:{s:4:"type";s:3:"int";s:4:"size";s:4:"tiny";s:8:"not null";b:1;s:7:"default";i:0;s:11:"description";s:60:"A boolean indicating whether this data item has been deleted";}s:9:"entity_id";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:38:"The entity id this data is attached to";}s:11:"revision_id";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:47:"The entity revision id this data is attached to";}s:8:"langcode";a:5:{s:4:"type";s:13:"varchar_ascii";s:6:"length";i:32;s:8:"not null";b:1;s:7:"default";s:0:"";s:11:"description";s:37:"The language code for this data item.";}s:5:"delta";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:67:"The sequence number for this data item, used for multi-value fields";}s:17:"field_range_value";a:4:{s:11:"description";s:21:"The start date value.";s:4:"type";s:7:"varchar";s:6:"length";i:20;s:8:"not null";b:1;}s:21:"field_range_end_value";a:4:{s:11:"description";s:19:"The end date value.";s:4:"type";s:7:"varchar";s:6:"length";i:20;s:8:"not null";b:1;}}s:11:"primary key";a:4:{i:0;s:9:"entity_id";i:1;s:7:"deleted";i:2;s:5:"delta";i:3;s:8:"langcode";}s:7:"indexes";a:4:{s:6:"bundle";a:1:{i:0;s:6:"bundle";}s:11:"revision_id";a:1:{i:0;s:11:"revision_id";}s:17:"field_range_value";a:1:{i:0;s:17:"field_range_value";}s:21:"field_range_end_value";a:1:{i:0;s:21:"field_range_end_value";}}}s:26:"node_revision__field_range";a:4:{s:11:"description";s:52:"Revision archive storage for node field field_range.";s:6:"fields";a:8:{s:6:"bundle";a:5:{s:4:"type";s:13:"varchar_ascii";s:6:"length";i:128;s:8:"not null";b:1;s:7:"default";s:0:"";s:11:"description";s:88:"The field instance bundle to which this row belongs, used when deleting a field instance";}s:7:"deleted";a:5:{s:4:"type";s:3:"int";s:4:"size";s:4:"tiny";s:8:"not null";b:1;s:7:"default";i:0;s:11:"description";s:60:"A boolean indicating whether this data item has been deleted";}s:9:"entity_id";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:38:"The entity id this data is attached to";}s:11:"revision_id";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:47:"The entity revision id this data is attached to";}s:8:"langcode";a:5:{s:4:"type";s:13:"varchar_ascii";s:6:"length";i:32;s:8:"not null";b:1;s:7:"default";s:0:"";s:11:"description";s:37:"The language code for this data item.";}s:5:"delta";a:4:{s:4:"type";s:3:"int";s:8:"unsigned";b:1;s:8:"not null";b:1;s:11:"description";s:67:"The sequence number for this data item, used for multi-value fields";}s:17:"field_range_value";a:4:{s:11:"description";s:21:"The start date value.";s:4:"type";s:7:"varchar";s:6:"length";i:20;s:8:"not null";b:1;}s:21:"field_range_end_value";a:4:{s:11:"description";s:19:"The end date value.";s:4:"type";s:7:"varchar";s:6:"length";i:20;s:8:"not null";b:1;}}s:11:"primary key";a:5:{i:0;s:9:"entity_id";i:1;s:11:"revision_id";i:2;s:7:"deleted";i:3;s:5:"delta";i:4;s:8:"langcode";}s:7:"indexes";a:4:{s:6:"bundle";a:1:{i:0;s:6:"bundle";}s:11:"revision_id";a:1:{i:0;s:11:"revision_id";}s:17:"field_range_value";a:1:{i:0;s:17:"field_range_value";}s:21:"field_range_end_value";a:1:{i:0;s:21:"field_range_end_value";}}}}',
++))
++->values(array(
++  'collection' => 'system.schema',
++  'name' => 'datetime_range',
++  'value' => 'i:8000;',
++))
++->execute();
++
++// Update entity.definitions.bundle_field_map
++$value = $connection->select('key_value')
++  ->fields('key_value', ['value'])
++  ->condition('collection', 'entity.definitions.bundle_field_map')
++  ->condition('name', 'node')
++  ->execute()
++  ->fetchField();
++
++$value = unserialize($value);
++$value["field_range"] = array("type" => "daterange", "bundles" => array("page" => "page"));
++
++$connection->update('key_value')
++  ->fields([
++    'value' => serialize($value),
++  ])
++  ->condition('collection', 'entity.definitions.bundle_field_map')
++  ->condition('name', 'node')
++  ->execute();
++
++// Update system.module.files
++$files = $connection->select('key_value')
++  ->fields('key_value', ['value'])
++  ->condition('collection', 'state')
++  ->condition('name', 'system.module.files')
++  ->execute()
++  ->fetchField();
++
++$files = unserialize($files);
++$files["datetime_range"] = "core/modules/datetime_range/datetime_range.info.yml";
++
++$connection->update('key_value')
++  ->fields([
++    'value' => serialize($files),
++  ])
++  ->condition('collection', 'state')
++  ->condition('name', 'system.module.files')
++  ->execute();
++
++$connection->schema()->createTable('node__field_range', array(
++  'fields' => array(
++    'bundle' => array(
++      'type' => 'varchar_ascii',
++      'not null' => TRUE,
++      'length' => '128',
++      'default' => '',
++    ),
++    'deleted' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'tiny',
++      'default' => '0',
++    ),
++    'entity_id' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'revision_id' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'langcode' => array(
++      'type' => 'varchar_ascii',
++      'not null' => TRUE,
++      'length' => '32',
++      'default' => '',
++    ),
++    'delta' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'field_range_value' => array(
++      'type' => 'varchar',
++      'not null' => TRUE,
++      'length' => '20',
++    ),
++    'field_range_end_value' => array(
++      'type' => 'varchar',
++      'not null' => TRUE,
++      'length' => '20',
++    ),
++  ),
++  'primary key' => array(
++    'entity_id',
++    'deleted',
++    'delta',
++    'langcode',
++  ),
++  'indexes' => array(
++    'bundle' => array(
++      'bundle',
++    ),
++    'revision_id' => array(
++      'revision_id',
++    ),
++    'field_range_value' => array(
++      'field_range_value',
++    ),
++    'field_range_end_value' => array(
++      'field_range_end_value',
++    ),
++  ),
++  'mysql_character_set' => 'utf8mb4',
++));
++
++$connection->schema()->createTable('node_revision__field_range', array(
++  'fields' => array(
++    'bundle' => array(
++      'type' => 'varchar_ascii',
++      'not null' => TRUE,
++      'length' => '128',
++      'default' => '',
++    ),
++    'deleted' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'tiny',
++      'default' => '0',
++    ),
++    'entity_id' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'revision_id' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'langcode' => array(
++      'type' => 'varchar_ascii',
++      'not null' => TRUE,
++      'length' => '32',
++      'default' => '',
++    ),
++    'delta' => array(
++      'type' => 'int',
++      'not null' => TRUE,
++      'size' => 'normal',
++      'unsigned' => TRUE,
++    ),
++    'field_range_value' => array(
++      'type' => 'varchar',
++      'not null' => TRUE,
++      'length' => '20',
++    ),
++    'field_range_end_value' => array(
++      'type' => 'varchar',
++      'not null' => TRUE,
++      'length' => '20',
++    ),
++  ),
++  'primary key' => array(
++    'entity_id',
++    'revision_id',
++    'deleted',
++    'delta',
++    'langcode',
++  ),
++  'indexes' => array(
++    'bundle' => array(
++      'bundle',
++    ),
++    'revision_id' => array(
++      'revision_id',
++    ),
++    'field_range_value' => array(
++      'field_range_value',
++    ),
++    'field_range_end_value' => array(
++      'field_range_end_value',
++    ),
++  ),
++  'mysql_character_set' => 'utf8mb4',
++));
++
+diff --git a/modules/datetime_range/tests/fixtures/update/field.field.node.page.field_range.yml b/modules/datetime_range/tests/fixtures/update/field.field.node.page.field_range.yml
+new file mode 100644
+index 0000000000..1b984295e9
+--- /dev/null
++++ b/modules/datetime_range/tests/fixtures/update/field.field.node.page.field_range.yml
+@@ -0,0 +1,21 @@
++uuid: 87dc4221-8d56-4112-8a7f-7a855ac35d08
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_range
++    - node.type.page
++  module:
++    - datetime_range
++id: node.page.field_range
++field_name: field_range
++entity_type: node
++bundle: page
++label: range
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: daterange
+diff --git a/modules/datetime_range/tests/fixtures/update/field.storage.node.field_range.yml b/modules/datetime_range/tests/fixtures/update/field.storage.node.field_range.yml
+new file mode 100644
+index 0000000000..26d610e724
+--- /dev/null
++++ b/modules/datetime_range/tests/fixtures/update/field.storage.node.field_range.yml
+@@ -0,0 +1,20 @@
++uuid: 2190ad8c-39dd-4eb1-b189-1bfc0c244a40
++langcode: en
++status: true
++dependencies:
++  module:
++    - datetime_range
++    - node
++id: node.field_range
++field_name: field_range
++entity_type: node
++type: daterange
++settings:
++  datetime_type: datetime
++module: datetime_range
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/modules/datetime_range/tests/fixtures/update/views.view.test_datetime_range_filter_values.yml b/modules/datetime_range/tests/fixtures/update/views.view.test_datetime_range_filter_values.yml
+new file mode 100644
+index 0000000000..9afc26412c
+--- /dev/null
++++ b/modules/datetime_range/tests/fixtures/update/views.view.test_datetime_range_filter_values.yml
+@@ -0,0 +1,231 @@
++uuid: d20760b6-7cc4-4844-ae04-96da7225a46f
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - user
++id: test_datetime_range_filter_values
++label: test_datetime_range_filter_values
++module: views
++description: ''
++tag: ''
++base_table: node_field_data
++base_field: nid
++core: 8.x
++display:
++  default:
++    display_plugin: default
++    id: default
++    display_title: Master
++    position: 0
++    display_options:
++      access:
++        type: perm
++        options:
++          perm: 'access content'
++      cache:
++        type: tag
++        options: {  }
++      query:
++        type: views_query
++        options:
++          disable_sql_rewrite: false
++          distinct: false
++          replica: false
++          query_comment: ''
++          query_tags: {  }
++      exposed_form:
++        type: basic
++        options:
++          submit_button: Apply
++          reset_button: false
++          reset_button_label: Reset
++          exposed_sorts_label: 'Sort by'
++          expose_sort_order: true
++          sort_asc_label: Asc
++          sort_desc_label: Desc
++      pager:
++        type: mini
++        options:
++          items_per_page: 10
++          offset: 0
++          id: 0
++          total_pages: null
++          expose:
++            items_per_page: false
++            items_per_page_label: 'Items per page'
++            items_per_page_options: '5, 10, 25, 50'
++            items_per_page_options_all: false
++            items_per_page_options_all_label: '- All -'
++            offset: false
++            offset_label: Offset
++          tags:
++            previous: ‹‹
++            next: ››
++      style:
++        type: default
++        options:
++          grouping: {  }
++          row_class: ''
++          default_row_class: true
++          uses_fields: false
++      row:
++        type: fields
++        options:
++          inline: {  }
++          separator: ''
++          hide_empty: false
++          default_field_elements: true
++      fields:
++        title:
++          id: title
++          table: node_field_data
++          field: title
++          entity_type: node
++          entity_field: title
++          label: ''
++          alter:
++            alter_text: false
++            make_link: false
++            absolute: false
++            trim: false
++            word_boundary: false
++            ellipsis: false
++            strip_tags: false
++            html: false
++          hide_empty: false
++          empty_zero: false
++          settings:
++            link_to_entity: true
++          plugin_id: field
++          relationship: none
++          group_type: group
++          admin_label: ''
++          exclude: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: true
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_alter_empty: true
++          click_sort_column: value
++          type: string
++          group_column: value
++          group_columns: {  }
++          group_rows: true
++          delta_limit: 0
++          delta_offset: 0
++          delta_reversed: false
++          delta_first_last: false
++          multi_type: separator
++          separator: ', '
++          field_api_classes: false
++      filters:
++        field_range_value:
++          id: field_range_value
++          table: node__field_range
++          field: field_range_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          operator: '='
++          value: '2017'
++          group: 1
++          exposed: false
++          expose:
++            operator_id: ''
++            label: ''
++            description: ''
++            use_operator: false
++            operator: ''
++            identifier: ''
++            required: false
++            remember: false
++            multiple: false
++            remember_roles:
++              authenticated: authenticated
++          is_grouped: false
++          group_info:
++            label: ''
++            description: ''
++            identifier: ''
++            optional: true
++            widget: select
++            multiple: false
++            remember: false
++            default_group: All
++            default_group_multiple: {  }
++            group_items: {  }
++          plugin_id: string
++        field_range_end_value:
++          id: field_range_end_value
++          table: node__field_range
++          field: field_range_end_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          operator: contains
++          value: ''
++          group: 1
++          exposed: false
++          expose:
++            operator_id: ''
++            label: ''
++            description: ''
++            use_operator: false
++            operator: ''
++            identifier: ''
++            required: false
++            remember: false
++            multiple: false
++            remember_roles:
++              authenticated: authenticated
++          is_grouped: false
++          group_info:
++            label: ''
++            description: ''
++            identifier: ''
++            optional: true
++            widget: select
++            multiple: false
++            remember: false
++            default_group: All
++            default_group_multiple: {  }
++            group_items: {  }
++          plugin_id: string
++      sorts:
++        field_range_value:
++          id: field_range_value
++          table: node__field_range
++          field: field_range_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          order: ASC
++          exposed: false
++          expose:
++            label: ''
++          plugin_id: standard
++      header: {  }
++      footer: {  }
++      empty: {  }
++      relationships: {  }
++      arguments: {  }
++      display_extenders: {  }
++      filter_groups:
++        operator: AND
++        groups: {  }
++    cache_metadata:
++      max-age: -1
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++        - url.query_args
++        - 'user.node_grants:view'
++        - user.permissions
++      tags: {  }
+diff --git a/modules/datetime_range/tests/src/Functional/Update/DatetimeRangeViewUpdateTest.php b/modules/datetime_range/tests/src/Functional/Update/DatetimeRangeViewUpdateTest.php
+new file mode 100644
+index 0000000000..9afd7aa22b
+--- /dev/null
++++ b/modules/datetime_range/tests/src/Functional/Update/DatetimeRangeViewUpdateTest.php
+@@ -0,0 +1,75 @@
++<?php
++
++namespace Drupal\Tests\datetime_range\Functional\Update;
++
++use Drupal\FunctionalTests\Update\UpdatePathTestBase;
++use Drupal\views\Entity\View;
++
++/**
++ * Test update of views with datetime_range filters.
++ *
++ * @see https://www.drupal.org/node/2786577
++ * @see datetime_range_post_update_views_string_plugin_id()
++ *
++ * @group Update
++ * @group legacy
++ */
++class DatetimeRangeViewUpdateTest extends UpdatePathTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setDatabaseDumpFiles() {
++    $this->databaseDumpFiles = [
++      __DIR__ . '/../../../../../system/tests/fixtures/update/drupal-8.bare.standard.php.gz',
++      __DIR__ . '/../../../../tests/fixtures/update/datetime_range-filter-values.php',
++    ];
++  }
++
++  /**
++   * Tests that datetime_range filter values are updated properly.
++   */
++  public function testViewsPostUpdateDateRangeFilterValues() {
++
++    // Load our pre-update test view.
++    $view = View::load('test_datetime_range_filter_values');
++    $data = $view->toArray();
++
++    // Check pre-update filter values.
++    $filter1 = $data['display']['default']['display_options']['filters']['field_range_value'];
++    $this->assertSame('string', $filter1['plugin_id']);
++
++    // Check pre-update filter with operator going to be mapped.
++    $filter2 = $data['display']['default']['display_options']['filters']['field_range_end_value'];
++    $this->assertSame('string', $filter2['plugin_id']);
++    $this->assertSame('', $filter2['value']);
++    $this->assertSame('contains', $filter2['operator']);
++
++    // Check pre-update sort values.
++    $sort = $data['display']['default']['display_options']['sorts']['field_range_value'];
++    $this->assertSame('standard', $sort['plugin_id']);
++
++    $this->runUpdates();
++
++    // Reload and initialize our test view.
++    $view = View::load('test_datetime_range_filter_values');
++    $data = $view->toArray();
++
++    // Check filter values.
++    $filter1 = $data['display']['default']['display_options']['filters']['field_range_value'];
++    $this->assertSame('datetime', $filter1['plugin_id']);
++    $this->assertSame('2017', $filter1['value']['value']);
++    $this->assertSame('=', $filter1['operator']);
++
++    // Check string to datetime operator/value mapping.
++    $filter2 = $data['display']['default']['display_options']['filters']['field_range_end_value'];
++    $this->assertSame('datetime', $filter2['plugin_id']);
++    $this->assertSame('.*', $filter2['value']['value']);
++    $this->assertSame('regular_expression', $filter2['operator']);
++
++    // Check sort values.
++    $sort = $data['display']['default']['display_options']['sorts']['field_range_value'];
++    $this->assertSame('datetime', $sort['plugin_id']);
++  }
++
++}
+diff --git a/modules/datetime_range/tests/src/Kernel/Views/FilterDateTest.php b/modules/datetime_range/tests/src/Kernel/Views/FilterDateTest.php
+new file mode 100644
+index 0000000000..76e3dbf447
+--- /dev/null
++++ b/modules/datetime_range/tests/src/Kernel/Views/FilterDateTest.php
+@@ -0,0 +1,158 @@
++<?php
++
++namespace Drupal\Tests\datetime_range\Kernel\Views;
++
++use Drupal\datetime_range\Plugin\Field\FieldType\DateRangeItem;
++use Drupal\field\Entity\FieldStorageConfig;
++use Drupal\node\Entity\Node;
++use Drupal\Tests\datetime\Kernel\Views\DateTimeHandlerTestBase;
++use Drupal\views\Views;
++
++/**
++ * Tests date-only fields.
++ *
++ * @group datetime
++ */
++class FilterDateTest extends DateTimeHandlerTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public static $modules = ['datetime_test', 'node', 'datetime_range', 'field'];
++
++  /**
++   * Type of the field.
++   *
++   * @var string
++   */
++  protected static $field_type = 'daterange';
++
++  /**
++   * {@inheritdoc}
++   */
++  public static $testViews = ['test_filter_datetime'];
++
++  /**
++   * For offset tests, set to the current time.
++   */
++  protected static $date;
++
++  /**
++   * {@inheritdoc}
++   *
++   * Create nodes with relative date range of:
++   * yesterday - today, today - today, and today - tomorrow.
++   */
++  protected function setUp($import_test_views = TRUE) {
++    parent::setUp($import_test_views);
++
++    // Set to 'today'.
++    static::$date = $this->getUTCEquivalentOfUserNowAsTimestamp();
++
++    // Change field storage to date-only.
++    $storage = FieldStorageConfig::load('node.' . static::$field_name);
++    $storage->setSetting('datetime_type', DateRangeItem::DATETIME_TYPE_DATE);
++    $storage->save();
++
++    // Retrieve tomorrow, today and yesterday dates.
++    $dates = $this->getRelativeDateValuesFromTimestamp(static::$date);
++
++    // Node 0: Yesterday - Today.
++    $node = Node::create([
++      'title' => $this->randomMachineName(8),
++      'type' => 'page',
++      'field_date' => [
++        'value' => $dates[2],
++        'end_value' => $dates[1],
++      ],
++    ]);
++    $node->save();
++    $this->nodes[] = $node;
++
++    // Node 1: Today - Today.
++    $node = Node::create([
++      'title' => $this->randomMachineName(8),
++      'type' => 'page',
++      'field_date' => [
++        'value' => $dates[1],
++        'end_value' => $dates[1],
++      ],
++    ]);
++    $node->save();
++    $this->nodes[] = $node;
++
++    // Node 2: Today - Tomorrow.
++    $node = Node::create([
++      'title' => $this->randomMachineName(8),
++      'type' => 'page',
++      'field_date' => [
++        'value' => $dates[1],
++        'end_value' => $dates[0],
++      ],
++    ]);
++    $node->save();
++    $this->nodes[] = $node;
++
++    // Add end date filter to the test_filter_datetime view.
++    /** @var \Drupal\views\Entity\View $view */
++    $view = \Drupal::entityTypeManager()->getStorage('view')->load('test_filter_datetime');
++    $field_end = static::$field_name . '_end_value';
++    $display = $view->getDisplay('default');
++    $filter_end_date = $display['display_options']['filters'][static::$field_name . '_value'];
++    $filter_end_date['id'] = $field_end;
++    $filter_end_date['field'] = $field_end;
++
++    $view->getDisplay('default')['display_options']['filters'][$field_end] = $filter_end_date;
++    $view->save();
++  }
++
++  /**
++   * Test offsets with date-only fields.
++   */
++  public function testDateOffsets() {
++    $view = Views::getView('test_filter_datetime');
++    $field_start = static::$field_name . '_value';
++    $field_end = static::$field_name . '_end_value';
++
++    // Test simple operations.
++    $view->initHandlers();
++
++    // Search nodes with:
++    // - start date greater than or equal to 'yesterday'.
++    // - end date lower than or equal to 'today'.
++    // Expected results: nodes 0 and 1.
++    $view->filter[$field_start]->operator = '>=';
++    $view->filter[$field_start]->value['type'] = 'offset';
++    $view->filter[$field_start]->value['value'] = '-1 day';
++    $view->filter[$field_end]->operator = '<=';
++    $view->filter[$field_end]->value['type'] = 'offset';
++    $view->filter[$field_end]->value['value'] = 'now';
++    $view->setDisplay('default');
++    $this->executeView($view);
++    $expected_result = [
++      ['nid' => $this->nodes[0]->id()],
++      ['nid' => $this->nodes[1]->id()],
++    ];
++    $this->assertIdenticalResultset($view, $expected_result, $this->map);
++    $view->destroy();
++
++    // Search nodes with:
++    // - start date greater than or equal to 'yesterday'.
++    // - end date greater than 'today'.
++    // Expected results: node 2.
++    $view->initHandlers();
++    $view->filter[$field_start]->operator = '>=';
++    $view->filter[$field_start]->value['type'] = 'offset';
++    $view->filter[$field_start]->value['value'] = '-1 day';
++    $view->filter[$field_end]->operator = '>';
++    $view->filter[$field_end]->value['type'] = 'offset';
++    $view->filter[$field_end]->value['value'] = 'now';
++    $view->setDisplay('default');
++    $this->executeView($view);
++    $expected_result = [
++      ['nid' => $this->nodes[2]->id()],
++    ];
++    $this->assertIdenticalResultset($view, $expected_result, $this->map);
++  }
++
++}

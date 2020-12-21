@@ -1,0 +1,67 @@
+diff --git a/src/Form/PanelizerWizardContextConfigure.php b/src/Form/PanelizerWizardContextConfigure.php
+index a7ab05049..2c724198c 100644
+--- a/src/Form/PanelizerWizardContextConfigure.php
++++ b/src/Form/PanelizerWizardContextConfigure.php
+@@ -5,8 +5,9 @@
+ use Drupal\Core\Plugin\Context\ContextInterface;
+ use Drupal\ctools\ContextMapperInterface;
+ use Drupal\ctools\Form\ContextConfigure;
+-use Drupal\user\SharedTempStoreFactory;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\TempStore\SharedTempStoreFactory;
+ 
+ /**
+  *
+@@ -28,8 +29,8 @@ class PanelizerWizardContextConfigure extends ContextConfigure {
+    * @param \Drupal\ctools\ContextMapperInterface $context_mapper
+    *   The context mapper.
+    */
+-  public function __construct(SharedTempStoreFactory $tempstore, ContextMapperInterface $context_mapper) {
+-    parent::__construct($tempstore);
++  public function __construct(SharedTempStoreFactory $tempstore, EntityTypeManagerInterface $entity_type_manager, ContextMapperInterface $context_mapper) {
++    parent::__construct($tempstore, $entity_type_manager);
+     $this->contextMapper = $context_mapper;
+   }
+ 
+@@ -38,7 +39,8 @@ public function __construct(SharedTempStoreFactory $tempstore, ContextMapperInte
+    */
+   public static function create(ContainerInterface $container) {
+     return new static(
+-      $container->get('user.shared_tempstore'),
++      $container->get('tempstore.shared'),
++      $container->get('entity_type.manager'),
+       $container->get('ctools.context_mapper')
+     );
+   }
+diff --git a/src/Form/PanelizerWizardContextForm.php b/src/Form/PanelizerWizardContextForm.php
+index 8fe284621..47aadf331 100644
+--- a/src/Form/PanelizerWizardContextForm.php
++++ b/src/Form/PanelizerWizardContextForm.php
+@@ -10,6 +10,7 @@
+ use Drupal\ctools\Form\ManageContext;
+ use Drupal\Core\TempStore\SharedTempStoreFactory;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
++use Drupal\ctools\TypedDataResolver;
+ 
+ /**
+  * Simple wizard step form.
+@@ -35,6 +36,7 @@ public static function create(ContainerInterface $container) {
+     return new static(
+       $container->get('typed_data_manager'),
+       $container->get('form_builder'),
++      $container->get('ctools.typed_data.resolver'),
+       $container->get('tempstore.shared')
+     );
+   }
+@@ -49,8 +51,8 @@ public static function create(ContainerInterface $container) {
+    * @param \Drupal\user\SharedTempStoreFactory $tempstore_factory
+    *   Shared user tempstore factory.
+    */
+-  public function __construct(TypedDataManagerInterface $typed_data_manager, FormBuilderInterface $form_builder, SharedTempStoreFactory $tempstore_factory) {
+-    parent::__construct($typed_data_manager, $form_builder);
++  public function __construct(TypedDataManagerInterface $typed_data_manager, FormBuilderInterface $form_builder, TypedDataResolver $ctools_typed_data_resolver, SharedTempStoreFactory $tempstore_factory) {
++    parent::__construct($typed_data_manager, $form_builder, $ctools_typed_data_resolver);
+     $this->tempstoreFactory = $tempstore_factory;
+   }
+ 

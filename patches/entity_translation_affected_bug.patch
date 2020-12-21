@@ -1,0 +1,14 @@
+diff --git a/lib/Drupal/Core/Entity/EntityChangesDetectionTrait.php b/lib/Drupal/Core/Entity/EntityChangesDetectionTrait.php
+index cde4d834c..79e34ee11 100644
+--- a/lib/Drupal/Core/Entity/EntityChangesDetectionTrait.php
++++ b/lib/Drupal/Core/Entity/EntityChangesDetectionTrait.php
+@@ -36,6 +36,9 @@ protected function getFieldsToSkipFromTranslationChangesCheck(ContentEntityInter
+         $fields[] = $field_name;
+       }
+     }
++    if(\Drupal::moduleHandler()->moduleExists('multiversion')){
++      array_push($fields, '_rev');
++    }
+ 
+     return $fields;
+   }

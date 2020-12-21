@@ -1,0 +1,13 @@
+diff --git a/docroot/modules/contrib/libraries/libraries.module b/docroot/modules/contrib/libraries/libraries.module
+index 3006c34..f1fabcc 100644
+--- a/docroot/modules/contrib/libraries/libraries.module
++++ b/docroot/modules/contrib/libraries/libraries.module
+@@ -412,7 +412,7 @@ function &libraries_info($name = NULL) {
+     // Gather information from hook_libraries_info() in enabled themes.
+     // @see drupal_alter()
+     global $theme, $base_theme_info;
+-    if (isset($theme)) {
++    if (is_array($theme) && isset($theme)) {
+       $theme_keys = array();
+       foreach ($base_theme_info as $base) {
+         $theme_keys[] = $base->name;

@@ -1,0 +1,19 @@
+diff --git a/modules/editor/src/Plugin/Filter/EditorFileReference.php b/modules/editor/src/Plugin/Filter/EditorFileReference.php
+index ad2ac033fa..057861f13b 100644
+--- a/modules/editor/src/Plugin/Filter/EditorFileReference.php
++++ b/modules/editor/src/Plugin/Filter/EditorFileReference.php
+@@ -80,6 +80,14 @@ public function process($text, $langcode) {
+             $node->setAttribute('src', file_url_transform_relative(file_create_url($file->getFileUri())));
+           }
+         }
++        // If there is a 'href' attribute, set it to the file entity's current
++        // URL. This ensures the URL works even after the file location changes.
++        if ($node->hasAttribute('href')) {
++          $file = $this->entityManager->loadEntityByUuid('file', $uuid);
++          if ($file) {
++            $node->setAttribute('href', file_url_transform_relative(file_create_url($file->getFileUri())));
++          }
++        }
+ 
+         // Only process the first occurrence of each file UUID.
+         if (!isset($processed_uuids[$uuid])) {

@@ -1,0 +1,388 @@
+diff --git a/includes/theme.inc b/includes/theme.inc
+index 4cc6424..0b8f999 100644
+--- a/includes/theme.inc
++++ b/includes/theme.inc
+@@ -572,6 +572,14 @@ function template_preprocess_datetime_wrapper(&$variables) {
+     $variables['title'] = $element['#title'];
+   }
+ 
++  // Pass elements #type and #name to template.
++  if (!empty($element['#type'])) {
++    $variables['type'] = $element['#type'];
++  }
++  if (!empty($element['#name'])) {
++    $variables['name'] = $element['#name'];
++  }
++
+   // Suppress error messages.
+   $variables['errors'] = NULL;
+ 
+@@ -585,6 +593,13 @@ function template_preprocess_datetime_wrapper(&$variables) {
+     $variables['description_attributes'] = new Attribute($description_attributes);
+   }
+ 
++  // For disabled datetime fields, the 'disabled' attribute should not be
++  // applied to the wrapper, but the 'form-disabled' class should be.
++  $variables['disabled'] = !empty($element['#attributes']['disabled']) ? $element['#attributes']['disabled'] : NULL;
++  if (isset($variables['attributes']['disabled'])) {
++    unset($variables['attributes']['disabled']);
++  }
++
+   $variables['required'] = FALSE;
+   // For required datetime fields 'form-required' & 'js-form-required' classes
+   // are appended to the label attributes.
+diff --git a/lib/Drupal/Core/Datetime/Element/Datetime.php b/lib/Drupal/Core/Datetime/Element/Datetime.php
+index d005475..aae4140 100644
+--- a/lib/Drupal/Core/Datetime/Element/Datetime.php
++++ b/lib/Drupal/Core/Datetime/Element/Datetime.php
+@@ -95,7 +95,7 @@ public static function valueCallback(&$element, $input, FormStateInterface $form
+       ];
+     }
+     else {
+-      $date = $element['#default_value'];
++      $date = isset($element['#default_value']) ? $element['#default_value'] : NULL;
+       if ($date instanceof DrupalDateTime && !$date->hasErrors()) {
+         $input = [
+           'date'   => $date->format($element['#date_date_format']),
+@@ -227,6 +227,19 @@ public static function processDatetime(&$element, FormStateInterface $form_state
+ 
+     $element['#tree'] = TRUE;
+ 
++    // Visibility states need to be applied to the element as a whole, but the
++    // other states apply to the individual parts.
++    if (isset($element['#states']) && is_array($element['#states'])) {
++      $wrapper_states = array_filter($element['#states'], function ($key) {
++        return in_array($key, ['visible', 'invisible']);
++      }, ARRAY_FILTER_USE_KEY);
++      $children_states = array_diff_key($element['#states'], $wrapper_states);
++    }
++    else {
++      $wrapper_states = $children_states = [];
++    }
++    $element['#states'] = $wrapper_states;
++
+     if ($element['#date_date_element'] != 'none') {
+ 
+       $date_format = $element['#date_date_element'] != 'none' ? static::getHtml5DateFormat($element) : '';
+@@ -264,6 +277,7 @@ public static function processDatetime(&$element, FormStateInterface $form_state
+         '#size' => max(12, strlen($element['#value']['date'])),
+         '#error_no_message' => TRUE,
+         '#date_date_format' => $element['#date_date_format'],
++        '#states' => $children_states,
+       ];
+ 
+       // Allows custom callbacks to alter the element.
+@@ -296,6 +310,7 @@ public static function processDatetime(&$element, FormStateInterface $form_state
+         '#required' => $element['#required'],
+         '#size' => 12,
+         '#error_no_message' => TRUE,
++        '#states' => $children_states,
+       ];
+ 
+       // Allows custom callbacks to alter the element.
+diff --git a/misc/states.js b/misc/states.js
+index 61bbf46..9e86515 100644
+--- a/misc/states.js
++++ b/misc/states.js
+@@ -311,6 +311,9 @@
+   $document.on('state:disabled', function (e) {
+     if (e.trigger) {
+       $(e.target).prop('disabled', e.value).closest('.js-form-item, .js-form-submit, .js-form-wrapper').toggleClass('form-disabled', e.value).find('select, input, textarea').prop('disabled', e.value);
++      // A complex form element, like 'datetime' (one made up of multiple
++      // sub-elements) may have a label for the element as a whole.
++      $(e.target).closest('.js-complex-form-item').toggleClass('form-disabled', e.value);
+     }
+   });
+ 
+@@ -319,12 +322,19 @@
+       if (e.value) {
+         var label = 'label' + (e.target.id ? '[for=' + e.target.id + ']' : '');
+         var $label = $(e.target).attr({ required: 'required', 'aria-required': 'aria-required' }).closest('.js-form-item, .js-form-wrapper').find(label);
++        // A complex form element, like 'datetime' (one made up of multiple
++        // sub-elements) may have a label for the element as a whole.
++        var $complexLabel = $(e.target).closest('.js-complex-form-item').children('label');
+ 
+         if (!$label.hasClass('js-form-required').length) {
+           $label.addClass('js-form-required form-required');
+         }
++        if (!$complexLabel.hasClass('js-form-required').length) {
++          $complexLabel.addClass('js-form-required form-required');
++        }
+       } else {
+         $(e.target).removeAttr('required aria-required').closest('.js-form-item, .js-form-wrapper').find('label.js-form-required').removeClass('js-form-required form-required');
++        $(e.target).closest('.js-complex-form-item').children('label').removeClass('js-form-required form-required');
+       }
+     }
+   });
+diff --git a/modules/datetime/tests/modules/datetime_states/datetime_states.info.yml b/modules/datetime/tests/modules/datetime_states/datetime_states.info.yml
+new file mode 100644
+index 0000000..75e139f
+--- /dev/null
++++ b/modules/datetime/tests/modules/datetime_states/datetime_states.info.yml
+@@ -0,0 +1,8 @@
++name: 'Datetime #states test'
++type: module
++description: 'Provides an example demonstrating how form #states affect datetime elements.'
++package: Testing
++version: VERSION
++core: 8.x
++dependencies:
++  - datetime
+diff --git a/modules/datetime/tests/modules/datetime_states/datetime_states.routing.yml b/modules/datetime/tests/modules/datetime_states/datetime_states.routing.yml
+new file mode 100644
+index 0000000..f5e44fe
+--- /dev/null
++++ b/modules/datetime/tests/modules/datetime_states/datetime_states.routing.yml
+@@ -0,0 +1,6 @@
++datetime_states.example:
++  path: '/datetime/states-example'
++  defaults:
++    _form: '\Drupal\datetime_states\Form\StateForm'
++  requirements:
++    _access: 'TRUE'
+diff --git a/modules/datetime/tests/modules/datetime_states/src/Form/StateForm.php b/modules/datetime/tests/modules/datetime_states/src/Form/StateForm.php
+new file mode 100644
+index 0000000..9b00a6d
+--- /dev/null
++++ b/modules/datetime/tests/modules/datetime_states/src/Form/StateForm.php
+@@ -0,0 +1,70 @@
++<?php
++
++namespace Drupal\datetime_states\Form;
++
++use Drupal\Core\Form\FormBase;
++use Drupal\Core\Form\FormStateInterface;
++
++/**
++ * Defines a settings page for the File Hosting module.
++ */
++class StateForm extends FormBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getFormId() {
++    return "datetime_states_form";
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildForm(array $form, FormStateInterface $form_state) {
++    $form['toggle_invisible'] = array(
++      '#type' => 'checkbox',
++      '#title' => $this->t('Invisible'),
++    );
++    $form['toggle_disabled'] = array(
++      '#type' => 'checkbox',
++      '#title' => $this->t('Disabled'),
++    );
++    $form['toggle_required'] = array(
++      '#type' => 'checkbox',
++      '#title' => $this->t('Required'),
++    );
++
++
++    $form['date'] = array(
++      '#type' => 'datetime',
++      '#title' => $this->t('Datetime'),
++      '#description' => $this->t('A datetime form element.'),
++      '#states' => [
++        'invisible' => [
++          ':input[name="toggle_invisible"]' => ['checked' => TRUE],
++        ],
++        'disabled' => [
++          ':input[name="toggle_disabled"]' => ['checked' => TRUE],
++        ],
++        'required' => [
++          ':input[name="toggle_required"]' => ['checked' => TRUE],
++        ],
++      ],
++    );
++
++    $form['submit'] = array(
++      '#type' => 'submit',
++      '#value' => $this->t('Save'),
++    );
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitForm(array &$form, FormStateInterface $form_state) {
++
++  }
++
++}
+diff --git a/modules/datetime/tests/src/Functional/DateTimeFieldTest.php b/modules/datetime/tests/src/Functional/DateTimeFieldTest.php
+index 3df2582..910ecfa 100644
+--- a/modules/datetime/tests/src/Functional/DateTimeFieldTest.php
++++ b/modules/datetime/tests/src/Functional/DateTimeFieldTest.php
+@@ -48,7 +48,7 @@ public function testDateField() {
+       // Display creation form.
+       $this->drupalGet('entity_test/add');
+       $this->assertFieldByName("{$field_name}[0][value][date]", '', 'Date element found.');
+-      $this->assertFieldByXPath('//*[@id="edit-' . $field_name . '-wrapper"]//label[contains(@class,"js-form-required")]', TRUE, 'Required markup found');
++      $this->assertFieldByXPath('//*[@id="edit-' . $field_name . '-wrapper"]/div/label[contains(@class,"js-form-required")]', TRUE, 'Required markup found');
+       $this->assertNoFieldByName("{$field_name}[0][value][time]", '', 'Time element not found.');
+       $this->assertFieldByXPath('//input[@aria-describedby="edit-' . $field_name . '-0-value--description"]', NULL, 'ARIA described-by found');
+       $this->assertFieldByXPath('//div[@id="edit-' . $field_name . '-0-value--description"]', NULL, 'ARIA description found');
+diff --git a/modules/system/templates/datetime-wrapper.html.twig b/modules/system/templates/datetime-wrapper.html.twig
+index a14da89..944ad77 100644
+--- a/modules/system/templates/datetime-wrapper.html.twig
++++ b/modules/system/templates/datetime-wrapper.html.twig
+@@ -16,22 +16,29 @@
+  */
+ #}
+ {%
++set container_classes = [
++'js-complex-form-item',
++]
++%}
++{%
+   set title_classes = [
+     required ? 'js-form-required',
+     required ? 'form-required',
+   ]
+ %}
+-{% if title %}
+-  <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
+-{% endif %}
+-{{ content }}
+-{% if errors %}
+-  <div>
+-    {{ errors }}
+-  </div>
+-{% endif %}
+-{% if description %}
+-  <div{{ description_attributes }}>
+-    {{ description }}
+-  </div>
+-{% endif %}
++<div{{ attributes.addClass(container_classes) }}>
++  {% if title %}
++    <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
++  {% endif %}
++  {{ content }}
++  {% if errors %}
++    <div>
++      {{ errors }}
++    </div>
++  {% endif %}
++  {% if description %}
++    <div{{ description_attributes }}>
++      {{ description }}
++    </div>
++  {% endif %}
++</div>
+diff --git a/themes/classy/templates/form/datetime-wrapper.html.twig b/themes/classy/templates/form/datetime-wrapper.html.twig
+index 5b52f2d..c97159f 100644
+--- a/themes/classy/templates/form/datetime-wrapper.html.twig
++++ b/themes/classy/templates/form/datetime-wrapper.html.twig
+@@ -14,23 +14,36 @@
+  */
+ #}
+ {%
++set container_classes = [
++'js-form-item',
++'form-item',
++'js-form-type-' ~ type|clean_class,
++'form-type-' ~ type|clean_class,
++'js-form-item-' ~ name|clean_class,
++'form-item-' ~ name|clean_class,
++'js-complex-form-item',
++disabled == 'disabled' ? 'form-disabled',
++]
++%}
++{%
+   set title_classes = [
+-    'label',
+     required ? 'js-form-required',
+     required ? 'form-required',
+   ]
+ %}
+-{% if title %}
+-  <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
+-{% endif %}
+-{{ content }}
+-{% if errors %}
+-  <div class="form-item--error-message">
+-    <strong>{{ errors }}</strong>
+-  </div>
+-{% endif %}
+-{% if description %}
+-  <div{{ description_attributes.addClass('description') }}>
+-    {{ description }}
+-  </div>
+-{% endif %}
++<div{{ attributes.addClass(container_classes) }}>
++  {% if title %}
++    <label{{ title_attributes.addClass(title_classes) }}>{{ title }}</label>
++  {% endif %}
++  {{ content }}
++  {% if errors %}
++    <div class="form-item--error-message">
++      <strong>{{ errors }}</strong>
++    </div>
++  {% endif %}
++  {% if description %}
++    <div{{ description_attributes.addClass('description') }}>
++      {{ description }}
++    </div>
++  {% endif %}
++</div>
+diff --git a/themes/seven/css/components/form.css b/themes/seven/css/components/form.css
+index 0db30e8..68cae03 100644
+--- a/themes/seven/css/components/form.css
++++ b/themes/seven/css/components/form.css
+@@ -81,6 +81,8 @@ label[for] {
+ .form-disabled input.form-number,
+ .form-disabled input.form-color,
+ .form-disabled input.form-file,
++.form-disabled input.form-date,
++.form-disabled input.form-time,
+ .form-disabled textarea.form-textarea,
+ .form-disabled select.form-select {
+   border-color: #d4d4d4;
+diff --git a/themes/stable/templates/form/datetime-wrapper.html.twig b/themes/stable/templates/form/datetime-wrapper.html.twig
+index 3c37ffd..29ed9a3 100644
+--- a/themes/stable/templates/form/datetime-wrapper.html.twig
++++ b/themes/stable/templates/form/datetime-wrapper.html.twig
+@@ -14,18 +14,25 @@
+  */
+ #}
+ {%
++  set container_classes = [
++    'js-complex-form-item',
++  ]
++%}
++{%
+   set title_classes = [
+     required ? 'js-form-required',
+     required ? 'form-required',
+   ]
+ %}
+-{% if title %}
+-  <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
+-{% endif %}
+-{{ content }}
+-{% if errors %}
+-  <div>
+-    {{ errors }}
+-  </div>
+-{% endif %}
+-{{ description }}
++<div{{ attributes.addClass(container_classes) }}>
++  {% if title %}
++    <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
++  {% endif %}
++  {{ content }}
++  {% if errors %}
++    <div>
++      {{ errors }}
++    </div>
++  {% endif %}
++  {{ description }}
++</div>

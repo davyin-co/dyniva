@@ -1,0 +1,63 @@
+diff --git a/panels_ipe/src/Form/PanelsIPEBlockPluginForm.php b/panels_ipe/src/Form/PanelsIPEBlockPluginForm.php
+index 8d8a8b9..fd85e26 100644
+--- a/panels_ipe/src/Form/PanelsIPEBlockPluginForm.php
++++ b/panels_ipe/src/Form/PanelsIPEBlockPluginForm.php
+@@ -308,6 +308,22 @@ class PanelsIPEBlockPluginForm extends FormBase {
+       'html' => $this->renderer->render($build),
+     ];
+ 
++    if (isset($block_config['vid'])) {
++      $block_content = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_instance->getDerivativeId());
++      if ($block_content->shared_type->value == 'global') {
++        $block_model['vid_pin'] = $block_config['vid'];
++        $block_model['vid'] = $block_content->revision_id->value;
++        $query = \Drupal::entityQuery('node');
++        $result = $query
++                ->condition('panelizer.panels_display', $block_instance->getDerivativeId(), 'CONTAINS')
++                ->condition('panelizer.panels_display', $block_content->revision_id->value . '";s:3:"pin";', 'CONTAINS')
++                ->execute();
++        if ($result) {
++          $block_model['nid'] = reset($result);
++        }
++      }
++    }
++
+     $form['build'] = $build;
+ 
+     // Add Block metadata and HTML as a drupalSetting.
+diff --git a/panels_ipe/src/Plugin/DisplayBuilder/InPlaceEditorDisplayBuilder.php b/panels_ipe/src/Plugin/DisplayBuilder/InPlaceEditorDisplayBuilder.php
+index 556ec39..6cab2fb 100644
+--- a/panels_ipe/src/Plugin/DisplayBuilder/InPlaceEditorDisplayBuilder.php
++++ b/panels_ipe/src/Plugin/DisplayBuilder/InPlaceEditorDisplayBuilder.php
+@@ -119,6 +119,23 @@ class InPlaceEditorDisplayBuilder extends StandardDisplayBuilder {
+           'provider' => $configuration['provider'],
+           'plugin_id' => $plugin_definition['id'],
+         ];
++
++        if ($block->getDerivativeId() && isset($configuration['vid'])) {
++          $block_content = \Drupal::entityManager()->loadEntityByUuid('block_content', $block->getDerivativeId());
++          if ($block_content->shared_type->value == 'global') {
++            $setting['vid_pin'] = $configuration['vid'];
++            $setting['vid'] = $block_content->revision_id->value;
++            $query = \Drupal::entityQuery('node');
++            $result = $query
++                    ->condition('panelizer.panels_display', $block->getDerivativeId(), 'CONTAINS')
++                    ->condition('panelizer.panels_display', $block_content->revision_id->value . '";s:3:"pin";', 'CONTAINS')
++                    ->execute();
++            if ($result) {
++              $setting['nid'] = reset($result);
++            }
++          }
++        }
++
+         $settings['regions'][$region]['blocks'][$block_uuid] = $setting;
+       }
+     }
+@@ -149,7 +166,6 @@ class InPlaceEditorDisplayBuilder extends StandardDisplayBuilder {
+ 
+     // Inform the App of our saved state.
+     $settings['unsaved'] = $unsaved;
+-    $settings['locked'] = $locked;
+ 
+     return $settings;
+   }

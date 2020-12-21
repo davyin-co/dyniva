@@ -1,0 +1,25 @@
+diff --git a/src/Normalizer/CropNormalizer.php b/src/Normalizer/CropNormalizer.php
+index 0d136e9..d53ea92 100644
+--- a/src/Normalizer/CropNormalizer.php
++++ b/src/Normalizer/CropNormalizer.php
+@@ -20,12 +20,14 @@ class CropNormalizer extends ContentEntityNormalizer {
+     $cropped_entity_type_id = $entity->entity_type->value;
+     $cropped_entity_storage = $this->entityManager->getStorage($cropped_entity_type_id);
+     $cropped_entity = $cropped_entity_storage->load($entity->entity_id->value);
+-    $entity_languages = $entity->getTranslationLanguages();
+-    foreach ($entity_languages as $entity_language) {
+-      // Store all needed information about entity referenced by 'entity_id' field.
+-      $data[$entity_language->getId()]['entity_id'][0]['crop_target_uuid'] = $cropped_entity->uuid();
+-      $data[$entity_language->getId()]['entity_id'][0]['crop_target_entity_type_id'] = $cropped_entity->getEntityTypeId();
+-      $data[$entity_language->getId()]['entity_id'][0]['crop_target_bundle'] = $cropped_entity->bundle();
++    if($cropped_entity){
++      $entity_languages = $entity->getTranslationLanguages();
++      foreach ($entity_languages as $entity_language) {
++        // Store all needed information about entity referenced by 'entity_id' field.
++        $data[$entity_language->getId()]['entity_id'][0]['crop_target_uuid'] = $cropped_entity->uuid();
++        $data[$entity_language->getId()]['entity_id'][0]['crop_target_entity_type_id'] = $cropped_entity->getEntityTypeId();
++        $data[$entity_language->getId()]['entity_id'][0]['crop_target_bundle'] = $cropped_entity->bundle();
++      }
+     }
+ 
+     return $data;

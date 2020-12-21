@@ -1,0 +1,151 @@
+diff --git a/modules/views/src/Plugin/views/row/RssFields.php b/modules/views/src/Plugin/views/row/RssFields.php
+index 9a31a028f0..1c9ffde9f7 100644
+--- a/modules/views/src/Plugin/views/row/RssFields.php
++++ b/modules/views/src/Plugin/views/row/RssFields.php
+@@ -139,9 +139,7 @@ public function render($row) {
+     // Create the RSS item object.
+     $item = new \stdClass();
+     $item->title = $this->getField($row_index, $this->options['title_field']);
+-    // @todo Views should expect and store a leading /. See:
+-    //   https://www.drupal.org/node/2423913
+-    $item->link = Url::fromUserInput('/' . $this->getField($row_index, $this->options['link_field']))->setAbsolute()->toString();
++    $item->link = $this->getFieldUrl($this->getField($row_index, $this->options['link_field']))->setAbsolute()->toString();
+ 
+     $field = $this->getField($row_index, $this->options['description_field']);
+     $item->description = is_array($field) ? $field : ['#markup' => $field];
+@@ -158,9 +156,7 @@ public function render($row) {
+     $item_guid = $this->getField($row_index, $this->options['guid_field_options']['guid_field']);
+     if ($this->options['guid_field_options']['guid_field_is_permalink']) {
+       $guid_is_permalink_string = 'true';
+-      // @todo Enforce GUIDs as system-generated rather than user input? See
+-      //   https://www.drupal.org/node/2430589.
+-      $item_guid = Url::fromUserInput('/' . $item_guid)->setAbsolute()->toString();
++      $item_guid = $this->getFieldUrl($item_guid)->setAbsolute()->toString();
+     }
+     $item->elements[] = [
+       'key' => 'guid',
+@@ -207,4 +203,29 @@ public function getField($index, $field_id) {
+     return $this->view->style_plugin->getField($index, $field_id);
+   }
+ 
++  /**
++   * Retrieves a URL from a field value.
++   *
++   * @param string $field_value
++   *   The field value retrieved with RssFields::getField().
++   *
++   * @return \Drupal\Core\Url
++   *   The URL object built from the field value.
++   */
++  private function getFieldUrl($field_value) {
++    global $base_path;
++
++    $value = rawurldecode($field_value);
++
++    // Url::fromUserInput expects the argument to be an internal path, so the
++    // base path should be stripped if it's there.
++    if (substr($value, 0, strlen($base_path)) === $base_path) {
++      $value = substr($value, strlen($base_path));
++    }
++
++    // @todo Views should expect and store a leading /. See:
++    //   https://www.drupal.org/node/2423913
++    return Url::fromUserInput('/' . $value);
++  }
++
+ }
+diff --git a/modules/views/src/Tests/Plugin/DisplayFeedTest.php b/modules/views/src/Tests/Plugin/DisplayFeedTest.php
+index 04ba4cab99..57981eaacf 100644
+--- a/modules/views/src/Tests/Plugin/DisplayFeedTest.php
++++ b/modules/views/src/Tests/Plugin/DisplayFeedTest.php
+@@ -103,7 +103,7 @@ public function testFeedFieldOutput() {
+ 
+     // Verify a title with HTML entities is properly escaped.
+     $node_title = 'This "cool" & "neat" article\'s title';
+-    $this->drupalCreateNode([
++    $node = $this->drupalCreateNode([
+       'title' => $node_title,
+       'body' => [
+         0 => [
+@@ -116,6 +116,8 @@ public function testFeedFieldOutput() {
+     $this->drupalGet('test-feed-display-fields.xml');
+     $result = $this->xpath('//title/a');
+     $this->assertEqual($result[0], $node_title, 'Node title with HTML entities displays correctly.');
++    $raw = '<link>' . $node->toUrl()->setAbsolute()->toString() . '</link>';
++    $this->assertRaw($raw, 'Node is linked correctly.');
+     // Verify HTML is properly escaped in the description field.
+     $this->assertRaw('&lt;p&gt;A paragraph&lt;/p&gt;');
+   }
+diff --git a/modules/views/tests/modules/views_test_config/test_views/views.view.test_display_feed.yml b/modules/views/tests/modules/views_test_config/test_views/views.view.test_display_feed.yml
+index 51c083868d..67503e50fa 100644
+--- a/modules/views/tests/modules/views_test_config/test_views/views.view.test_display_feed.yml
++++ b/modules/views/tests/modules/views_test_config/test_views/views.view.test_display_feed.yml
+@@ -107,6 +107,59 @@ display:
+           separator: ', '
+           field_api_classes: false
+           plugin_id: field
++        view_node:
++          id: view_node
++          table: node
++          field: view_node
++          relationship: none
++          group_type: group
++          admin_label: ''
++          label: ''
++          exclude: false
++          alter:
++            alter_text: false
++            text: ''
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: false
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++          text: view
++          output_url_as_text: true
++          absolute: false
++          entity_type: node
++          plugin_id: entity_link
+       filters:
+         status:
+           expose:
+@@ -191,7 +244,7 @@ display:
+         type: rss_fields
+         options:
+           title_field: title
+-          link_field: title
++          link_field: view_node
+           description_field: body
+           creator_field: title
+           date_field: title

@@ -1,0 +1,13 @@
+diff --git a/src/Form/CasAttributesSettings.php b/src/Form/CasAttributesSettings.php
+index 32bba03..a12e035 100644
+--- a/src/Form/CasAttributesSettings.php
++++ b/src/Form/CasAttributesSettings.php
+@@ -130,7 +130,7 @@ class CasAttributesSettings extends ConfigFormBase {
+ 
+     foreach ($this->entityFieldManager->getFieldDefinitions('user', 'user') as $name => $definition) {
+       if (!empty($definition->getTargetBundle())) {
+-        if ($definition->getType() == 'string' || $definition->getType() == 'list_string') {
++        if ($definition->getType() == 'string' || $definition->getType() == 'list_string' || $definition->getType() == 'telephone') {
+           $form['field']['mappings'][$name] = array(
+             '#type' => 'textfield',
+             '#title' => $definition->getLabel(),

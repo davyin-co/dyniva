@@ -1,0 +1,89 @@
+diff --git a/src/Plugin/CKEditorPlugin/FontCKEditorButton.php b/src/Plugin/CKEditorPlugin/FontCKEditorButton.php
+index c054b0c..a8e7226 100644
+--- a/src/Plugin/CKEditorPlugin/FontCKEditorButton.php
++++ b/src/Plugin/CKEditorPlugin/FontCKEditorButton.php
+@@ -8,6 +8,8 @@
+ namespace Drupal\ckeditor_font\Plugin\CKEditorPlugin;
+ 
+ use Drupal\ckeditor\CKEditorPluginBase;
++use Drupal\ckeditor\CKEditorPluginConfigurableInterface;
++use Drupal\Core\Form\FormStateInterface;
+ use Drupal\editor\Entity\Editor;
+ 
+ /**
+@@ -22,7 +24,7 @@ use Drupal\editor\Entity\Editor;
+  *   label = @Translation("Font ckeditor button")
+  * )
+  */
+-class FontCKEditorButton extends CKEditorPluginBase {
++class FontCKEditorButton extends CKEditorPluginBase implements CKEditorPluginConfigurableInterface {
+ 
+   /**
+    * {@inheritdoc}
+@@ -53,7 +55,7 @@ class FontCKEditorButton extends CKEditorPluginBase {
+   public function getFile() {
+     // Make sure that the path to the plugin.js matches the file structure of
+     // the CKEditor plugin you are implementing.
+-    $path = '/libraries/font';
++    $path = 'libraries/font';
+     return $path . '/plugin.js';
+   }
+ 
+@@ -77,12 +79,56 @@ class FontCKEditorButton extends CKEditorPluginBase {
+   function getLibraries(Editor $editor) {
+     return array();
+   }
++  
++  /**
++   * {@inheritdoc}
++   */
++  public function settingsForm(array $form, FormStateInterface $form_state, Editor $editor) {
++    $settings = $editor->getSettings();
++    $config = $this->getDefault();
++    if (isset($settings['plugins']['font'])) {
++      $config = $settings['plugins']['font'];
++    }
++
++    $form['font_family'] = [
++      '#type' => 'textarea',
++      '#title' => 'Font Family',
++      '#default_value' =>  $config['font_family']
++    ];
++
++    return $form;
++  }
+ 
+   /**
+    * {@inheritdoc}
+    */
+   public function getConfig(Editor $editor) {
+-    return array();
++    $settings = $editor->getSettings();
++    $config = $this->getDefault();
++    if (isset($settings['plugins']['font'])) {
++      $config = $settings['plugins']['font'];
++    }
++    $configs = explode("\n", $config['font_family']);
++    $font_names = implode(";", $configs);
++    return [
++      'font_names' => $font_names
++    ];
++  }
++
++  private function getDefault() {
++    return ['font_family' => "宋体/SimSun, Songti SC
++黑体/SimHei, Heiti SC
++楷体/KaiTi, Kaiti SC
++微软雅黑/Microsoft YaHei
++Arial/Arial, Helvetica, sans-serif
++Comic Sans MS/Comic Sans MS, cursive
++Courier New/Courier New, Courier, monospace
++Georgia/Georgia, serif
++Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif
++Tahoma/Tahoma, Geneva, sans-serif
++Times New Roman/Times New Roman, Times, serif
++Trebuchet MS/Trebuchet MS, Helvetica, sans-serif
++Verdana/Verdana, Geneva, sans-serif"];
+   }
+ 
+ }

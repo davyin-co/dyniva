@@ -1,0 +1,110 @@
+diff --git a/config/install/multiversion.settings.yml b/config/install/multiversion.settings.yml
+index 2429f30..aea1855 100644
+--- a/config/install/multiversion.settings.yml
++++ b/config/install/multiversion.settings.yml
+@@ -1,19 +1,12 @@
+ #Entity types supported by multiversion.
+ supported_entity_types:
+   - node
+-  - taxonomy_term
+-  - comment
+-  - menu_link_content
+   - block_content
+-  - file
+-  - media
+-  - shortcut
+   - entity_test
+   - entity_test_rev
+   - entity_test_mul
+   - entity_test_mulrev
+   - entity_test_local
+-  - content_moderation_state
+   - replication_log
+   - paragraph
+   - paragraphs_library_item
+diff --git a/src/Entity/Storage/ContentEntityStorageTrait.php b/src/Entity/Storage/ContentEntityStorageTrait.php
+index 9278b83..1a8cc0c 100644
+--- a/src/Entity/Storage/ContentEntityStorageTrait.php
++++ b/src/Entity/Storage/ContentEntityStorageTrait.php
+@@ -428,41 +428,6 @@ trait ContentEntityStorageTrait {
+ 
+   /**
+    * {@inheritdoc}
+-   *
+-   * @todo Revisit this logic with forward revisions in mind.
+-   */
+-  protected function doSave($id, EntityInterface $entity) {
+-    if ($entity->_rev->is_stub || $this->entityType->get('local')
+-      || (!empty($entity->original) && $entity->original->_rev->is_stub)) {
+-      $entity->isDefaultRevision(TRUE);
+-    }
+-    else {
+-      // Enforce new revision if any module messed with it in a hook.
+-      $entity->setNewRevision();
+-
+-      // Decide whether or not this is the default revision.
+-      if (!$entity->isNew()) {
+-        $workspace = isset($entity->workspace) ? $entity->workspace->entity : null;
+-        $index_factory = \Drupal::service('multiversion.entity_index.factory');
+-        /** @var \Drupal\multiversion\Entity\Index\RevisionTreeIndexInterface $tree */
+-        $tree = $index_factory->get('multiversion.entity_index.rev.tree', $workspace);
+-        $default_rev = $tree->getDefaultRevision($entity->uuid());
+-
+-        if ($entity->_rev->value == $default_rev) {
+-          $entity->isDefaultRevision(TRUE);
+-        }
+-        // @todo: {@link https://www.drupal.org/node/2597538 Needs test.}
+-        else {
+-          $entity->isDefaultRevision(FALSE);
+-        }
+-      }
+-    }
+-
+-    return parent::doSave($id, $entity);
+-  }
+-
+-  /**
+-   * {@inheritdoc}
+    */
+   public function delete(array $entities) {
+     // Entities are always "deleted" as new revisions when using a Multiversion
+diff --git a/src/MultiversionServiceProvider.php b/src/MultiversionServiceProvider.php
+index 5696ed7..9706761 100644
+--- a/src/MultiversionServiceProvider.php
++++ b/src/MultiversionServiceProvider.php
+@@ -17,20 +17,6 @@ class MultiversionServiceProvider extends ServiceProviderBase {
+     $renderer_config['required_cache_contexts'][] = 'workspace';
+     $container->setParameter('renderer.config', $renderer_config);
+ 
+-    // Switch the menu tree storage to our own that respect Workspace cache
+-    // contexts.
+-    $definition = $container->getDefinition('menu.tree_storage');
+-    $definition->setClass('Drupal\multiversion\MenuTreeStorage');
+-
+-    // Override the comment.statistics class with a new class.
+-    try {
+-      $definition = $container->getDefinition('comment.statistics');
+-      $definition->setClass('Drupal\multiversion\CommentStatistics');
+-    }
+-    catch (InvalidArgumentException $e) {
+-      // Do nothing, comment module is not installed.
+-    }
+-
+     // Override the redirect.repository class with a new class.
+     try {
+       $definition = $container->getDefinition('redirect.repository');
+@@ -42,14 +28,6 @@ class MultiversionServiceProvider extends ServiceProviderBase {
+       // Do nothing, Redirect module is not installed.
+     }
+ 
+-    // Override the access_check.node.revision class with a new class.
+-    try {
+-      $definition = $container->getDefinition('access_check.node.revision');
+-      $definition->setClass('Drupal\multiversion\Access\NodeRevisionAccessCheck');
+-    }
+-    catch (InvalidArgumentException $e) {
+-      // Do nothing, Node module is not installed.
+-    }
+   }
+ 
+ }

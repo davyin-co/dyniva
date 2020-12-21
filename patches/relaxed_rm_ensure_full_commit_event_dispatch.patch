@@ -1,0 +1,12 @@
+diff --git a/src/Plugin/rest/resource/EnsureFullCommitResource.php b/src/Plugin/rest/resource/EnsureFullCommitResource.php
+index 89e480fbe..65e151fe8 100644
+--- a/src/Plugin/rest/resource/EnsureFullCommitResource.php
++++ b/src/Plugin/rest/resource/EnsureFullCommitResource.php
+@@ -141,7 +141,6 @@ public function post($workspace) {
+     $this->jsCollectionOptimizer->deleteAll();
+     _drupal_flush_css_js();
+ 
+-    $this->eventDispatcher->dispatch(RelaxedEvents::REPLICATION_ENSURE_FULL_COMMIT, new RelaxedEnsureFullCommitEvent($workspace));
+ 
+     return new ModifiedResourceResponse($response_data, 201);
+   }

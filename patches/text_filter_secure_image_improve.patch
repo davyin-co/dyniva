@@ -1,0 +1,13 @@
+diff --git a/modules/filter/filter.module b/modules/filter/filter.module
+index 1497aba2ee..e0264bc018 100644
+--- a/modules/filter/filter.module
++++ b/modules/filter/filter.module
+@@ -795,7 +795,7 @@ function _filter_html_image_secure_process($text) {
+       // with the Drupal root and running getimagesize() on it.
+       $local_image_path = $local_dir . Unicode::substr($src, $base_path_length);
+       $local_image_path = rawurldecode($local_image_path);
+-      if (@getimagesize($local_image_path)) {
++      if (@getimagesize($local_image_path) || preg_match('#/files/styles/#',$src)) {
+         // The image has the right path. Erroneous images are dealt with below.
+         continue;
+       }

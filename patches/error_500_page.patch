@@ -1,0 +1,14 @@
+diff --git a/includes/errors.inc b/includes/errors.inc
+index fb63820639..790db12927 100644
+--- a/includes/errors.inc
++++ b/includes/errors.inc
+@@ -261,6 +261,9 @@ function _drupal_log_error($error, $fatal = FALSE) {
+         exit;
+       }
+ 
++      $template_file = 'error_500.html';
++      $message = str_replace('{{content}}', $message, file_get_contents($template_file));
++
+       $response->setContent($message);
+       $response->setStatusCode(500, '500 Service unavailable (with message)');
+ 

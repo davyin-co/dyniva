@@ -1,0 +1,17 @@
+diff --git a/src/Entity/Storage/Sql/CommentStorage.php b/src/Entity/Storage/Sql/CommentStorage.php
+index 07764634d..d121ac23d 100644
+--- a/src/Entity/Storage/Sql/CommentStorage.php
++++ b/src/Entity/Storage/Sql/CommentStorage.php
+@@ -39,5 +39,11 @@ public function delete(array $entities) {
+     krsort($keyed_entities);
+     $this->deleteEntities($keyed_entities);
+   }
+-
++  /**
++   * {@inheritdoc}
++   */
++  public function getChildCids(array $comments) {
++    if(empty($comments)) return [];
++    return parent::getChildCids($comments);
++  }
+ }

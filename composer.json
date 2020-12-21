@@ -56,6 +56,7 @@
 		"drupal/jsonapi_extras": "^3.0",
 		"drupal/site_settings": "^1.12",
 		"drupal/devel": "^2.0",
+		"drupal/coffee": "^1.0",
 		"drupal/baidu_analytics": "1.x-dev",
 		"drupal/google_analytics": "^3.1",
 		"drupal/cas_attributes": "^1.0-beta1",
@@ -224,10 +225,6 @@
 			]
 		},
 		"enable-patching": "true",
-        "patches": {
-            "drupal/ace_editor": {
-                "drupal-library-installer-plugin not compatible with composer 2": "https://www.drupal.org/files/issues/2020-10-27/3179273-remove-asset-packagist-as-requirement.patch"
-            }
-        }
+        "patches-file": "composer.patches.json"
 	}
 }

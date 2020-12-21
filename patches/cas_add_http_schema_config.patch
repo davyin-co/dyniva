@@ -1,0 +1,40 @@
+diff --git a/src/Form/CasSettings.php b/src/Form/CasSettings.php
+index eafccb1..8cc4e2b 100755
+--- a/src/Form/CasSettings.php
++++ b/src/Form/CasSettings.php
+@@ -88,6 +88,13 @@ class CasSettings extends ConfigFormBase {
+       '#default_value' => $config->get('server.version'),
+       '#description' => $this->t('The CAS protocol version your CAS server supports.'),
+     );
++    $form['server']['schema'] = array(
++      '#type' => 'radios',
++      '#title' => $this->t('Schema'),
++      '#description' => $this->t('Http schema of the CAS server.'),
++      '#default_value' => \Drupal::state()->get('cas.server.schema','https'),
++      '#options' => ['http' => 'http','https' => 'https']
++    );
+     $form['server']['hostname'] = array(
+       '#type' => 'textfield',
+       '#title' => $this->t('Hostname'),
+@@ -479,6 +486,7 @@ class CasSettings extends ConfigFormBase {
+       ->set('server.verify', $server_data['verify'])
+       ->set('server.cert', $server_data['cert']);
+ 
++    \Drupal::state()->set('cas.server.schema',$server_data['schema']);
+     $general_data = $form_state->getValue('general');
+     $config
+       ->set('login_link_enabled', $general_data['login_link_enabled'])
+diff --git a/src/Service/CasHelper.php b/src/Service/CasHelper.php
+index dd15b5f..f691966 100644
+--- a/src/Service/CasHelper.php
++++ b/src/Service/CasHelper.php
+@@ -115,7 +115,8 @@ class CasHelper {
+    *   The base URL.
+    */
+   public function getServerBaseUrl() {
+-    $url = 'https://' . $this->settings->get('server.hostname');
++    $schema = \Drupal::state()->get('cas.server.schema','https');
++    $url = $schema . '://' . $this->settings->get('server.hostname');
+     $port = $this->settings->get('server.port');
+     if (!empty($port) && $port != 443) {
+       $url .= ':' . $this->settings->get('server.port');

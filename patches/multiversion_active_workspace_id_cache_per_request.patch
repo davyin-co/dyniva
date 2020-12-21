@@ -1,0 +1,35 @@
+diff --git a/src/Workspace/WorkspaceManager.php b/src/Workspace/WorkspaceManager.php
+index 0165b2856..bc942407f 100644
+--- a/src/Workspace/WorkspaceManager.php
++++ b/src/Workspace/WorkspaceManager.php
+@@ -107,18 +107,21 @@ public function getActiveWorkspace() {
+    * {@inheritdoc}
+    */
+   public function getActiveWorkspaceId() {
+-    $request = $this->requestStack->getCurrentRequest();
+-    if (empty($request)) {
+-      return $this->container->getParameter('workspace.default');
+-    }
+-
+-    foreach ($this->getSortedNegotiators() as $negotiator) {
+-      if ($negotiator->applies($request)) {
+-        if ($workspace_id = $negotiator->getWorkspaceId($request)) {
+-          return $workspace_id;
++    $cache = &drupal_static(__METHOD__, NULL);
++    if (empty($cache)) {
++      $request = $this->requestStack->getCurrentRequest();
++      if (empty($request)) {
++        $cache = $this->container->getParameter('workspace.default');
++      }
++      foreach ($this->getSortedNegotiators() as $negotiator) {
++        if ($negotiator->applies($request)) {
++          if ($workspace_id = $negotiator->getWorkspaceId($request)) {
++            $cache = $workspace_id;
++          }
+         }
+       }
+     }
++    return $cache;
+   }
+ 
+   /**

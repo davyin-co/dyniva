@@ -1,0 +1,37 @@
+diff --git a/better_field_descriptions.module b/better_field_descriptions.module
+index 5b119ab..6ea4d33 100644
+--- a/better_field_descriptions.module
++++ b/better_field_descriptions.module
+@@ -152,7 +152,7 @@ function better_field_descriptions_after_build(array $form, FormStateInterface $
+         $output = [
+           '#theme' => 'better_field_descriptions',
+           '#label' => Xss::filter($label),
+-          '#description' => Xss::filter($description),
++          '#description' => $description,
+         ];
+         $output = \Drupal::service('renderer')->render($output);
+ 
+diff --git a/src/Form/BetterFieldDescriptionsFieldsForm.php b/src/Form/BetterFieldDescriptionsFieldsForm.php
+index 597bc59..be45feb 100644
+--- a/src/Form/BetterFieldDescriptionsFieldsForm.php
++++ b/src/Form/BetterFieldDescriptionsFieldsForm.php
+@@ -1,7 +1,7 @@
+ <?php
+ 
+ namespace Drupal\better_field_descriptions\Form;
+-
++use Drupal\Core\Field\FieldFilteredMarkup;
+ use Drupal\Core\Form\ConfigFormBase;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Component\Utility\Xss;
+@@ -180,8 +180,8 @@ class BetterFieldDescriptionsFieldsForm extends ConfigFormBase {
+         $form['bundles'][$bundle_machine_name][$field_machine_name]['description'] = [
+           '#type' => 'textarea',
+           '#title' => $fields_instances[$field_machine_name]->getLabel() . ' (' . $field_machine_name . ')',
+-          '#default_value' => Xss::filter($bfd_description),
+-          '#description' => $this->t('Add description for @machine_name.', ['@machine_name' => $fields_instances[$field_machine_name]->getLabel()]),
++          '#default_value' => $bfd_description,
++          '#description' => $this->t('Add description for @machine_name.', ['@machine_name' => $fields_instances[$field_machine_name]->getLabel()]) . '<br />' . $this->t('Instructions to present to the user below this field on the editing form.<br />Allowed HTML tags: @tags', ['@tags' => FieldFilteredMarkup::displayAllowedTags()]),
+         ];
+ 
+         // Label.

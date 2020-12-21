@@ -1,0 +1,122 @@
+diff --git a/modules/color/color.module b/modules/color/color.module
+index 92c6110b..3ca54b06 100644
+--- a/modules/color/color.module
++++ b/modules/color/color.module
+@@ -376,6 +376,8 @@ function color_scheme_form_validate($form, FormStateInterface $form_state) {
+  * @see color_scheme_form_validate()
+  */
+ function color_scheme_form_submit($form, FormStateInterface $form_state) {
++  
++  $logger = \Drupal::logger('color');
+ 
+   // Avoid color settings spilling over to theme settings.
+   $color_settings = ['theme', 'palette', 'scheme'];
+@@ -442,7 +444,7 @@ function color_scheme_form_submit($form, FormStateInterface $form_state) {
+   }
+ 
+   // Prepare target locations for generated files.
+-  $id = $theme . '-' . substr(hash('sha256', serialize($palette) . microtime()), 0, 8);
++  $id = $theme . '-' . substr(hash('sha256', serialize($palette)), 0, 8);
+   $paths['color'] = 'public://color';
+   $paths['target'] = $paths['color'] . '/' . $id;
+   /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+@@ -484,32 +486,64 @@ function color_scheme_form_submit($form, FormStateInterface $form_state) {
+ 
+   // Rewrite theme stylesheets.
+   $css = [];
+-  foreach ($info['css'] as $stylesheet) {
+-    // Build a temporary array with CSS files.
+-    $files = [];
+-    if (file_exists($paths['source'] . $stylesheet)) {
+-      $files[] = $stylesheet;
+-    }
+-
+-    foreach ($files as $file) {
+-      $css_optimizer = new CssOptimizer();
+-      // Aggregate @imports recursively for each configured top level CSS file
+-      // without optimization. Aggregation and optimization will be
+-      // handled by drupal_build_css_cache() only.
+-      $style = $css_optimizer->loadFile($paths['source'] . $file, FALSE);
+-
+-      // Return the path to where this CSS file originated from, stripping
+-      // off the name of the file at the end of the path.
+-      $css_optimizer->rewriteFileURIBasePath = base_path() . dirname($paths['source'] . $file) . '/';
+-
+-      // Prefix all paths within this CSS file, ignoring absolute paths.
+-      $style = preg_replace_callback('/url\([\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\)/i', [$css_optimizer, 'rewriteFileURI'], $style);
+-
+-      // Rewrite stylesheet with new colors.
+-      $style = _color_rewrite_stylesheet($theme, $info, $paths, $palette, $style);
+-      $base_file = $file_system->basename($file);
+-      $css[] = $paths['target'] . $base_file;
+-      _color_save_stylesheet($paths['target'] . $base_file, $style, $paths);
++  foreach ($info['css'] as $less_key => $stylesheet) {
++    if(is_string($less_key) && pathinfo($less_key)['extension'] == 'less'){
++      try{
++        $base_path = base_path();
++        $less_base_path = drupal_dirname($less_key);
++        $options = array( 'compress'=> TRUE);
++        $parser = new Less_Parser($options);
++        $directories = array( $paths['source'] => '/' );
++        $directories = array( $paths['source'] .'/' . $less_base_path => '/' . $less_base_path );
++        $parser->SetImportDirs( $directories );
++        $parser->parseFile( $paths['source'] . $less_key, $base_path . drupal_get_path('theme', $theme) . '/');
++        $parser->ModifyVars($palette);
++        $less_css = $parser->getCss();
++        $base_file = drupal_basename($stylesheet);
++        $css[] = $paths['target'] . $base_file;
++        _color_save_stylesheet($paths['target'] . $base_file, $less_css, $paths);
++        
++        $css_optimizer = new CssOptimizer();
++        $style = $css_optimizer->loadFile($paths['target'] . $base_file, FALSE);
++        $css_optimizer->rewriteFileURIBasePath = base_path() . dirname($paths['source'] . $stylesheet) . '/';
++        $style = preg_replace_callback('/url\([\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\)/i', [$css_optimizer, 'rewriteFileURI'], $style);
++        _color_save_stylesheet($paths['target'] . $base_file, $style, $paths);
++        
++        $imported_files = $parser->allParsedFiles();
++        $logger->debug('Imported Files : ' . print_r($imported_files,1));
++        $variables = $parser->getVariables();
++        $logger->debug('Parser Variables : ' . print_r($variables,1));
++      }catch(\Exception $e){
++        watchdog_exception('color', $e);
++        drupal_set_message("Less complie error : " . $e->getMessage(),'error');
++      }
++    }else{
++      // Build a temporary array with CSS files.
++      $files = [];
++      if (file_exists($paths['source'] . $stylesheet)) {
++        $files[] = $stylesheet;
++      }
++      
++      foreach ($files as $file) {
++        $css_optimizer = new CssOptimizer();
++        // Aggregate @imports recursively for each configured top level CSS file
++        // without optimization. Aggregation and optimization will be
++        // handled by drupal_build_css_cache() only.
++        $style = $css_optimizer->loadFile($paths['source'] . $file, FALSE);
++        
++        // Return the path to where this CSS file originated from, stripping
++        // off the name of the file at the end of the path.
++        $css_optimizer->rewriteFileURIBasePath = base_path() . dirname($paths['source'] . $file) . '/';
++        
++        // Prefix all paths within this CSS file, ignoring absolute paths.
++        $style = preg_replace_callback('/url\([\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\)/i', [$css_optimizer, 'rewriteFileURI'], $style);
++        
++        // Rewrite stylesheet with new colors.
++        $style = _color_rewrite_stylesheet($theme, $info, $paths, $palette, $style);
++        $base_file = drupal_basename($file);
++        $css[] = $paths['target'] . $base_file;
++        _color_save_stylesheet($paths['target'] . $base_file, $style, $paths);
++      }
+     }
+   }
+ 
+@@ -518,6 +552,8 @@ function color_scheme_form_submit($form, FormStateInterface $form_state) {
+     ->set('stylesheets', $css)
+     ->set('files', $paths['files'])
+     ->save();
++  // Clean all caches
++  drupal_flush_all_caches();
+ }
+ 
+ /**

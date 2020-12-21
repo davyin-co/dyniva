@@ -1,0 +1,13 @@
+diff --git a/lib/Drupal/Component/Utility/Tags.php b/lib/Drupal/Component/Utility/Tags.php
+index ac0ce60817..698fb0a742 100644
+--- a/lib/Drupal/Component/Utility/Tags.php
++++ b/lib/Drupal/Component/Utility/Tags.php
+@@ -22,6 +22,8 @@ public static function explode($tags) {
+     // This regexp allows the following types of user input:
+     // this, "somecompany, llc", "and ""this"" w,o.rks", foo bar
+     $regexp = '%(?:^|,\ *)("(?>[^"]*)(?>""[^"]* )*"|(?: [^",]*))%x';
++    $tags = str_replace("，",',',$tags);
++    $tags = preg_replace('%(,?[ ]+)([^\(\), "\']+)%',',\2',$tags);
+     preg_match_all($regexp, $tags, $matches);
+     $typed_tags = array_unique($matches[1]);
+ 

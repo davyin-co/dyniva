@@ -1,0 +1,13 @@
+diff --git a/templates/focal-point-preview-page.html.twig b/templates/focal-point-preview-page.html.twig
+index 3809093..3f0b211 100644
+--- a/templates/focal-point-preview-page.html.twig
++++ b/templates/focal-point-preview-page.html.twig
+@@ -12,7 +12,7 @@
+   </div>
+ 
+   <div id="focal-point-preview">
+-    <h2 id="focal-point-preview-label">Original Image</h2>
++    <h2 id="focal-point-preview-label">{{ 'Original Image'|t }}</h2>
+     {{ original_image }}
+   </div>
+   <span class="preview-note note">{{ preview_image_note }}</span>

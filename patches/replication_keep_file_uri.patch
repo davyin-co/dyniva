@@ -1,0 +1,18 @@
+diff --git a/src/ProcessFileAttachment.php b/src/ProcessFileAttachment.php
+index 550fefcde..556df1b5d 100644
+--- a/src/ProcessFileAttachment.php
++++ b/src/ProcessFileAttachment.php
+@@ -66,13 +66,6 @@ public function process($data, $format, WorkspaceInterface $workspace = null) {
+     }
+ 
+     // Create the new entity file and the file itself.
+-    // Check if exists a file with this $uri, if it exists then rename the file.
+-    $existing_files = $this->entity_type_manager
+-      ->getStorage('file')
+-      ->loadByProperties(['uri' => $uri]);
+-    if (count($existing_files)) {
+-      $uri = file_destination($uri, FILE_EXISTS_RENAME);
+-    }
+     $file_context = [
+       'uri' => $uri,
+       'uuid' => $file_uuid,

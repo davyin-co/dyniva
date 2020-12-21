@@ -1,0 +1,61 @@
+diff --git a/docroot/core/modules/system/src/Plugin/Block/SystemMenuBlock.php b/docroot/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
+index 24db858..e8c5452 100644
+--- a/docroot/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
++++ b/docroot/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
+@@ -147,6 +147,25 @@ public function build() {
+       $parameters->setMaxDepth(min($level + $depth - 1, $this->menuTree->maxDepth()));
+     }
+ 
++    // For menu blocks with start level greater than 1, only show menu items
++    // from the current active trail. Adjust the root according to the current
++    // position in the menu in order to determine if we can show the subtree.
++    if ($level > 1) {
++      if (count($parameters->activeTrail) >= $level) {
++        // Active trail array is child-first. Reverse it, and pull the new menu
++        // root based on the parent of the configured start level.
++        $menu_trail_ids = array_reverse(array_values($parameters->activeTrail));
++        $menu_root = $menu_trail_ids[$level - 1];
++        $parameters->setRoot($menu_root)->setMinDepth(1);
++        if ($depth > 0) {
++          $parameters->setMaxDepth(min($level - 1 + $depth - 1, $this->menuTree->maxDepth()));
++        }
++      }
++      else {
++        return array();
++      }
++    }
++
+     $tree = $this->menuTree->load($menu_name, $parameters);
+     $manipulators = array(
+       array('callable' => 'menu.default_tree_manipulators:checkAccess'),
+diff --git a/docroot/core/modules/system/tests/src/Kernel/Block/SystemMenuBlockTest.php b/docroot/core/modules/system/tests/src/Kernel/Block/SystemMenuBlockTest.php
+index ca1c5af..8b44c88 100644
+--- a/docroot/core/modules/system/tests/src/Kernel/Block/SystemMenuBlockTest.php
++++ b/docroot/core/modules/system/tests/src/Kernel/Block/SystemMenuBlockTest.php
+@@ -218,9 +218,7 @@ public function testConfigLevelDepth() {
+       'test.example6' => [],
+       'test.example8' => [],
+     ];
+-    $no_active_trail_expectations['level_2_only'] = [
+-      'test.example7' => [],
+-    ];
++    $no_active_trail_expectations['level_2_only'] = [];
+     $no_active_trail_expectations['level_3_only'] = [];
+     $no_active_trail_expectations['level_1_and_beyond'] = $no_active_trail_expectations['all'];
+     $no_active_trail_expectations['level_2_and_beyond'] = $no_active_trail_expectations['level_2_only'];
+@@ -266,7 +264,6 @@ public function testConfigLevelDepth() {
+     ];
+     $active_trail_expectations['level_2_only'] = [
+       'test.example3' => [],
+-      'test.example7' => [],
+     ];
+     $active_trail_expectations['level_3_only'] = [
+       'test.example4' => [],
+@@ -276,7 +273,6 @@ public function testConfigLevelDepth() {
+       'test.example3' => [
+         'test.example4' => [],
+       ],
+-      'test.example7' => [],
+     ];
+     $active_trail_expectations['level_3_and_beyond'] = $active_trail_expectations['level_3_only'];
+     foreach ($blocks as $id => $block) {

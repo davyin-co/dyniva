@@ -1,0 +1,42 @@
+diff --git a/src/Plugin/views/field/EntityFormField.php b/src/Plugin/views/field/EntityFormField.php
+index 7f42b69c5..8afb4fcae 100644
+--- a/src/Plugin/views/field/EntityFormField.php
++++ b/src/Plugin/views/field/EntityFormField.php
+@@ -599,9 +599,23 @@ public function saveEntities(array &$form, FormStateInterface $form_state) {
+       // Try to save this field relationship's relevant entity from each row.
+       foreach ($this->getView()->result as $row_index => $row) {
+         $entity = $this->getEntityTranslation($this->getEntity($row), $row);
++        $originalEntity = $this->getEntityTranslation($storage->loadUnchanged($entity->id()), $row);
+ 
++        $entity_array = $entity->toArray();
++        $original_array = $originalEntity->toArray();
++        $this->entityArrayFilter($entity_array);
++        $this->entityArrayFilter($original_array);
++
++        if(empty(\Drupal\Component\Utility\DiffArray::diffAssocRecursive($entity_array, $original_array))) {
++          continue;
++        }
+         try {
+           $storage->save($entity);
++          $currentEntity = $entity;
++          while ($currentEntity->getEntityTypeId() == 'paragraph') {
++            $currentEntity = $currentEntity->getParentEntity();
++            $currentEntity->save();
++          }
+           $rows_saved[$row_index] = $entity->label();
+         }
+         catch (\Exception $exception) {
+@@ -640,4 +654,13 @@ public function query() {
+     // Do nothing.
+   }
+ 
++  protected function entityArrayFilter(&$array) {
++    foreach ($array as $key => &$value) {
++      if(strpos($key, '_') === 0) {
++        unset($array[$key]);
++      }elseif(is_array($value)) {
++        $this->entityArrayFilter($value);
++      }
++    }
++  }
+ }

@@ -1,0 +1,135 @@
+diff --git a/modules/comment/comment.module b/modules/comment/comment.module
+index bb203bf644..c7494abf34 100644
+--- a/modules/comment/comment.module
++++ b/modules/comment/comment.module
+@@ -230,7 +230,7 @@ function comment_entity_view(array &$build, EntityInterface $entity, EntityViewD
+     $comment_manager = \Drupal::service('comment.manager');
+     $fields = $comment_manager->getFields($entity->getEntityTypeId());
+     foreach ($fields as $field_name => $detail) {
+-      if ($entity->hasField($field_name) && $entity->get($field_name)->status != CommentItemInterface::HIDDEN) {
++      if ($entity->hasField($field_name) && $entity->get($field_name)->status != CommentItemInterface::CLOSED) {
+         // Add a comments RSS element which is a URL to the comments of this
+         // entity.
+         $options = [
+@@ -499,11 +499,8 @@ function comment_node_search_result(EntityInterface $node) {
+     }
+     // Do not make a string if comments are hidden.
+     $status = $node->get($field_name)->status;
+-    if (\Drupal::currentUser()->hasPermission('access comments') && $status != CommentItemInterface::HIDDEN) {
+-      if ($status == CommentItemInterface::OPEN) {
+-        // At least one comment field is open.
+-        $open = TRUE;
+-      }
++    if (\Drupal::currentUser()->hasPermission('access comments') && $status != CommentItemInterface::CLOSED) {
++      $open = TRUE;
+       $comments += $node->get($field_name)->comment_count;
+     }
+   }
+diff --git a/modules/comment/src/CommentForm.php b/modules/comment/src/CommentForm.php
+index 98e9ddef96..80ecfcc259 100644
+--- a/modules/comment/src/CommentForm.php
++++ b/modules/comment/src/CommentForm.php
+@@ -362,7 +362,7 @@ public function save(array $form, FormStateInterface $form_state) {
+     $uri = $entity->urlInfo();
+     $logger = $this->logger('comment');
+ 
+-    if ($this->currentUser->hasPermission('post comments') && ($this->currentUser->hasPermission('administer comments') || $entity->{$field_name}->status == CommentItemInterface::OPEN)) {
++    if ($this->currentUser->hasPermission('post comments') && ($this->currentUser->hasPermission('administer comments') || $entity->{$field_name}->status != CommentItemInterface::CLOSED)) {
+       $comment->save();
+       $form_state->setValue('cid', $comment->id());
+ 
+diff --git a/modules/comment/src/CommentLazyBuilders.php b/modules/comment/src/CommentLazyBuilders.php
+index 730c840897..9afa8c716c 100644
+--- a/modules/comment/src/CommentLazyBuilders.php
++++ b/modules/comment/src/CommentLazyBuilders.php
+@@ -165,7 +165,7 @@ protected function buildLinks(CommentInterface $entity, EntityInterface $comment
+     $links = [];
+     $status = $commented_entity->get($entity->getFieldName())->status;
+ 
+-    if ($status == CommentItemInterface::OPEN) {
++    if ($status != CommentItemInterface::CLOSED) {
+       if ($entity->access('delete')) {
+         $links['comment-delete'] = [
+           'title' => t('Delete'),
+diff --git a/modules/comment/src/CommentLinkBuilder.php b/modules/comment/src/CommentLinkBuilder.php
+index c7cbc18d37..a7a34071d0 100644
+--- a/modules/comment/src/CommentLinkBuilder.php
++++ b/modules/comment/src/CommentLinkBuilder.php
+@@ -124,7 +124,7 @@ public function buildCommentedEntityLinks(FieldableEntityInterface $entity, arra
+             }
+           }
+           // Provide a link to new comment form.
+-          if ($commenting_status == CommentItemInterface::OPEN) {
++          if ($commenting_status != CommentItemInterface::CLOSED) {
+             $comment_form_location = $field_definition->getSetting('form_location');
+             if ($this->currentUser->hasPermission('post comments')) {
+               $links['comment-add'] = [
+@@ -155,7 +155,7 @@ public function buildCommentedEntityLinks(FieldableEntityInterface $entity, arra
+           // Entity in other view modes: add a "post comment" link if the user
+           // is allowed to post comments and if this entity is allowing new
+           // comments.
+-          if ($commenting_status == CommentItemInterface::OPEN) {
++          if ($commenting_status != CommentItemInterface::CLOSED) {
+             $comment_form_location = $field_definition->getSetting('form_location');
+             if ($this->currentUser->hasPermission('post comments')) {
+               // Show the "post comment" link if the form is on another page, or
+diff --git a/modules/comment/src/CommentStorage.php b/modules/comment/src/CommentStorage.php
+index 2bcda91d00..0eafaf9b1c 100644
+--- a/modules/comment/src/CommentStorage.php
++++ b/modules/comment/src/CommentStorage.php
+@@ -192,12 +192,14 @@ public function getNewCommentPageNumber($total_comments, $new_comments, Fieldabl
+    * {@inheritdoc}
+    */
+   public function getChildCids(array $comments) {
+-    return $this->database->select('comment_field_data', 'c')
+-      ->fields('c', ['cid'])
+-      ->condition('pid', array_keys($comments), 'IN')
+-      ->condition('default_langcode', 1)
+-      ->execute()
+-      ->fetchCol();
++    if(!empty($comments)){
++      return $this->database->select('comment_field_data', 'c')
++        ->fields('c', ['cid'])
++        ->condition('pid', array_keys($comments), 'IN')
++        ->condition('default_langcode', 1)
++        ->execute()
++        ->fetchCol();
++    }
+   }
+ 
+   /**
+diff --git a/modules/comment/src/Controller/CommentController.php b/modules/comment/src/Controller/CommentController.php
+index 560233889c..1f486c8ba7 100644
+--- a/modules/comment/src/Controller/CommentController.php
++++ b/modules/comment/src/Controller/CommentController.php
+@@ -281,7 +281,7 @@ public function replyFormAccess(EntityInterface $entity, $field_name, $pid = NUL
+ 
+     // If commenting is open on the entity.
+     $status = $entity->{$field_name}->status;
+-    $access = $access->andIf(AccessResult::allowedIf($status == CommentItemInterface::OPEN)
++    $access = $access->andIf(AccessResult::allowedIf($status != CommentItemInterface::CLOSED)
+       ->addCacheableDependency($entity))
+       // And if user has access to the host entity.
+       ->andIf(AccessResult::allowedIf($entity->access('view')));
+diff --git a/modules/comment/src/Plugin/Field/FieldFormatter/CommentDefaultFormatter.php b/modules/comment/src/Plugin/Field/FieldFormatter/CommentDefaultFormatter.php
+index 8adf252000..74bdc10170 100644
+--- a/modules/comment/src/Plugin/Field/FieldFormatter/CommentDefaultFormatter.php
++++ b/modules/comment/src/Plugin/Field/FieldFormatter/CommentDefaultFormatter.php
+@@ -149,7 +149,7 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+ 
+     $status = $items->status;
+ 
+-    if ($status != CommentItemInterface::HIDDEN && empty($entity->in_preview) &&
++    if ($status != CommentItemInterface::CLOSED && empty($entity->in_preview) &&
+       // Comments are added to the search results and search index by
+       // comment_node_update_index() instead of by this formatter, so don't
+       // return anything if the view mode is search_index or search_result.
+@@ -187,7 +187,7 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+ 
+       // Append comment form if the comments are open and the form is set to
+       // display below the entity. Do not show the form for the print view mode.
+-      if ($status == CommentItemInterface::OPEN && $comment_settings['form_location'] == CommentItemInterface::FORM_BELOW && $this->viewMode != 'print') {
++      if ($status != CommentItemInterface::CLOSED && $comment_settings['form_location'] == CommentItemInterface::FORM_BELOW && $this->viewMode != 'print') {
+         // Only show the add comment form if the user has permission.
+         $elements['#cache']['contexts'][] = 'user.roles';
+         if ($this->currentUser->hasPermission('post comments')) {

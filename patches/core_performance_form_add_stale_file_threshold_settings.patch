@@ -1,0 +1,29 @@
+diff --git a/modules/system/src/Form/PerformanceForm.php b/modules/system/src/Form/PerformanceForm.php
+index 9d19b7599..1bef5d3af 100644
+--- a/modules/system/src/Form/PerformanceForm.php
++++ b/modules/system/src/Form/PerformanceForm.php
+@@ -165,6 +165,12 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+       '#default_value' => $config->get('js.preprocess'),
+       '#disabled' => $disabled,
+     ];
++    $form['bandwidth_optimization']['stale_file_threshold'] = [
++      '#type' => 'textfield',
++      '#title' => t('Aggregate stale files expire time in second'),
++      '#default_value' => $config->get('stale_file_threshold'),
++      '#disabled' => $disabled,
++    ];
+ 
+     return parent::buildForm($form, $form_state);
+   }
+@@ -173,6 +179,11 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+    * {@inheritdoc}
+    */
+   public function submitForm(array &$form, FormStateInterface $form_state) {
++
++    $this->config('system.performance')
++    ->set('stale_file_threshold', $form_state->getValue('stale_file_threshold'))
++    ->save();
++
+     $this->cssCollectionOptimizer->deleteAll();
+     $this->jsCollectionOptimizer->deleteAll();
+ 

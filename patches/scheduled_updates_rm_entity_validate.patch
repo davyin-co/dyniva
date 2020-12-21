@@ -1,0 +1,20 @@
+diff --git a/src/Plugin/BaseUpdateRunner.php b/src/Plugin/BaseUpdateRunner.php
+index 5f6feb81f..4ab4e92ec 100644
+--- a/src/Plugin/BaseUpdateRunner.php
++++ b/src/Plugin/BaseUpdateRunner.php
+@@ -230,14 +230,7 @@ protected function runUpdate(ScheduledUpdateInterface $update, $entity_ids, $que
+       $entity_to_update = $entities_to_update[$entity_id];
+       $this->prepareEntityForUpdate($update, $queue_item, $entity_to_update);
+       $this->switchUser($update, $entity_to_update);
+-      $violations = $entity_to_update->validate();
+-      if (count($violations)) {
+-        $invalid_entity_ids[] = $entity_id;
+-      }
+-      else {
+-        // Validation was successful.
+-        $entity_to_update->save();
+-      }
++      $entity_to_update->save();
+       $this->switchUserBack();
+     }
+ 

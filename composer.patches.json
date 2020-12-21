@@ -1,0 +1,125 @@
+{
+  "patches": {
+    "drupal/core": {
+      "Fatal error update 8702 createHandlerInstance invoked with NULL class object.":"https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",
+      "Color add less support": "patches/color_less_support.patch",
+      "Statistics taxonomy page" : "patches/update_statistics_to_count_taxonomy_page_85.patch",
+      "select options list attributes ": "patches/select_options_list_attributes.patch",
+      "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
+      "Views entity cache error": "patches/views_entity_cache_error.patch",
+      "tags separators": "patches/allow_tags_to_use_chinese_commas_and_spaces_as_separators.patch",
+      "image filter imporve": "patches/text_filter_secure_image_improve.patch",
+      "options label add token support": "patches/add_token_support_on_options_label.patch",
+      "Config translation edit link destination": "patches/config_translation_edit_link_destination_fix.patch",
+      "content moderation delete bug": "patches/content_moderation_multiversion_delete_bug.patch",
+      "tokens in text editor": "patches/allow_tokens_in_text_editor-2830210-14.patch",
+      "editor file reference filter improve": "patches/editor_file_reference_filter_improve.patch",
+      "500 error page": "patches/error_500_page.patch",
+      "entity translation affected bug with multiversion": "patches/entity_translation_affected_bug.patch",
+      "add stale file threshold settings": "patches/core_performance_form_add_stale_file_threshold_settings.patch",
+      "content moderaton views langcode relationship": "patches/content_moderation_views_langcode_relationship.patch",
+      "status message render modify": "patches/core_status_message_render_modify.patch",
+      "layout builder enitty field error": "https://www.drupal.org/files/issues/2018-07-16/2985882-entityfield-2.patch",
+      "content sync import patch": "patches/content_sync_import_error_fix.patch",
+      "no bundle filter when bundle equals entity id": "patches/no-bundle-filter-when-bundle-equals-entity-id.patch",
+      "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
+      "css agg cache with base_path ": "patches/core_css_agg_with_base_path.patch",
+      "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch"
+    },
+    "drupal/panels": {
+      "ipe js translation": "https://www.drupal.org/files/issues/ipe_js_translation-2882645-4.patch"
+    },
+    "drupal/panelizer": {
+      "preview node bug": "patches/preview_bug_when_node_is_new.patch"
+    },
+    "drupal/multiversion": {
+      "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch"
+    },
+    "drupal/paragraphs": {
+      "Field weight settings" : "patches/paragraphs_field_setttings_weight.patch"
+    },
+    "drupal/replication": {
+      "content entity normalizer bug fix" : "https://www.drupal.org/files/issues/2890261-6.patch",
+      "content entity normalizer entity revision id fix" : "patches/replication_content_entity_revision_id_fix.patch",
+      "content crop normalizer error fix" : "patches/replication_crop_normalizer_error_fix.patch",
+      "keep file uri" : "patches/replication_keep_file_uri.patch",
+      "add drupal datetime normalizer" : "https://www.drupal.org/files/issues/2019-03-04/added-datetime-normalizer-2936153-6.patch",
+      "Field _deleted is unknown" : "https://www.drupal.org/files/issues/2020-02-14/3113016-2.patch",
+      "large file memory overflow": "patches/replication_large_file_memory_overflow_bug_fix.patch"
+    },
+    "drupal/cas": {
+      "Logout error" : "patches/cas_logout_error-2948185-2.patch",
+      "Redirect loop with distnation" : "patches/cas_distination_redirect_error.patch"
+    },
+    "drupal/cas_attributes": {
+      "Mapping add telephone type" : "patches/cas_attributes_mapping_add_telephone_type.patch"
+    },
+    "drupal/footable": {
+      "empty display fix " : "patches/table_empty_colspan_remove.patch"
+    },
+    "drupal/toolbar_visibility": {
+      "Add domain support" : "https://www.drupal.org/files/issues/2018-04-19/add_domain_settings_support-2962280-3.patch"
+    },
+    "drupal/migrate_plus": {
+      "Add source or destination module" : "https://www.drupal.org/files/issues/2018-03-22/migrate_plus_include_new_annotations-2955386-2.patch"
+    },
+    "drupal/flag":{
+      "user cancle error": "patches/flag_user_cancle_error.patch"
+    },
+    "drupal/menu_trail_by_path":{
+      "add context module support": "patches/add_context_module_support.patch"
+    },
+    "drupal/message_ui":{
+      "views plugin directory fix": "https://www.drupal.org/files/issues/2018-06-21/message_ui-views_plugin_case_2917574-1.patch"
+    },
+    "drupal/message":{
+      "views plugin directory fix": "https://www.drupal.org/files/issues/2018-05-25/message-views_plugin_case-2891680-14.patch",
+      "views create bug fix": "patches/message_views_create_bug.patch"
+    },
+    "drupal/relaxed":{
+      "rm ensure full commit event loop": "patches/relaxed_rm_ensure_full_commit_event_dispatch.patch"
+    },
+    "drupal/autofill_fields": {
+      "autofill fields entity bug": "patches/fix_autofill_fields_add_media_bug.patch"
+    },
+    "drupal/lightning_media": {
+      "media type document replace file": "patches/lightning_media_use_document.patch"
+    },
+    "drupal/colorbutton": {
+      "library path": "patches/ckeditor_colorbutton.patch"
+    },
+    "drupal/ckeditor_uploadimage": {
+      "image size": "patches/ckeditor_uploadimage_original_size.patch"
+    },
+    "drupal/password_policy": {
+      "show policy for all": "patches/show_policy_for_all.patch"
+    },
+    "drupal/scheduled_updates": {
+      "rm entity validate": "patches/scheduled_updates_rm_entity_validate.patch"
+    },
+    "drupal/inline_entity_form": {
+    },
+    "drupal/crop": {
+      "crop_file_url_alter_hook remove": "patches/crop_file_url_alter_hook_remove.patch"
+    },
+    "drupal/search_api": {
+      "fix excerpt empty bug": "patches/search_api_fix_chinese_excerpt.patch"
+    },
+    "drupal/pathauto": {
+      "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch"
+    },
+    "drupal/smsframework": {
+      "Error: Call to member function getStatus() on bool": "https://www.drupal.org/files/issues/2019-11-08/3069588-status-on-bool-6.patch"
+    },
+    "drupal/shs": {
+      "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
+      "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"
+    },
+    "drupal/ace_editor": {
+      "drupal-library-installer-plugin not compatible with composer 2": "https://www.drupal.org/files/issues/2020-10-27/3179273-remove-asset-packagist-as-requirement.patch"
+    },
+    "drupal/calendar": {
+      "Variable passed to _calc_indents() function is enforcing calendar object to be an array": "https://www.drupal.org/files/issues/2020-11-27/Variable-passed-to_calc_indents-3175873.patch"
+    }
+  }
+}

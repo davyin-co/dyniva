@@ -1,0 +1,45 @@
+diff --git a/src/ContentLock/ContentLock.php b/src/ContentLock/ContentLock.php
+index 6c9ab5f..de7cb6a 100644
+--- a/src/ContentLock/ContentLock.php
++++ b/src/ContentLock/ContentLock.php
+@@ -421,22 +421,24 @@ class ContentLock extends ServiceProviderBase {
+     else {
+       // Currently locking by other user.
+       if ($lock->uid != $uid) {
+-        // Send message.
+-        $message = $this->displayLockOwner($lock);
+-        drupal_set_message($message, 'warning');
+-
+-        // Higher permission user can unblock.
+-        if ($this->currentUser->hasPermission('break content lock')) {
+-
+-          $link = Link::createFromRoute(
+-            $this->t('Break lock'),
+-            'content_lock.break_lock.' . $entity_type,
+-            ['entity' => $entity_id],
+-            ['query' => ['destination' => $this->currentRequest->getRequestUri()]]
+-          )->toString();
+-
+-          // Let user break lock.
+-          drupal_set_message($this->t('Click here to @link', ['@link' => $link]), 'warning');
++        if ($this->verbose() && !$quiet) {
++            // Send message.
++            $message = $this->displayLockOwner($lock);
++            drupal_set_message($message, 'warning');
++
++            // Higher permission user can unblock.
++            if ($this->currentUser->hasPermission('break content lock')) {
++
++              $link = Link::createFromRoute(
++                $this->t('Break lock'),
++                'content_lock.break_lock.' . $entity_type,
++                ['entity' => $entity_id],
++                ['query' => ['destination' => $this->currentRequest->getRequestUri()]]
++              )->toString();
++
++              // Let user break lock.
++              drupal_set_message($this->t('Click here to @link', ['@link' => $link]), 'warning');
++            }
+         }
+ 
+         // Return FALSE flag.

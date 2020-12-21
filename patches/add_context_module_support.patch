@@ -1,0 +1,35 @@
+diff --git a/src/MenuTrailByPathActiveTrail.php b/src/MenuTrailByPathActiveTrail.php
+index cd154d0..736716c 100644
+--- a/src/MenuTrailByPathActiveTrail.php
++++ b/src/MenuTrailByPathActiveTrail.php
+@@ -63,7 +63,9 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
+    */
+   protected function getCid() {
+     if (!isset($this->cid)) {
+-      return parent::getCid() . ":langcode:{$this->languageManager->getCurrentLanguage()->getId()}:pathinfo:{$this->context->getPathInfo()}";
++      $scope = \Drupal::request()->get('scope');
++      $destination = \Drupal::request()->get('destination');
++      return parent::getCid() . ":langcode:{$this->languageManager->getCurrentLanguage()->getId()}:pathinfo:{$this->context->getPathInfo()}:scope:{$scope}{$destination}";
+     }
+ 
+     return $this->cid;
+@@ -101,6 +103,19 @@ class MenuTrailByPathActiveTrail extends MenuActiveTrail {
+     $menu_links = $this->menuHelper->getMenuLinks($menu_name);
+     $trail_urls = $this->pathHelper->getUrls();
+ 
++    if(\Drupal::moduleHandler()->moduleExists('context')){
++      // Get active reaction of Menu type.
++      foreach(\Drupal::service('context.manager')->getActiveReactions('menu') as $reaction) {
++        $menu_items = $reaction->execute();
++        foreach ($menu_items as $menu_link_content) {
++          $menu = strtok($menu_link_content, ':');
++          if ($menu == $menu_name) {
++            $plugin_id = substr($menu_link_content, strlen($menu) + 1);
++            return $this->menuLinkManager->createInstance($plugin_id);
++          }
++        }
++      }
++    }
+     foreach (array_reverse($trail_urls) as $trail_url) {
+       foreach (array_reverse($menu_links) as $menu_link) {
+         /* @var $menu_link \Drupal\Core\Menu\MenuLinkInterface */

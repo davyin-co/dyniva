@@ -1,0 +1,17 @@
+diff --git a/cas_attributes.module b/cas_attributes.module
+index 799cba3..3b4cdd4 100644
+--- a/cas_attributes.module
++++ b/cas_attributes.module
+@@ -31,7 +31,11 @@ function cas_attributes_tokens($type, $tokens, array $data = array(), array $opt
+   if ($type == 'cas') {
+     // Provide [cas:attribute:?] dynamic tokens.
+     if ($attribute_tokens = $token_service->findWithPrefix($tokens, 'attribute')) {
+-      $attribute = @unserialize(\Drupal::request()->getSession()->get('cas_attributes_properties'))->getAttributes();
++      $cas_attri = @unserialize(\Drupal::request()->getSession()->get('cas_attributes_properties'));
++      if(empty($cas_attri) || !is_object($cas_attri)){
++        return $replacements;
++      }
++      $attribute = $cas_attri->getAttributes();
+       $attribute = array_change_key_case($attribute, CASE_LOWER);
+       foreach ($attribute_tokens as $name => $original) {
+         // If there are no options specified have it return all values.

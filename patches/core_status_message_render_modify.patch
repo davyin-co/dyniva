@@ -1,0 +1,13 @@
+diff --git a/lib/Drupal/Core/Render/Element/StatusMessages.php b/lib/Drupal/Core/Render/Element/StatusMessages.php
+index d8627343e..3e535a013 100644
+--- a/lib/Drupal/Core/Render/Element/StatusMessages.php
++++ b/lib/Drupal/Core/Render/Element/StatusMessages.php
+@@ -75,7 +75,7 @@ public static function generatePlaceholder(array $element) {
+    */
+   public static function renderMessages($type = NULL) {
+     $render = [];
+-    if (isset($type)) {
++    if (!empty($type)) {
+       $messages = [
+         $type => \Drupal::messenger()->deleteByType($type),
+       ];

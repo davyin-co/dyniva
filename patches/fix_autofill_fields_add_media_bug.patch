@@ -1,0 +1,32 @@
+diff --git a/autofill_fields.module b/autofill_fields.module
+index 022bb2e..98f071f 100644
+--- a/autofill_fields.module
++++ b/autofill_fields.module
+@@ -43,11 +43,16 @@ function autofill_fields_field_widget_form_alter(&$element, FormStateInterface $
+   if (!$user_id = \Drupal::currentUser()->id()) {
+     return;
+   }
++  $buildInfo = $form_state->getBuildInfo();
++  if (strstr($buildInfo['form_id'], 'views_form') || (isset($context['form']['#type']) && $context['form']['#type'] == 'inline_entity_form')) {
++    return;
++  }
+   $entity = $form_state->getFormObject()->getEntity();
+   // Only run for new entities; we don't want to overwrite desired data.
+   if (!$entity->isNew()) {
+     return;
+   }
++
+   $plugin = $context['widget'];
+ 
+   // Check that it is enabled for this field.
+@@ -132,6 +137,10 @@ function autofill_fields_submit($form, FormStateInterface $form_state) {
+     return;
+   }
+ 
++  if ($entity->getEntityTypeId() == 'media') {
++    return;
++  }
++
+   //TODO: get real form mode.
+   $form_mode = 'default';
+   $entity_form_display = EntityFormDisplay::load($entity->getEntityTypeId() . '.' . $entity->getType() . '.' . $form_mode);

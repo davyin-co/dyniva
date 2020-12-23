@@ -11,7 +11,7 @@ dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版�
 1. SEO
 1. ... ...
 
-# 版本信息
+# 版本路线规划
 |Dyniva|Lightning|Drupal core|layout方案|
 |---|---|---|----|
 |3.0.x|5.0.x|9.0.x|layout builder|

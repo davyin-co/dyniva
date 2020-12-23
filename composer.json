@@ -156,7 +156,8 @@
         "drupal/ckeditor_autosave": "^1.0@beta",
         "drupal/ckeditor_textindent": "^1.0@alpha",
         "drupal/ckeditor_copyformatting": "^1.0",
-        "drupal/ckeditor_lineheight": "^1.1"
+        "drupal/ckeditor_lineheight": "^1.1",
+        "drupal/core-composer-scaffold": "^9.1"
     },
     "replace": {
         "drupal/lightning_workflow": "*"
@@ -205,6 +206,11 @@
         "verify-patched-constraints": "Acquia\\Lightning\\Composer\\PatchedConstraint::execute"
     },
     "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
         "installer-types": [
             "bower-asset",
             "npm-asset"
@@ -238,6 +244,9 @@
             ]
         },
         "enable-patching": "true",
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "patches": {
             "drupal/core": {
                 "Fatal error update 8702 createHandlerInstance invoked with NULL class object.": "https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",

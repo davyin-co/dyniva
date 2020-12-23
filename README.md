@@ -1,6 +1,12 @@
 # 介绍
 dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版。
-# 功能特色
+
+## 使用
+通过如下命令使用。
+```
+composer create-project davyin/dyniva-project dyniva-project --stability dev  --no-interaction
+```
+## 功能特色
 1. 精选的drupal模块
 1. 组件化建站
 1. 适合国情的后台管理界面
@@ -11,7 +17,7 @@ dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版�
 1. SEO
 1. ... ...
 
-# 版本路线规划
+## 版本路线规划
 |Dyniva|Lightning|Drupal core|layout方案|
 |---|---|---|----|
 |3.0.x|5.0.x|9.0.x|layout builder|
@@ -22,7 +28,7 @@ dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版�
 
 [lighting 版本说明](https://github.com/acquia/lightning/wiki/Lightning-3.x-vs-4.x)
 
-# lightning_layout 版本兼容性说明
+## lightning_layout 版本兼容性说明
 ||8.4.x|8.5.x|8.6.x|8.7.x|8.8.x|
 |--|--|--|--|--|--|
 |1.x|✅|✅|✅|✅|✅|

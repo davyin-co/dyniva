@@ -1,163 +1,163 @@
 {
-	"name": "davyin/dyniva",
-	"description": "Daniva distribution, based on Drupal 8",
-	"type": "drupal-custom-profile",
-	"license": "GPL-2.0+",
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"require": {
-		"ext-dom": "*",
-		"cweagans/composer-patches": "^1.7",
-		"oyejorge/less.php": "v1.7.0.14",
-		"overtrue/wechat": "^4.1",
-		"endroid/qr-code": "^3.9",
-		"php-http/guzzle6-adapter": "^1.1",
-		"woohoolabs/yang": "^1.4",
-		"oomphinc/composer-installers-extender": "^2.0",
-		"acquia/lightning": "~4.1.5",
-		"davyin/dyniva_admin": "1.x-dev",
-		"davyin/dyniva_ui": "1.x-dev",
-		"davyin/boost": "1.x-dev",
-		"davyin/dyniva_examples": "1.x-dev",
-		"davyin/dyniva_content_access": "1.x-dev",
-		"davyin/dyniva_content_agent": "1.x-dev",
-		"davyin/dyniva_elastic_search": "1.x-dev",
-		"davyin/dyniva_migrate": "1.x-dev",
-		"davyin/dyniva_replica_db": "1.x-dev",
-		"davyin/dyniva_connect": "1.x-dev",
-		"davyin/dyniva_event": "1.x-dev",
-		"davyin/dyniva_flowchart": "1.x-dev",
-		"davyin/dyniva_media": "1.x-dev",
-		"davyin/dyniva_ui_patterns": "1.x-dev",
-		"davyin/dyniva_calendar": "1.x-dev",
-		"davyin/dyniva_content_receiver": "1.x-dev",
-		"davyin/dyniva_matomo": "1.x-dev",
-		"davyin/dyniva_matomo_tracker": "1.x-dev",
-		"davyin/dyniva_baidu": "1.x-dev",
-		"davyin/dyniva_checklist": "1.x-dev",
-		"davyin/dyniva_core": "1.x-dev",
-		"davyin/dyniva_scheduled_updates": "1.x-dev",
-		"davyin/dyniva_seckit": "1.x-dev",
-		"davyin/dyniva_content_hub": "1.x-dev",
-		"davyin/dyniva_prompt_message": "1.x-dev",
-		"davyin/dyniva_comment": "1.x-dev",
-		"davyin/dyniva_message": "1.x-dev",
-		"davyin/dyniva_permission": "1.x-dev",
-		"davyin/dyniva_content_sync": "1.x-dev",
-		"davyin/dyniva_private_message": "1.x-dev",
-		"davyin/dyniva_content_moderation": "1.x-dev",
-		"davyin/dyniva_connect_wechat": "1.x-dev",
-		"davyin/dyniva_editor": "1.x-dev",
-		"davyin/component_hub": "1.x-dev",
-		"drupal/swiftmailer": "^2.0",
-		"drupal/conflict": "^1.0",
-		"drupal/multiversion": "1.0-beta34",
-		"drupal/key_value": "^1.1",
-		"drupal/replication": "^1.0",
-		"drupal/workspace": "^1.0",
-		"drupal/switch_page_theme": "^1.0",
-		"drupal/content_lock": "^2.1",
-		"drupal/paragraphs": "^1.12",
-		"drupal/eck": "^1.0",
-		"drupal/mailsystem": "^4.3",
-		"drupal/message": "1.0.0-rc2",
-		"drupal/message_ui": "^1.0",
-		"drupal/menu_multilingual": "^1.0",
-		"drupal/fontawesome": "^1.2",
-		"drupal/fontawesome_iconpicker": "^1.0",
-		"drupal/responsive_preview": "^1.0",
-		"drupal/calendar": "1.x-dev",
-		"drupal/features": "^3.11",
-		"drupal/better_exposed_filters": "^5.0",
-		"drupal/chosen": "^2.9",
-		"drupal/colorbox": "^1.6",
-		"drupal/field_group": "^3.1",
-		"drupal/flag": "^4.0",
-		"drupal/footable": "1.x-dev",
-		"drupal/menu_breadcrumb": "^1.13",
-		"drupal/menu_trail_by_path": "^1.3",
-		"drupal/migrate_plus": "^5.1",
-		"drupal/migrate_source_csv": "^3.1",
-		"drupal/migrate_spreadsheet": "^1.1",
-		"drupal/migrate_tools": "^5.0",
-		"drupal/shs": "^1.0",
-		"drupal/views_infinite_scroll": "^1.7",
-		"drupal/views_templates": "^1.1",
-		"drupal/viewsreference": "^2.0",
-		"drupal/multiselect": "^1.0",
-		"drupal/field_permissions": "^1.0",
-		"drupal/focal_point": "^1.4",
-		"drupal/module_filter": "^3.1",
-		"drupal/stage_file_proxy": "^1.0",
-		"drupal/field_name_prefix_remove": "1.x-dev",
-		"drupal/library": "^1.0@beta",
-		"drupal/admin_toolbar": "^2.3",
-		"drupal/purge": "^3.0@beta",
-		"drupal/purge_purger_http": "^1.0@beta",
-		"drupal/toolbar_visibility": "^1.2",
-		"drupal/jsonapi_extras": "^3.0",
-		"drupal/site_settings": "^1.12",
-		"drupal/devel": "^2.0",
-		"drupal/coffee": "^1.0",
-		"drupal/baidu_analytics": "1.x-dev",
-		"drupal/google_analytics": "^3.1",
-		"drupal/cas_attributes": "^1.0-beta1",
-		"drupal/password_policy": "^3.0@alpha",
-		"drupal/r4032login": "^1.0@beta",
-		"drupal/asset_injector": "^2.2",
-		"drupal/context": "^4.0@beta",
-		"drupal/user_default_page": "^2.0",
-		"drupal/search_api_solr": "^4.1.4",
-		"drupal/search_api_autocomplete": "^1.0",
-		"drupal/message_notify": "^1.0@beta",
-		"drupal/message_subscribe": "^1.0@beta",
-		"drupal/reroute_email": "^1.0",
-		"drupal/redis": "^1.1",
-		"drupal/block_class": "^1.0",
-		"drupal/redirect": "^1.3",
-		"drupal/allowed_formats": "^1.1",
-		"drupal/confirm_leave": "^1.0@beta",
-		"drupal/password_encrypt": "^1.0",
-		"drupal/styleguide": "^1.0@alpha",
-		"drupal/linkit": "^4.3",
-		"drupal/relaxed": "^1.0@beta",
-		"drupal/production_checklist": "^1.0@alpha",
-		"drupal/page_load_progress": "^1.4",
-		"drupal/locker": "1.0",
-		"drupal/autofill_fields": "^1.0",
-		"drupal/ckeditor_uploadimage": "^1.5",
-		"drupal/login_emailusername": "^1.1",
-		"drupal/private_message": "^1.2",
-		"drupal/ckeditor_font": "^1.0",
-		"drupal/sms": "^1.1",
-		"drupal/colorbutton": "^1.1",
-		"drupal/devel_php": "^1.0",
-		"drupal/scheduled_updates": "^1.0@alpha",
-		"drupal/sitemap": "^1.5",
-		"drupal/xmlsitemap": "^1.0@alpha",
-		"drupal/config_ignore": "^2.1",
-		"drupal/config_split": "^1.4",
-		"drupal/config_installer": "^1.8",
-		"drupal/config_pages": "^2.6",
-		"drupal/menu_item_extras": "2.7",
-		"drupal/devel_entity_updates": "^1.0",
-		"drupal/elasticsearch_connector": "^7.0@alpha",
-		"drupal/views_entity_form_field": "^1.0@beta",
-		"drupal/views_bulk_operations": "^3.3",
-		"drupal/matomo": "^1.9",
-		"drupal/matomo_reporting_api": "^1.0@alpha",
-		"drupal/entity_theme_engine": "^1.5",
-		"drupal/pathauto": "^1.8",
-		"drupal/ace_editor": "^1.3",
-		"drupal/facets": "^1.6",
-		"drupal/ckeditor_pasteimage": "^1.0@alpha",
-		"drupal/diff": "^1.0",
-		"drupal/ckeditor_pasteexcel": "^1.0@alpha",
-		"drupal/ckeditor_autosave": "^1.0@beta",
-		"drupal/ckeditor_textindent": "^1.0@alpha",
-		"drupal/ckeditor_copyformatting": "^1.0",
-		"drupal/ckeditor_lineheight": "^1.1"
-	},
+    "name": "davyin/dyniva",
+    "description": "Daniva distribution, based on Drupal 8",
+    "type": "drupal-custom-profile",
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "ext-dom": "*",
+        "cweagans/composer-patches": "^1.7",
+        "oyejorge/less.php": "v1.7.0.14",
+        "overtrue/wechat": "^4.1",
+        "endroid/qr-code": "^3.9",
+        "php-http/guzzle6-adapter": "^1.1",
+        "woohoolabs/yang": "^1.4",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "acquia/lightning": "~4.1.5",
+        "davyin/dyniva_admin": "1.x-dev",
+        "davyin/dyniva_ui": "1.x-dev",
+        "davyin/boost": "1.x-dev",
+        "davyin/dyniva_examples": "1.x-dev",
+        "davyin/dyniva_content_access": "1.x-dev",
+        "davyin/dyniva_content_agent": "1.x-dev",
+        "davyin/dyniva_elastic_search": "1.x-dev",
+        "davyin/dyniva_migrate": "1.x-dev",
+        "davyin/dyniva_replica_db": "1.x-dev",
+        "davyin/dyniva_connect": "1.x-dev",
+        "davyin/dyniva_event": "1.x-dev",
+        "davyin/dyniva_flowchart": "1.x-dev",
+        "davyin/dyniva_media": "1.x-dev",
+        "davyin/dyniva_ui_patterns": "1.x-dev",
+        "davyin/dyniva_calendar": "1.x-dev",
+        "davyin/dyniva_content_receiver": "1.x-dev",
+        "davyin/dyniva_matomo": "1.x-dev",
+        "davyin/dyniva_matomo_tracker": "1.x-dev",
+        "davyin/dyniva_baidu": "1.x-dev",
+        "davyin/dyniva_checklist": "1.x-dev",
+        "davyin/dyniva_core": "1.x-dev",
+        "davyin/dyniva_scheduled_updates": "1.x-dev",
+        "davyin/dyniva_seckit": "1.x-dev",
+        "davyin/dyniva_content_hub": "1.x-dev",
+        "davyin/dyniva_prompt_message": "1.x-dev",
+        "davyin/dyniva_comment": "1.x-dev",
+        "davyin/dyniva_message": "1.x-dev",
+        "davyin/dyniva_permission": "1.x-dev",
+        "davyin/dyniva_content_sync": "1.x-dev",
+        "davyin/dyniva_private_message": "1.x-dev",
+        "davyin/dyniva_content_moderation": "1.x-dev",
+        "davyin/dyniva_connect_wechat": "1.x-dev",
+        "davyin/dyniva_editor": "1.x-dev",
+        "davyin/component_hub": "1.x-dev",
+        "drupal/swiftmailer": "^2.0",
+        "drupal/conflict": "^1.0",
+        "drupal/multiversion": "1.0-beta34",
+        "drupal/key_value": "^1.1",
+        "drupal/replication": "^1.0",
+        "drupal/workspace": "^1.0",
+        "drupal/switch_page_theme": "^1.0",
+        "drupal/content_lock": "^2.1",
+        "drupal/paragraphs": "^1.12",
+        "drupal/eck": "^1.0",
+        "drupal/mailsystem": "^4.3",
+        "drupal/message": "1.0.0-rc2",
+        "drupal/message_ui": "^1.0",
+        "drupal/menu_multilingual": "^1.0",
+        "drupal/fontawesome": "^1.2",
+        "drupal/fontawesome_iconpicker": "^1.0",
+        "drupal/responsive_preview": "^1.0",
+        "drupal/calendar": "1.x-dev",
+        "drupal/features": "^3.11",
+        "drupal/better_exposed_filters": "^5.0",
+        "drupal/chosen": "^2.9",
+        "drupal/colorbox": "^1.6",
+        "drupal/field_group": "^3.1",
+        "drupal/flag": "^4.0",
+        "drupal/footable": "1.x-dev",
+        "drupal/menu_breadcrumb": "^1.13",
+        "drupal/menu_trail_by_path": "^1.3",
+        "drupal/migrate_plus": "^5.1",
+        "drupal/migrate_source_csv": "^3.1",
+        "drupal/migrate_spreadsheet": "^1.1",
+        "drupal/migrate_tools": "^5.0",
+        "drupal/shs": "^1.0",
+        "drupal/views_infinite_scroll": "^1.7",
+        "drupal/views_templates": "^1.1",
+        "drupal/viewsreference": "^2.0",
+        "drupal/multiselect": "^1.0",
+        "drupal/field_permissions": "^1.0",
+        "drupal/focal_point": "^1.4",
+        "drupal/module_filter": "^3.1",
+        "drupal/stage_file_proxy": "^1.0",
+        "drupal/field_name_prefix_remove": "1.x-dev",
+        "drupal/library": "^1.0@beta",
+        "drupal/admin_toolbar": "^2.3",
+        "drupal/purge": "^3.0@beta",
+        "drupal/purge_purger_http": "^1.0@beta",
+        "drupal/toolbar_visibility": "^1.2",
+        "drupal/jsonapi_extras": "^3.0",
+        "drupal/site_settings": "^1.12",
+        "drupal/devel": "^2.0",
+        "drupal/coffee": "^1.0",
+        "drupal/baidu_analytics": "1.x-dev",
+        "drupal/google_analytics": "^3.1",
+        "drupal/cas_attributes": "^1.0-beta1",
+        "drupal/password_policy": "^3.0@alpha",
+        "drupal/r4032login": "^1.0@beta",
+        "drupal/asset_injector": "^2.2",
+        "drupal/context": "^4.0@beta",
+        "drupal/user_default_page": "^2.0",
+        "drupal/search_api_solr": "^4.1.4",
+        "drupal/search_api_autocomplete": "^1.0",
+        "drupal/message_notify": "^1.0@beta",
+        "drupal/message_subscribe": "^1.0@beta",
+        "drupal/reroute_email": "^1.0",
+        "drupal/redis": "^1.1",
+        "drupal/block_class": "^1.0",
+        "drupal/redirect": "^1.3",
+        "drupal/allowed_formats": "^1.1",
+        "drupal/confirm_leave": "^1.0@beta",
+        "drupal/password_encrypt": "^1.0",
+        "drupal/styleguide": "^1.0@alpha",
+        "drupal/linkit": "^4.3",
+        "drupal/relaxed": "^1.0@beta",
+        "drupal/production_checklist": "^1.0@alpha",
+        "drupal/page_load_progress": "^1.4",
+        "drupal/locker": "1.0",
+        "drupal/autofill_fields": "^1.0",
+        "drupal/ckeditor_uploadimage": "^1.5",
+        "drupal/login_emailusername": "^1.1",
+        "drupal/private_message": "^1.2",
+        "drupal/ckeditor_font": "^1.0",
+        "drupal/sms": "^1.1",
+        "drupal/colorbutton": "^1.1",
+        "drupal/devel_php": "^1.0",
+        "drupal/scheduled_updates": "^1.0@alpha",
+        "drupal/sitemap": "^1.5",
+        "drupal/xmlsitemap": "^1.0@alpha",
+        "drupal/config_ignore": "^2.1",
+        "drupal/config_split": "^1.4",
+        "drupal/config_installer": "^1.8",
+        "drupal/config_pages": "^2.6",
+        "drupal/menu_item_extras": "2.7",
+        "drupal/devel_entity_updates": "^1.0",
+        "drupal/elasticsearch_connector": "^7.0@alpha",
+        "drupal/views_entity_form_field": "^1.0@beta",
+        "drupal/views_bulk_operations": "^3.3",
+        "drupal/matomo": "^1.9",
+        "drupal/matomo_reporting_api": "^1.0@alpha",
+        "drupal/entity_theme_engine": "^1.5",
+        "drupal/pathauto": "^1.8",
+        "drupal/ace_editor": "^1.3",
+        "drupal/facets": "^1.6",
+        "drupal/ckeditor_pasteimage": "^1.0@alpha",
+        "drupal/diff": "^1.0",
+        "drupal/ckeditor_pasteexcel": "^1.0@alpha",
+        "drupal/ckeditor_autosave": "^1.0@beta",
+        "drupal/ckeditor_textindent": "^1.0@alpha",
+        "drupal/ckeditor_copyformatting": "^1.0",
+        "drupal/ckeditor_lineheight": "^1.1"
+    },
     "replace": {
         "drupal/lightning_workflow": "*"
     },
@@ -169,23 +169,23 @@
             "src/Composer/ConfigureLegacyProject.php"
         ]
     },
-	"repositories": {
-		"drupal": {
-			"type": "composer",
-			"url": "https://packages.drupal.org/8"
-		},
-		"assets": {
-			"type": "composer",
-			"url": "https://asset-packagist.org"
-		},
-		"dev": {
-			"type": "github",
-			"url": "https://github.com/acquia/lightning-dev",
-			"no-api": true
-		}
-	},
-	"scripts": {
-         "post-install-cmd": [
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "dev": {
+            "type": "github",
+            "url": "https://github.com/acquia/lightning-dev",
+            "no-api": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
             "@composer push"
         ],
         "post-update-cmd": [
@@ -203,41 +203,151 @@
             "rm dyniva.tar"
         ],
         "verify-patched-constraints": "Acquia\\Lightning\\Composer\\PatchedConstraint::execute"
-	},
-	"extra": {
-		"installer-types": [
-			"bower-asset",
-			"npm-asset"
-		],
-		"installer-paths": {
-			"docroot/core": [
-				"type:drupal-core"
-			],
-			"docroot/libraries/{$name}": [
-				"type:drupal-library",
-				"type:bower-asset",
-				"type:npm-asset"
-			],
-			"docroot/modules/contrib/{$name}": [
-				"type:drupal-module"
-			],
-			"docroot/modules/custom/{$name}": [
-				"type:drupal-custom-module"
-			],
-			"docroot/profiles/contrib/{$name}": [
-				"type:drupal-profile"
-			],
-			"docroot/themes/contrib/{$name}": [
-				"type:drupal-theme"
-			],
-			"docroot/themes/custom/{$name}": [
-				"type:drupal-custom-theme"
-			],
-			"drush/contrib/{$name}": [
-				"type:drupal-drush"
-			]
-		},
-		"enable-patching": "true",
-        "patches-file": "composer.patches.json"
-	}
+    },
+    "extra": {
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "enable-patching": "true",
+        "patches": {
+            "drupal/core": {
+                "Fatal error update 8702 createHandlerInstance invoked with NULL class object.": "https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",
+                "Color add less support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/color_less_support.patch",
+                "Statistics taxonomy page": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/update_statistics_to_count_taxonomy_page_85.patch",
+                "select options list attributes ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/select_options_list_attributes.patch",
+                "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
+                "Views entity cache error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/views_entity_cache_error.patch",
+                "tags separators": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/allow_tags_to_use_chinese_commas_and_spaces_as_separators.patch",
+                "image filter imporve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/text_filter_secure_image_improve.patch",
+                "options label add token support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/add_token_support_on_options_label.patch",
+                "Config translation edit link destination": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/config_translation_edit_link_destination_fix.patch",
+                "content moderation delete bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_moderation_multiversion_delete_bug.patch",
+                "tokens in text editor": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/allow_tokens_in_text_editor-2830210-14.patch",
+                "editor file reference filter improve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/editor_file_reference_filter_improve.patch",
+                "500 error page": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/error_500_page.patch",
+                "entity translation affected bug with multiversion": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/entity_translation_affected_bug.patch",
+                "add stale file threshold settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/core_performance_form_add_stale_file_threshold_settings.patch",
+                "content moderaton views langcode relationship": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_moderation_views_langcode_relationship.patch",
+                "status message render modify": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/core_status_message_render_modify.patch",
+                "content sync import patch": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_sync_import_error_fix.patch",
+                "no bundle filter when bundle equals entity id": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/no-bundle-filter-when-bundle-equals-entity-id.patch",
+                "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
+                "css agg cache with base_path ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/core_css_agg_with_base_path.patch",
+                "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
+                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch"
+            },
+            "drupal/panels": {
+                "ipe js translation": "https://www.drupal.org/files/issues/ipe_js_translation-2882645-4.patch"
+            },
+            "drupal/panelizer": {
+                "preview node bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/preview_bug_when_node_is_new.patch"
+            },
+            "drupal/multiversion": {
+                "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.": "https://www.drupal.org/files/issues/2020-01-10/multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
+                "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch"
+            },
+            "drupal/paragraphs": {
+                "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"
+            },
+            "drupal/replication": {
+                "content entity normalizer bug fix": "https://www.drupal.org/files/issues/2890261-6.patch",
+                "content entity normalizer entity revision id fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_content_entity_revision_id_fix.patch",
+                "content crop normalizer error fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_crop_normalizer_error_fix.patch",
+                "keep file uri": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_keep_file_uri.patch",
+                "add drupal datetime normalizer": "https://www.drupal.org/files/issues/2019-03-04/added-datetime-normalizer-2936153-6.patch",
+                "Field _deleted is unknown": "https://www.drupal.org/files/issues/2020-02-14/3113016-2.patch",
+                "large file memory overflow": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_large_file_memory_overflow_bug_fix.patch"
+            },
+            "drupal/cas": {
+                "Logout error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_logout_error-2948185-2.patch",
+                "Redirect loop with distnation": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_distination_redirect_error.patch"
+            },
+            "drupal/cas_attributes": {
+                "Mapping add telephone type": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_attributes_mapping_add_telephone_type.patch"
+            },
+            "drupal/footable": {
+                "empty display fix ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/table_empty_colspan_remove.patch"
+            },
+            "drupal/toolbar_visibility": {
+                "Add domain support": "https://www.drupal.org/files/issues/2018-04-19/add_domain_settings_support-2962280-3.patch"
+            },
+            "drupal/migrate_plus": {
+                "Add source or destination module": "https://www.drupal.org/files/issues/2018-03-22/migrate_plus_include_new_annotations-2955386-2.patch"
+            },
+            "drupal/flag": {
+                "user cancle error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/flag_user_cancle_error.patch"
+            },
+            "drupal/menu_trail_by_path": {
+                "add context module support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/add_context_module_support.patch"
+            },
+            "drupal/message_ui": {
+                "views plugin directory fix": "https://www.drupal.org/files/issues/2018-06-21/message_ui-views_plugin_case_2917574-1.patch"
+            },
+            "drupal/message": {
+                "views plugin directory fix": "https://www.drupal.org/files/issues/2018-05-25/message-views_plugin_case-2891680-14.patch",
+                "views create bug fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/message_views_create_bug.patch"
+            },
+            "drupal/relaxed": {
+                "rm ensure full commit event loop": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/relaxed_rm_ensure_full_commit_event_dispatch.patch"
+            },
+            "drupal/autofill_fields": {
+                "autofill fields entity bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_autofill_fields_add_media_bug.patch"
+            },
+            "drupal/lightning_media": {
+                "media type document replace file": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/lightning_media_use_document.patch"
+            },
+            "drupal/ckeditor_uploadimage": {
+                "image size": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/ckeditor_uploadimage_original_size.patch"
+            },
+            "drupal/password_policy": {
+                "show policy for all": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/show_policy_for_all.patch"
+            },
+            "drupal/scheduled_updates": {
+                "rm entity validate": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/scheduled_updates_rm_entity_validate.patch"
+            },
+            "drupal/crop": {
+                "crop_file_url_alter_hook remove": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/crop_file_url_alter_hook_remove.patch"
+            },
+            "drupal/search_api": {
+                "fix excerpt empty bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/search_api_fix_chinese_excerpt.patch"
+            },
+            "drupal/pathauto": {
+                "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",
+                "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
+            },
+            "drupal/shs": {
+                "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
+                "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"
+            }
+        }
+    }
 }

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  dyniva-project-13:
+    image: sparkpos/docker-nginx-php:7.3-alpine
+    container_name: dyniva-project-13
+    hostname: dyniva-project-13.docker
+    volumes:
+      - ~/www/dyniva-project-1.3.x:/var/www/html:cached
+    environment:
+      - VIRTUAL_HOST=dyniva-project-13.docker
+      - DRUPAL8_WEB_DIR=docroot
+      - MAX_FILE_UPLOAD_SIZE=300 
+      - TIMEOUT=300
+networks:
+  default:
+    external:
+      name: proxy

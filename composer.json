@@ -105,7 +105,11 @@
         "drupal/ckeditor_autosave": "^1.0@beta",
         "drupal/ckeditor_textindent": "^1.0@alpha",
         "drupal/ckeditor_copyformatting": "^1.0",
-        "drupal/ckeditor_lineheight": "^1.1"
+        "drupal/ckeditor_lineheight": "^1.1",
+        "drupal/autosave_form": "^1.2",
+        "drupal/moderation_dashboard": "^1.0@beta",
+        "drupal/moderation_sidebar": "^1.4",
+        "drupal/diff": "^1.0"
     },
     "require-dev": {
         "drupal/devel": "^2.0",

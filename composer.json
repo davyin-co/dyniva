@@ -11,6 +11,7 @@
         "oomphinc/composer-installers-extender": "^2.0",
         "drupal/core-composer-scaffold": "^9.1",
         "acquia/lightning": "~4.1.5",
+        "drupal/core": "^8.9",
         "davyin/dyniva_admin": "1.x-dev",
         "davyin/dyniva_ui": "1.x-dev",
         "davyin/boost": "1.x-dev",

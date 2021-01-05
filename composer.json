@@ -158,7 +158,7 @@
         "drupal/ckeditor_textindent": "^1.0@alpha",
         "drupal/ckeditor_copyformatting": "^1.0",
         "drupal/ckeditor_lineheight": "^1.1",
-        "drupal/core-composer-scaffold": "^9.1"
+        "drupal/core-composer-scaffold": "^8.9"
     },
     "replace": {
         "drupal/lightning_workflow": "*"

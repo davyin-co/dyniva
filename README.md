@@ -20,10 +20,11 @@ composer create-project davyin/dyniva-project dyniva-project --stability dev  --
 ## 版本路线规划
 |Dyniva|Lightning|Drupal core|layout方案|
 |---|---|---|----|
-|3.0.x|5.0.x|9.0.x|layout builder|
-|2.0.x|4.1.x|8.8.x, 8.9.x|panelizer => layout builder|
-|1.2.x|4.0.x|8.8.x|layout builder|
-|1.1.x|3.4.x|8.8.x, 8.9.x|panelizer => layout builder|
+|2.1.x|5.1.x|9.1.x|layout builder|
+|2.0.x|5.0.x|9.0.x|layout builder|
+|1.3.x|4.1.x|8.8.x, 8.9.x|layout builder|
+|1.2.x|4.1.x|8.8.x, 8.9.x|panelizer => layout builder|
+|1.1.x|4.1.x|8.8.x, 8.9.x|panelizer|
 |1.0.x|3.3.x|8.7.x|panelizer|
 
 [lighting 版本说明](https://github.com/acquia/lightning/wiki/Lightning-3.x-vs-4.x)

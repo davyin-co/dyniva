@@ -120,16 +120,13 @@
         "drupal/confirm_leave": "^1.0@beta",
         "drupal/password_encrypt": "^1.0",
         "drupal/styleguide": "^1.0@alpha",
-        "drupal/linkit": "^4.3",
         "drupal/relaxed": "^1.0@beta",
         "drupal/production_checklist": "^1.0@alpha",
         "drupal/page_load_progress": "^1.4",
         "drupal/locker": "1.0",
         "drupal/autofill_fields": "^1.0",
-        "drupal/ckeditor_uploadimage": "^1.5",
         "drupal/login_emailusername": "^1.1",
         "drupal/private_message": "^1.2",
-        "drupal/ckeditor_font": "^1.0",
         "drupal/sms": "^1.1",
         "drupal/colorbutton": "^1.1",
         "drupal/devel_php": "^1.0",
@@ -151,13 +148,7 @@
         "drupal/pathauto": "^1.8",
         "drupal/ace_editor": "^1.3",
         "drupal/facets": "^1.6",
-        "drupal/ckeditor_pasteimage": "^1.0@alpha",
         "drupal/diff": "^1.0",
-        "drupal/ckeditor_pasteexcel": "^1.0@alpha",
-        "drupal/ckeditor_autosave": "^1.0@beta",
-        "drupal/ckeditor_textindent": "^1.0@alpha",
-        "drupal/ckeditor_copyformatting": "^1.0",
-        "drupal/ckeditor_lineheight": "^1.1",
         "drupal/core-composer-scaffold": "^8.9"
     },
     "replace": {
@@ -331,9 +322,6 @@
             },
             "drupal/lightning_media": {
                 "media type document replace file": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/lightning_media_use_document.patch"
-            },
-            "drupal/ckeditor_uploadimage": {
-                "image size": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/ckeditor_uploadimage_original_size.patch"
             },
             "drupal/password_policy": {
                 "show policy for all": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/show_policy_for_all.patch"

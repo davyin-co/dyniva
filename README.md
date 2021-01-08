@@ -5,6 +5,10 @@ dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版�
 通过如下命令使用。
 ```
 composer create-project davyin/dyniva-project dyniva-project --stability dev  --no-interaction
+#cp default.settings.php settings.php
+#修改数据库指向
+#下载数据库，然后解压：http://www.davyin.com/sites/default/files/dyniva/dyniva-8_9.init.sql.gz
+# 导入到数据库
 ```
 ## 功能特色
 1. 精选的drupal模块

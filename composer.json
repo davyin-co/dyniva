@@ -60,7 +60,7 @@
         "drupal/focal_point": "^1.4",
         "drupal/module_filter": "^3.1",
         "drupal/stage_file_proxy": "^1.0",
-        "drupal/field_name_prefix_remove": "1.x-dev",
+        "drupal/field_name_prefix_remove": "^1.0",
         "drupal/library": "^1.0@beta",
         "drupal/admin_toolbar": "^2.3",
         "drupal/toolbar_visibility": "^1.2",
@@ -109,16 +109,39 @@
         "drupal/autosave_form": "^1.2",
         "drupal/moderation_dashboard": "^1.0@beta",
         "drupal/moderation_sidebar": "^1.4",
-        "drupal/diff": "^1.0"
+        "drupal/diff": "^1.0",
+        "drupal/layout_builder_component_attributes": "^1.1",
+        "drupal/atomic_block": "^1.1",
+        "drupal/vartheme_claro": "^2.1",
+        "drupal/vartheme_bs4": "^6.26",
+        "drupal/layout_builder_st": "^1.0@alpha",
+        "drupal/varbase_layout_builder": "^1.24",
+        "drupal/layout_builder_styles": "^1.0@beta",
+        "furf/jquery-ui-touch-punch": "dev-master",
+        "kenwheeler/slick": "^1.8",
+        "drupal/layout_builder_title_link": "^1.0@beta",
+        "drupal/views_add_button": "^1.6",
+        "drupal/admin_audit_trail": "^1.0@alpha",
+        "drupal/features": "^3.11",
+        "davyin/dyniva_article": "1.x-dev",
+        "drupal/length_indicator": "^1.1",
+        "drupal/varbase_heroslider_media": "^7.16",
+        "drupal/varbase_carousels": "^7.7",
+        "drupal/varbase_workflow": "^2.0",
+        "drupal/varbase_core": "^8.27",
+        "drupal/layout_builder_browser": "^1.2",
+        "drupal/layout_builder_blocks": "^1.0",
+        "drupal/varbase_editor": "^7.13"
     },
     "require-dev": {
-        "drupal/devel": "^2.0",
+        "drush/drush": "^10.3",
+        "drupal/devel": "^4.0",
         "drupal/devel_php": "^1.0",
         "drupal/devel_entity_updates": "^1.0"
     },
-     "replace": {
-         "drupal/lightning_workflow": "*"
-     },
+    "replace": {
+        "drupal/lightning_workflow": "*"
+    },
     "autoload": {
         "psr-4": {
             "Davyin\\Dyniva\\": "src"
@@ -127,33 +150,57 @@
             "src/Composer/ConfigureLegacyProject.php"
         ]
     },
-    "repositories": {
-        "drupal": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "assets": {
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "furf/jquery-ui-touch-punch",
+                "type": "drupal-library",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/furf/jquery-ui-touch-punch",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "kenwheeler/slick",
+                "type": "drupal-library",
+                "version": "1.8.0",
+                "dist": {
+                    "url": "https://github.com/kenwheeler/slick/archive/1.8.0.zip",
+                    "type": "zip"
+                }
+            }
         }
-    },
+    ],
     "scripts": {
         "post-install-cmd": [
-            "@composer push"
+            "@composer sync"
         ],
         "post-update-cmd": [
-            "@composer push"
+            "@composer sync"
         ],
         "configure-tarball": "Davyin\\Dyniva\\Composer\\ConfigureLegacyProject::execute",
         "enable-asset-packagist": "Acquia\\Lightning\\Composer\\AssetPackagist::execute",
         "nuke": "rm -r -f docroot vendor",
         "pull": "cp -R -f ./docroot/profiles/contrib/dyniva/* .",
-        "push": [
+        "sync": [
            "rm -r -f ./docroot/profiles/contrib/dyniva",
            "mkdir -p ./docroot/profiles/contrib/dyniva",
-           "@composer archive --file dyniva",
-           "tar -x -f dyniva.tar -C ./docroot/profiles/contrib/dyniva",
-           "rm dyniva.tar"
+           "cp dyniva.* docroot/profiles/contrib/dyniva/",
+           "cp -r config src css images docroot/profiles/contrib/dyniva/"
        ]
     },
     "extra": {
@@ -213,6 +260,7 @@
                 "preview node bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/preview_bug_when_node_is_new.patch"
             },
             "drupal/multiversion": {
+                "Argument 1 passed to RedirectRepository::__construct() must be an instance of EntityManagerInterface": "https://www.drupal.org/files/issues/2019-12-18/fix-constructor-argument-3101924-2.patch",
                 "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.": "https://www.drupal.org/files/issues/2020-01-10/multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
                 "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch"
             },
@@ -284,6 +332,9 @@
             "drupal/pathauto": {
                 "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",
                 "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
+            },
+            "drupal/lightning_layout": {
+                "Missing block is causing a fatal error when editing layout":"https://www.drupal.org/files/issues/2019-12-19/lightning_layout__fix_broken_inline_block_fatal_error-3102025-3.patch"
             },
             "drupal/shs": {
                 "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",

@@ -2,7 +2,7 @@ name: Dyniva
 type: profile
 description: 'Dyniva install profile.'
 core: 8.x
-version: 8.x-1.0-alpha
+version: 8.x-1.3-alpha
 project: dyniva
 distribution:
   name: Dyniva
@@ -24,6 +24,9 @@ install:
   - node
   - options
   - path
+  - locale
+  - language
+  - content_translation
   - pathauto
   - page_cache
   - redirect
@@ -38,7 +41,6 @@ install:
   - views_ui
   - admin_toolbar_links_access_filter
   - admin_toolbar_tools
-  - diff
   - image_widget_crop
   - metatag
   - moderation_dashboard
@@ -53,8 +55,7 @@ install:
   - lightning_media_document
   - lightning_media_image
   - lightning_media_video
-  - lightning_map_block
-  - dyniva_core
+  - varbase_layout_builder
 themes:
   - bartik
   - claro

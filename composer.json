@@ -242,9 +242,6 @@
             ]
         },
         "enable-patching": "true",
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
         "patches": {
             "drupal/core": {
                 "Fatal error update 8702 createHandlerInstance invoked with NULL class object.": "https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",

@@ -248,7 +248,8 @@
                 "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
                 "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
                 "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
-                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch"
+                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch",
+                "Configuration objects (system.theme) provided by system already exist in active configuration": "https://www.drupal.org/files/issues/2018-12-13/system-theme-already-exist-issue-3014329-4.patch"
             },
             "drupal/panels": {
                 "ipe js translation": "https://www.drupal.org/files/issues/ipe_js_translation-2882645-4.patch"

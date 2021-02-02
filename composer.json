@@ -1,6 +1,6 @@
 {
     "name": "davyin/dyniva",
-    "description": "Daniva distribution, based on Drupal 8",
+    "description": "Dyniva distribution, based on Drupal 8",
     "type": "drupal-custom-profile",
     "license": "GPL-2.0+",
     "minimum-stability": "dev",

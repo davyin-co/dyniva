@@ -131,8 +131,7 @@
         "drupal/varbase_core": "^8.27",
         "drupal/layout_builder_browser": "^1.2",
         "drupal/layout_builder_blocks": "^1.0",
-        "drupal/varbase_editor": "^7.13",
-        "drupal/layout_builder_kit": "^1.0@beta"
+        "drupal/varbase_editor": "^7.13"
     },
     "require-dev": {
         "drush/drush": "^10.3",
@@ -141,7 +140,8 @@
         "drupal/devel_entity_updates": "^1.0"
     },
     "replace": {
-        "drupal/lightning_workflow": "*"
+        "drupal/lightning_workflow": "*",
+        "drupal/default_content": "*"
     },
     "autoload": {
         "psr-4": {

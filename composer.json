@@ -131,7 +131,8 @@
         "drupal/varbase_core": "^8.27",
         "drupal/layout_builder_browser": "^1.2",
         "drupal/layout_builder_blocks": "^1.0",
-        "drupal/varbase_editor": "^7.13"
+        "drupal/varbase_editor": "^7.13",
+        "drupal/layout_builder_kit": "^1.0@beta"
     },
     "require-dev": {
         "drush/drush": "^10.3",

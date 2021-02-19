@@ -151,7 +151,8 @@
         "drupal/diff": "^1.0",
         "drupal/core-composer-scaffold": "^8.9",
         "drupal/moderation_dashboard": "^1.0@beta",
-        "drupal/moderation_sidebar": "^1.4"
+        "drupal/moderation_sidebar": "^1.4",
+        "drupal/autosave_form": "^1.2"
     },
     "replace": {
         "drupal/lightning_workflow": "*"

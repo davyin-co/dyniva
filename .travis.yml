@@ -13,9 +13,9 @@ before_script:
   - composer --version
   - composer remove drupal/migrate_tools
   - composer global require drush/drush
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 install:
   - composer update
 script:
-  - ~/.composer/vendor/bin/drush si -y
+  - drush si -y
   #- php scripts/quickstart install

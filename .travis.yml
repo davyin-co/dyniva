@@ -9,7 +9,6 @@ before_install:
   - phpenv config-rm xdebug.ini
   # Add the oauth token to prevent GitHub timeouts.
   # - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
-  - composer global require "hirak/prestissimo:^0.3"
 before_script:
   - composer --version
   - if [[ -n "$DRUPAL_CORE" ]]; then composer require drupal/core:$DRUPAL_CORE --update-with-all-dependencies; fi

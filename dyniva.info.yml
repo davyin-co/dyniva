@@ -25,6 +25,7 @@ install:
   - options
   - path
   - pathauto
+  - locale
   - page_cache
   - redirect
   - taxonomy

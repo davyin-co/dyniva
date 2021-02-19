@@ -22,10 +22,11 @@ before_install:
 before_script:
   - composer --version
   - composer remove drupal/migrate_tools
-  - composer global require drush/drush
+  - rm composer.lock
+  - composer require drush/drush
   - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 install:
   - composer update
 script:
-  - drush si dyniva --db-url=mysql://$DB_USERNAME@127.0.0.1:3306/$DATABASE -y -vvv
+  - ./vendor/drush/drush/drush si dyniva --db-url=mysql://$DB_USERNAME@127.0.0.1:3306/$DATABASE -y -vvv
   #- php scripts/quickstart install

@@ -1,0 +1,26 @@
+language: php
+php:
+  - 7.2
+matrix:
+  fast_finish: true
+  env:
+    global:
+      - DATABASE='drupal'
+      - DB_USERNAME='root'
+      - DB_ENCODE='utf8'
+  
+before_install:
+  - phpenv config-rm xdebug.ini
+  # Add the oauth token to prevent GitHub timeouts.
+  # https://drupalsun.com/brian-altenhofel/2014/05/09/how-we-test-drupal-7-modules-travis-ci
+  # - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
+before_script:
+  - composer --version
+  - composer remove drupal/migrate_tools
+  - rm composer.lock
+  - composer require drush/drush
+install:
+  - composer update
+script:
+  - ./vendor/drush/drush/drush si dyniva --db-url=sqlite://tmp/site.sqlite -y -vvv
+  #- php scripts/quickstart install

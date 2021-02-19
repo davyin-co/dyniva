@@ -4,10 +4,20 @@ php:
   - 7.3
 matrix:
   fast_finish: true
-
+  env:
+    global:
+      - DATABASE='drupal'
+      - DB_USERNAME='root'
+      - DB_ENCODE='utf8'
+mysql:
+  database: $DATABASE
+  username: $DB_USERNAME
+  encoding: $DB_ENCODE
+  
 before_install:
   - phpenv config-rm xdebug.ini
   # Add the oauth token to prevent GitHub timeouts.
+  # https://drupalsun.com/brian-altenhofel/2014/05/09/how-we-test-drupal-7-modules-travis-ci
   # - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
 before_script:
   - composer --version
@@ -17,5 +27,5 @@ before_script:
 install:
   - composer update
 script:
-  - drush si -y
+  - drush si dyniva --db-url=mysql://$DB_USERNAME@127.0.0.1:3306/$DATABASE -y -vvv
   #- php scripts/quickstart install

@@ -17,5 +17,5 @@ before_script:
 install:
   - composer update
 script:
-  - ./vendor/drush/drush/drush si -y
+  - drush si -y
   #- php scripts/quickstart install

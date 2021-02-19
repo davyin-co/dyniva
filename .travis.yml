@@ -12,7 +12,7 @@ before_install:
 before_script:
   - composer --version
   - if [[ -n "$DRUPAL_CORE" ]]; then composer require drupal/core:$DRUPAL_CORE --update-with-all-dependencies; fi
-  # - composer require drush/drush
+  - composer require drush/drush
   - rm composer.lock
 install:
   - composer install

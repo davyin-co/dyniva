@@ -1,7 +1,6 @@
 language: php
 php:
   - 7.2
-  - 7.3
 matrix:
   fast_finish: true
   env:
@@ -9,10 +8,6 @@ matrix:
       - DATABASE='drupal'
       - DB_USERNAME='root'
       - DB_ENCODE='utf8'
-mysql:
-  database: $DATABASE
-  username: $DB_USERNAME
-  encoding: $DB_ENCODE
   
 before_install:
   - phpenv config-rm xdebug.ini
@@ -24,9 +19,8 @@ before_script:
   - composer remove drupal/migrate_tools
   - rm composer.lock
   - composer require drush/drush
-  - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 install:
   - composer update
 script:
-  - ./vendor/drush/drush/drush si dyniva --db-url=mysql://$DB_USERNAME@127.0.0.1:3306/$DATABASE -y -vvv
+  - ./vendor/drush/drush/drush si dyniva --db-url=sqlite://tmp/site.sqlite -y -vvv
   #- php scripts/quickstart install

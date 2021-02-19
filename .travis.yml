@@ -15,7 +15,7 @@ before_script:
   - composer require drush/drush
   - rm composer.lock
 install:
-  - composer install
+  - composer update
 script:
   - ./vendor/drush/drush/drush si -y
   #- php scripts/quickstart install

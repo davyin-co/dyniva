@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/davyin-co/dyniva.svg?branch=1.3.x)](https://travis-ci.com/davyin-co/dyniva)
 # 介绍
 dyniva是基于acquia公司的lightning发行版开发而来的Drupal发行版。
 

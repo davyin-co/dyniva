@@ -1,15 +1,13 @@
-uuid: 334a6e67-9400-48e6-9c16-853f7229b47d
+uuid: f8ae81f4-b387-4fca-9216-1021a73d3219
 langcode: en
 status: true
 dependencies:
   theme:
-    - seven
-_core:
-  default_config_hash: ZSpc3IoSaLd0PkB02nxjVPBMztIdsTdHek9SiGaqZ_c
-id: seven_page_title
-theme: seven
+    - dyniva_admin
+id: pagetitle
+theme: dyniva_admin
 region: header
-weight: -30
+weight: 0
 provider: null
 plugin: page_title_block
 settings:

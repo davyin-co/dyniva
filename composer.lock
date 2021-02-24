@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf236e18ee008d219635e91cbf11b63f",
+    "content-hash": "89f9478d07b3d28b301b3d6c7f4c9100",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -1088,12 +1088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_article.git",
-                "reference": "d56dbebfe63bec88c866b2918e71be965af3110b"
+                "reference": "be72c6a288b94a4a23b5995c75a54579ffd90633"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_article/zipball/d56dbebfe63bec88c866b2918e71be965af3110b",
-                "reference": "d56dbebfe63bec88c866b2918e71be965af3110b",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_article/zipball/be72c6a288b94a4a23b5995c75a54579ffd90633",
+                "reference": "be72c6a288b94a4a23b5995c75a54579ffd90633",
                 "shasum": ""
             },
             "require": {
@@ -1111,7 +1111,41 @@
                 "issues": "https://github.com/davyin-co/dyniva_article/issues",
                 "source": "https://github.com/davyin-co/dyniva_article/tree/1.x"
             },
-            "time": "2020-12-31T02:31:27+00:00"
+            "time": "2021-02-22T06:20:06+00:00"
+        },
+        {
+            "name": "davyin/dyniva_backoffice",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davyin-co/dyniva_backoffice.git",
+                "reference": "ec55791eb0f0fee28097857dfbdca3a3d46a3f52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_backoffice/zipball/ec55791eb0f0fee28097857dfbdca3a3d46a3f52",
+                "reference": "ec55791eb0f0fee28097857dfbdca3a3d46a3f52",
+                "shasum": ""
+            },
+            "require": {
+                "davyin/dyniva_admin": "1.x-dev",
+                "drupal/core": "^8.8 || ^9",
+                "drupal/switch_page_theme": "^1.0",
+                "drupal/toolbar_menu": "^2.2"
+            },
+            "default-branch": true,
+            "type": "drupal-custom-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Dyniva Backoffice for drupal 8 +.",
+            "homepage": "https://github.com/davyin-co/dyniva_backoffice",
+            "support": {
+                "issues": "https://github.com/davyin-co/dyniva_backoffice/issues",
+                "source": "https://github.com/davyin-co/dyniva_backoffice/tree/1.x"
+            },
+            "time": "2021-02-22T09:05:48+00:00"
         },
         {
             "name": "davyin/dyniva_baidu",
@@ -1522,12 +1556,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_ui.git",
-                "reference": "a978c1ea3adcb90f58f88685b267c3a82bd75b78"
+                "reference": "03a5614f12f44550eb6f085672a4dc24cb40a542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_ui/zipball/a978c1ea3adcb90f58f88685b267c3a82bd75b78",
-                "reference": "a978c1ea3adcb90f58f88685b267c3a82bd75b78",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_ui/zipball/03a5614f12f44550eb6f085672a4dc24cb40a542",
+                "reference": "03a5614f12f44550eb6f085672a4dc24cb40a542",
                 "shasum": ""
             },
             "require": {
@@ -1550,7 +1584,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_ui/issues",
                 "source": "https://github.com/davyin-co/dyniva_ui/tree/2.x"
             },
-            "time": "2021-02-18T03:02:07+00:00"
+            "time": "2021-02-20T07:18:19+00:00"
         },
         {
             "name": "davyin/dyniva_ui_patterns",
@@ -1652,16 +1686,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.11.1",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad"
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b17c5014ef81d212ac539f07a1001832df1b6d3b",
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b",
                 "shasum": ""
             },
             "require": {
@@ -1676,11 +1710,6 @@
                 "phpunit/phpunit": "^7.5 || ^9.1.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
@@ -1721,9 +1750,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.11.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.12.1"
             },
-            "time": "2020-10-26T10:28:16+00:00"
+            "time": "2021-02-21T21:00:45+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -4347,28 +4376,28 @@
         },
         {
             "name": "drupal/chosen",
-            "version": "2.10.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/chosen.git",
-                "reference": "8.x-2.10"
+                "reference": "3.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/chosen-8.x-2.10.zip",
-                "reference": "8.x-2.10",
-                "shasum": "ce6f3ea7a99ab641385c4310fad86d3e660480e0"
+                "url": "https://ftp.drupal.org/files/projects/chosen-3.0.1.zip",
+                "reference": "3.0.1",
+                "shasum": "088cb5bfb3872e217cff5300bc5884e022bd08d4"
             },
             "require": {
                 "drupal/chosen_lib": "*",
-                "drupal/core": "^8 || ^9",
+                "drupal/core": "^8.8 || ^9",
                 "harvesthq/chosen": "^1.8.7"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.10",
-                    "datestamp": "1597305739",
+                    "version": "3.0.1",
+                    "datestamp": "1603473892",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4377,7 +4406,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -4430,17 +4459,17 @@
         },
         {
             "name": "drupal/chosen_lib",
-            "version": "2.10.0",
+            "version": "3.0.1",
             "require": {
-                "drupal/chosen": "^2",
+                "drupal/chosen": "^3",
                 "drupal/core": "^8 || ^9",
                 "php": ">=5.6.0"
             },
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.10",
-                    "datestamp": "1597305739",
+                    "version": "3.0.1",
+                    "datestamp": "1603473892",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -9878,17 +9907,17 @@
         },
         {
             "name": "drupal/jsonapi_extras",
-            "version": "3.16.0",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jsonapi_extras.git",
-                "reference": "8.x-3.16"
+                "reference": "8.x-3.17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jsonapi_extras-8.x-3.16.zip",
-                "reference": "8.x-3.16",
-                "shasum": "7f8bfc6ea44a0a1af2370ea8079aa4ffa91a1f32"
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_extras-8.x-3.17.zip",
+                "reference": "8.x-3.17",
+                "shasum": "2795865d847212f5b465445342118c1a6f57999e"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -9901,8 +9930,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.16",
-                    "datestamp": "1599132031",
+                    "version": "8.x-3.17",
+                    "datestamp": "1613848645",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -15947,6 +15976,69 @@
             }
         },
         {
+            "name": "drupal/select2",
+            "version": "1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/select2.git",
+                "reference": "8.x-1.12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/select2-8.x-1.12.zip",
+                "reference": "8.x-1.12",
+                "shasum": "a95c658ee4301c0432e378cee11b414f6963a075"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "require-dev": {
+                "drupal/better_exposed_filters": "^5.0",
+                "drupal/facets": "^1.5",
+                "drupal/form_options_attributes": "^1.2",
+                "drupal/search_api": "^1.17"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.12",
+                    "datestamp": "1603365970",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Fritsch",
+                    "homepage": "https://www.drupal.org/user/1133806",
+                    "email": "christian.fritsch@burda.com"
+                },
+                {
+                    "name": "chr.fritsch",
+                    "homepage": "https://www.drupal.org/user/2103716"
+                },
+                {
+                    "name": "oushen",
+                    "homepage": "https://www.drupal.org/user/1200780"
+                },
+                {
+                    "name": "thunderbot",
+                    "homepage": "https://www.drupal.org/user/3511180"
+                }
+            ],
+            "description": "Integration with the select2 JavaScript library.",
+            "homepage": "https://www.drupal.org/project/select2",
+            "support": {
+                "source": "https://git.drupalcode.org/project/select2"
+            }
+        },
+        {
             "name": "drupal/shield",
             "version": "1.4.0",
             "source": {
@@ -17172,6 +17264,50 @@
             }
         },
         {
+            "name": "drupal/toolbar_menu",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/toolbar_menu.git",
+                "reference": "8.x-2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/toolbar_menu-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "b77edd0543f20d9fbf55ff391ba8ef0f4dd4ea96"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.2",
+                    "datestamp": "1589214935",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "vpeltot",
+                    "homepage": "https://www.drupal.org/user/1361586"
+                }
+            ],
+            "description": "Add your favorite menu (Structure > Menu) in the Drupal Toolbar",
+            "homepage": "https://www.drupal.org/project/toolbar_menu",
+            "support": {
+                "source": "https://git.drupalcode.org/project/toolbar_menu"
+            }
+        },
+        {
             "name": "drupal/toolbar_visibility",
             "version": "1.2.0",
             "source": {
@@ -17522,17 +17658,17 @@
         },
         {
             "name": "drupal/username_enumeration_prevention",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/username_enumeration_prevention.git",
-                "reference": "8.x-1.1"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/username_enumeration_prevention-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "ba627bb6bad1e0f7e7c3055ec974fe41b212b65f"
+                "url": "https://ftp.drupal.org/files/projects/username_enumeration_prevention-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "0fe67462d3c919a7a8f33c41f1cb593ecf7ed7cf"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -17540,8 +17676,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1590986373",
+                    "version": "8.x-1.2",
+                    "datestamp": "1613949220",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -21730,6 +21866,62 @@
                 "source": "https://github.com/mkalkbrenner/php-htmldiff/tree/master"
             },
             "time": "2016-07-25T17:07:32+00:00"
+        },
+        {
+            "name": "mnsami/composer-custom-directory-installer",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mnsami/composer-custom-directory-installer.git",
+                "reference": "85f66323978d0b1cb0e6acc7f69b3e7b912f82d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mnsami/composer-custom-directory-installer/zipball/85f66323978d0b1cb0e6acc7f69b3e7b912f82d9",
+                "reference": "85f66323978d0b1cb0e6acc7f69b3e7b912f82d9",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": ">=5.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": [
+                    "Composer\\CustomDirectoryInstaller\\LibraryPlugin",
+                    "Composer\\CustomDirectoryInstaller\\PearPlugin",
+                    "Composer\\CustomDirectoryInstaller\\PluginPlugin"
+                ],
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Composer\\CustomDirectoryInstaller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mina Nabil Sami",
+                    "email": "mina.nsami@gmail.com"
+                }
+            ],
+            "description": "A composer plugin, to help install packages of different types in custom paths.",
+            "keywords": [
+                "composer",
+                "composer-installer",
+                "composer-plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/mnsami/composer-custom-directory-installer/issues",
+                "source": "https://github.com/mnsami/composer-custom-directory-installer/tree/2.0.0"
+            },
+            "time": "2020-08-18T11:00:11+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -26731,51 +26923,34 @@
         },
         {
             "name": "consolidation/site-alias",
-            "version": "3.0.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/site-alias.git",
-                "reference": "fd40a03f80f8fd4684b10bef8c8c4ec5a9a9bf26"
+                "reference": "9ed3c590be9fcf9fea69c73456c2fd4b27f5204c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/site-alias/zipball/fd40a03f80f8fd4684b10bef8c8c4ec5a9a9bf26",
-                "reference": "fd40a03f80f8fd4684b10bef8c8c4ec5a9a9bf26",
+                "url": "https://api.github.com/repos/consolidation/site-alias/zipball/9ed3c590be9fcf9fea69c73456c2fd4b27f5204c",
+                "reference": "9ed3c590be9fcf9fea69c73456c2fd4b27f5204c",
                 "shasum": ""
             },
             "require": {
                 "consolidation/config": "^1.2.1|^2",
-                "php": ">=5.5.0"
+                "php": ">=5.5.0",
+                "symfony/finder": "~2.3|^3|^4.4|^5"
             },
             "require-dev": {
-                "consolidation/robo": "^1.2.3|^2",
-                "g1a/composer-test-scenarios": "^3",
-                "knplabs/github-api": "^2.7",
-                "php-coveralls/php-coveralls": "^2.2",
-                "php-http/guzzle6-adapter": "^1.1",
-                "phpunit/phpunit": "^6",
-                "squizlabs/php_codesniffer": "^2.8",
-                "symfony/yaml": "~2.3|^3|^4.4|^5"
+                "php-coveralls/php-coveralls": "^2.4.2",
+                "phpunit/phpunit": ">=7",
+                "squizlabs/php_codesniffer": "^3",
+                "symfony/var-dumper": "^4",
+                "yoast/phpunit-polyfills": "^0.2.0"
             },
             "type": "library",
             "extra": {
-                "scenarios": {
-                    "phpunit5": {
-                        "require-dev": {
-                            "phpunit/phpunit": "^5.7.27"
-                        },
-                        "remove": [
-                            "php-coveralls/php-coveralls"
-                        ],
-                        "config": {
-                            "platform": {
-                                "php": "5.6.33"
-                            }
-                        }
-                    }
-                },
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-main": "3.x-dev"
                 }
             },
             "autoload": {
@@ -26800,9 +26975,9 @@
             "description": "Manage alias records for local and remote sites.",
             "support": {
                 "issues": "https://github.com/consolidation/site-alias/issues",
-                "source": "https://github.com/consolidation/site-alias/tree/3.0.1"
+                "source": "https://github.com/consolidation/site-alias/tree/3.1.0"
             },
-            "time": "2020-05-28T00:33:41+00:00"
+            "time": "2021-02-20T20:03:10+00:00"
         },
         {
             "name": "consolidation/site-process",
@@ -27362,21 +27537,21 @@
         },
         {
             "name": "league/container",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/container.git",
-                "reference": "43f35abd03a12977a60ffd7095efd6a7808488c0"
+                "reference": "8438dc47a0674e3378bcce893a0a04d79a2c22b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/container/zipball/43f35abd03a12977a60ffd7095efd6a7808488c0",
-                "reference": "43f35abd03a12977a60ffd7095efd6a7808488c0",
+                "url": "https://api.github.com/repos/thephpleague/container/zipball/8438dc47a0674e3378bcce893a0a04d79a2c22b3",
+                "reference": "8438dc47a0674e3378bcce893a0a04d79a2c22b3",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.2",
-                "php": "^5.4.0 || ^7.0"
+                "php": "^5.4 || ^7.0 || ^8.0"
             },
             "provide": {
                 "container-interop/container-interop-implementation": "^1.2",
@@ -27386,7 +27561,9 @@
                 "orno/di": "~2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "^4.8.36",
+                "scrutinizer/ocular": "^1.3",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
             "extra": {
@@ -27425,9 +27602,15 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/container/issues",
-                "source": "https://github.com/thephpleague/container/tree/2.x"
+                "source": "https://github.com/thephpleague/container/tree/2.5.0"
             },
-            "time": "2017-05-10T09:20:27+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/philipobenito",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-22T09:20:06+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -27659,48 +27842,49 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "davyin/dyniva_admin": 20,
-        "davyin/dyniva_ui": 20,
         "davyin/boost": 20,
-        "davyin/dyniva_elastic_search": 20,
-        "davyin/dyniva_migrate": 20,
+        "davyin/dyniva_admin": 20,
+        "davyin/dyniva_article": 20,
+        "davyin/dyniva_backoffice": 20,
+        "davyin/dyniva_baidu": 20,
+        "davyin/dyniva_calendar": 20,
+        "davyin/dyniva_checklist": 20,
         "davyin/dyniva_connect": 20,
+        "davyin/dyniva_content_moderation": 20,
+        "davyin/dyniva_core": 20,
+        "davyin/dyniva_elastic_search": 20,
         "davyin/dyniva_event": 20,
         "davyin/dyniva_flowchart": 20,
         "davyin/dyniva_media": 20,
-        "davyin/dyniva_ui_patterns": 20,
-        "davyin/dyniva_calendar": 20,
-        "davyin/dyniva_baidu": 20,
-        "davyin/dyniva_checklist": 20,
-        "davyin/dyniva_core": 20,
-        "davyin/dyniva_scheduled_updates": 20,
+        "davyin/dyniva_migrate": 20,
         "davyin/dyniva_permission": 20,
-        "davyin/dyniva_content_moderation": 20,
-        "drupal/calendar": 20,
-        "drupal/footable": 20,
-        "drupal/library": 10,
+        "davyin/dyniva_scheduled_updates": 20,
+        "davyin/dyniva_ui": 20,
+        "davyin/dyniva_ui_patterns": 20,
+        "drupal/admin_audit_trail": 15,
         "drupal/baidu_analytics": 20,
-        "drupal/password_policy": 15,
-        "drupal/r4032login": 10,
-        "drupal/confirm_leave": 10,
-        "drupal/styleguide": 15,
-        "drupal/production_checklist": 15,
-        "drupal/scheduled_updates": 15,
-        "drupal/xmlsitemap": 15,
-        "drupal/elasticsearch_connector": 15,
-        "drupal/views_entity_form_field": 10,
-        "drupal/ckeditor_pasteimage": 15,
-        "drupal/ckeditor_pasteexcel": 15,
+        "drupal/calendar": 20,
         "drupal/ckeditor_autosave": 10,
+        "drupal/ckeditor_pasteexcel": 15,
+        "drupal/ckeditor_pasteimage": 15,
         "drupal/ckeditor_textindent": 15,
-        "drupal/moderation_dashboard": 10,
+        "drupal/confirm_leave": 10,
+        "drupal/elasticsearch_connector": 15,
+        "drupal/footable": 20,
+        "drupal/layout_builder_kit": 10,
         "drupal/layout_builder_st": 15,
         "drupal/layout_builder_styles": 10,
-        "furf/jquery-ui-touch-punch": 20,
         "drupal/layout_builder_title_link": 10,
-        "drupal/admin_audit_trail": 15,
-        "davyin/dyniva_article": 20,
-        "drupal/layout_builder_kit": 10
+        "drupal/library": 10,
+        "drupal/moderation_dashboard": 10,
+        "drupal/password_policy": 15,
+        "drupal/production_checklist": 15,
+        "drupal/r4032login": 10,
+        "drupal/scheduled_updates": 15,
+        "drupal/styleguide": 15,
+        "drupal/views_entity_form_field": 10,
+        "drupal/xmlsitemap": 15,
+        "furf/jquery-ui-touch-punch": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

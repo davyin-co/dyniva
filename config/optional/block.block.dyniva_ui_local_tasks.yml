@@ -1,13 +1,13 @@
-uuid: 2deb690e-5c18-4e01-b1e8-727c489e2086
+uuid: d83bf0cb-b213-48ed-bba0-21ac62fa69b2
 langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
+    - dyniva_ui
 _core:
   default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
-id: bartik_local_tasks
-theme: bartik
+id: dyniva_ui_local_tasks
+theme: dyniva_ui
 region: content
 weight: -40
 provider: null

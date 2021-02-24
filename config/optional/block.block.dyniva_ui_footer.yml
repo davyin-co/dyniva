@@ -1,4 +1,4 @@
-uuid: 4d2411a0-bd73-4917-8b2b-c309d27ff944
+uuid: 34404e31-00f8-4a97-a7a5-e1a7e15f0860
 langcode: en
 status: true
 dependencies:
@@ -7,12 +7,12 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
+    - dyniva_ui
 _core:
   default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
-id: bartik_footer
-theme: bartik
-region: footer_fifth
+id: dyniva_ui_footer
+theme: dyniva_ui
+region: topbar
 weight: 0
 provider: null
 plugin: 'system_menu_block:footer'

@@ -78,8 +78,8 @@ function dyniva_grant_shortcut_access() {
 function dyniva_set_default_theme() {
   Drupal::configFactory()
     ->getEditable('system.theme')
-    ->set('default', 'bartik')
-    ->set('admin', 'claro')
+    ->set('default', 'dyniva_ui')
+    ->set('admin', 'seven')
     ->save(TRUE);
 
   // Use the admin theme for creating content.

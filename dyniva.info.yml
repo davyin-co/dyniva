@@ -41,21 +41,27 @@ install:
   - views_ui
   - admin_toolbar_links_access_filter
   - admin_toolbar_tools
+  - admin_toolbar_search
   - image_widget_crop
   - metatag
   - moderation_dashboard
   - moderation_sidebar
   - lightning_core
-  - lightning_api
   - lightning_layout
   - lightning_media
   - lightning_page
-  - lightning_media_audio
+  - lightning_landing_page
   - lightning_media_bulk_upload
   - lightning_media_document
   - lightning_media_image
   - lightning_media_video
-  - varbase_layout_builder
+  - layout_builder_browser
+  - module_filter
+  - dyniva_backoffice 
+  - dyniva_article
+  - dyniva_event
 themes:
   - bartik
+  - dyniva_ui
+  - dyniva_admin
   - claro

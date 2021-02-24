@@ -1,17 +1,17 @@
-uuid: 404e7875-b654-4607-b477-0a452e1ad260
+uuid: 161bf852-854a-45b0-af8b-1505fdfb4d3c
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - bartik
+    - dyniva_ui
 _core:
   default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
-id: bartik_powered
-theme: bartik
-region: footer_fifth
-weight: 10
+id: dyniva_ui_powered
+theme: dyniva_ui
+region: bottom
+weight: -4
 provider: null
 plugin: system_powered_by_block
 settings:

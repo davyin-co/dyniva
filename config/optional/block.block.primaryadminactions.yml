@@ -1,15 +1,13 @@
-uuid: 8429caee-3191-4478-b97c-ac844c3977a0
+uuid: 775e5ed6-7392-40d0-bacb-a7f077dabe77
 langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
-_core:
-  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
-id: bartik_local_actions
-theme: bartik
-region: content
-weight: -20
+    - dyniva_admin
+id: primaryadminactions
+theme: dyniva_admin
+region: admin_action
+weight: 0
 provider: null
 plugin: local_actions_block
 settings:

@@ -1,15 +1,15 @@
-uuid: 6499b420-71d0-42ab-a61a-d59d55b5ab8e
+uuid: 63dabf25-d06f-4a1e-913c-40b3d09b0f45
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - seven
+    - dyniva_ui
 _core:
-  default_config_hash: PFU7DzXtG6bcSomQ_wXUsjaAsVlys24Ypdu_wobbvV0
-id: seven_breadcrumbs
-theme: seven
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: dyniva_ui_breadcrumbs
+theme: dyniva_ui
 region: breadcrumb
 weight: 0
 provider: null

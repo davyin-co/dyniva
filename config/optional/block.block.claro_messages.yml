@@ -1,15 +1,15 @@
-uuid: f626617b-3e44-4ebb-ac47-f13a60308835
+uuid: 8c3d3bbe-a827-41fd-831c-137764980638
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - bartik
+    - claro
 _core:
-  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
-id: bartik_messages
-theme: bartik
+  default_config_hash: iIy-YIc9d9s1isAtTIKWDBKd6kd2r6LxoYz_-hkLJco
+id: claro_messages
+theme: claro
 region: highlighted
 weight: 0
 provider: null

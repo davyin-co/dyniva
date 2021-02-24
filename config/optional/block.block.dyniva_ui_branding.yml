@@ -1,16 +1,16 @@
-uuid: e8133fef-53ac-47e7-b08d-1922a2cd9cb8
+uuid: 0334062b-2b08-40f7-926a-37cf3a5238ee
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - bartik
+    - dyniva_ui
 _core:
   default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
-id: bartik_branding
-theme: bartik
-region: header
+id: dyniva_ui_branding
+theme: dyniva_ui
+region: topbar
 weight: 0
 provider: null
 plugin: system_branding_block

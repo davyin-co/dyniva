@@ -1,3 +1,4 @@
+uuid: 1846a421-093c-4bf7-907f-0acd5836f3a7
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.field.block_content.text.body
   module:
     - text
+_core:
+  default_config_hash: BNCuXJPvIp5LwqJERsg3FhYYAY6rDoTwx6Sdu-RC0sg
 id: block_content.text.default
 targetEntityType: block_content
 bundle: text
@@ -28,4 +31,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
 hidden: {  }

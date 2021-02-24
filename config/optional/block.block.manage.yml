@@ -1,0 +1,25 @@
+uuid: 4b465c19-1ce2-49ee-a4aa-b8163f58bdf2
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.manage
+  module:
+    - system
+  theme:
+    - dyniva_admin
+id: manage
+theme: dyniva_admin
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:manage'
+settings:
+  id: 'system_menu_block:manage'
+  label: manage
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

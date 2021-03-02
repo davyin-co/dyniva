@@ -11,11 +11,15 @@
     "require": {
         "ext-dom": "*",
         "acquia/lightning": "~4.1.5",
+        "constancecchen/objectfitpolyfill": "2.3.5",
         "cweagans/composer-patches": "^1.7",
         "davyin/boost": "1.x-dev",
         "davyin/dyniva_admin": "1.x-dev",
         "davyin/dyniva_article": "1.x-dev",
         "davyin/dyniva_backoffice": "1.x-dev",
+        "davyin/dyniva_document": "1.x-dev",
+        "davyin/dyniva_job": "1.x-dev",
+        "davyin/dyniva_staff": "1.x-dev",
         "davyin/dyniva_baidu": "1.x-dev",
         "davyin/dyniva_calendar": "1.x-dev",
         "davyin/dyniva_checklist": "1.x-dev",
@@ -63,13 +67,13 @@
         "drupal/elasticsearch_connector": "^7.0@alpha",
         "drupal/facets": "^1.6",
         "drupal/features": "^3.11",
-        "drupal/field_group": "^3.1",
         "drupal/field_name_prefix_remove": "^1.0",
         "drupal/field_permissions": "^1.0",
         "drupal/focal_point": "^1.4",
         "drupal/fontawesome": "^1.2",
         "drupal/fontawesome_iconpicker": "^1.0",
         "drupal/footable": "1.x-dev",
+        "drupal/gin": "^3.0@alpha",
         "drupal/google_analytics": "^3.1",
         "drupal/jsonapi_extras": "^3.0",
         "drupal/key_value": "^1.1",
@@ -81,7 +85,6 @@
         "drupal/layout_builder_styles": "^1.0@beta",
         "drupal/layout_builder_title_link": "^1.0@beta",
         "drupal/length_indicator": "^1.1",
-        "drupal/library": "^1.0@beta",
         "drupal/locker": "1.0",
         "drupal/login_emailusername": "^1.1",
         "drupal/menu_breadcrumb": "^1.13",
@@ -123,11 +126,10 @@
         "drupal/varbase_core": "^8.28",
         "drupal/varbase_editor": "^7.13",
         "drupal/varbase_heroslider_media": "^7.16",
-        "drupal/varbase_layout_builder": "^1.24",
+        "drupal/varbase_layout_builder": "1.x-dev",
         "drupal/varbase_workflow": "^2.0",
         "drupal/vartheme_bs4": "^6.26",
         "drupal/vartheme_claro": "^2.1",
-        "drupal/views_add_button": "^1.6",
         "drupal/views_bulk_operations": "^3.3",
         "drupal/views_entity_form_field": "^1.0@beta",
         "drupal/views_infinite_scroll": "^1.7",
@@ -176,6 +178,18 @@
                     "url": "https://github.com/furf/jquery-ui-touch-punch",
                     "type": "git",
                     "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "constancecchen/objectfitpolyfill",
+                "type": "drupal-library",
+                "version": "2.3.5",
+                "dist": {
+                    "url": "https://github.com/constancecchen/object-fit-polyfill/archive/v2.3.5.zip",
+                    "type": "zip"
                 }
             }
         },

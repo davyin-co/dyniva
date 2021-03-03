@@ -70,7 +70,7 @@
         "drupal/calendar": "1.x-dev",
         "drupal/features": "^3.11",
         "drupal/better_exposed_filters": "^5.0",
-        "drupal/chosen": "^3.0.1",
+        "drupal/chosen": "^3.0",
         "drupal/colorbox": "^1.6",
         "drupal/field_group": "^3.1",
         "drupal/flag": "^4.0",
@@ -217,7 +217,8 @@
             "docroot/libraries/{$name}": [
                 "type:drupal-library",
                 "type:bower-asset",
-                "type:npm-asset"
+                "type:npm-asset",
+                "harvesthq/chosen"
             ],
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"

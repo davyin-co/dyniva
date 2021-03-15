@@ -1,17 +1,17 @@
 diff --git a/multiversion.module b/multiversion.module
-index 8983a56..ce31004 100644
+index 5c46203..083ff25 100644
 --- a/multiversion.module
 +++ b/multiversion.module
-@@ -326,8 +326,10 @@ function multiversion_paragraph_update(EntityInterface $entity) {
+@@ -342,8 +342,10 @@ function multiversion_paragraph_update(EntityInterface $entity) {
        if ($save_parent) {
          $parent->{$parent_field_name}->setValue($updated_values);
          try {
 -          $storage->saveWithoutForcingNewRevision($parent);
 -          $storage->resetCache([$parent->id()]);
-+	   if ($parent->getEntityType()->isRevisionable()) {
-+             $storage->saveWithoutForcingNewRevision($parent);
-+             $storage->resetCache([$parent->id()]);
-+	   }
++          if ($parent->getEntityType()->isRevisionable()) {
++            $storage->saveWithoutForcingNewRevision($parent);
++            $storage->resetCache([$parent->id()]);
++          }
          }
          catch (\Exception $e) {
            $details = t('Failed to save parent entity with UUID: %uuid_parent for paragraph entity with UUID: %uuid_paragraph.',

@@ -23,13 +23,15 @@ index 2429f30..aea1855 100644
    - paragraph
    - paragraphs_library_item
 diff --git a/src/Entity/Storage/ContentEntityStorageTrait.php b/src/Entity/Storage/ContentEntityStorageTrait.php
-index 9278b83..1a8cc0c 100644
+index 7ba19a8..53f9550 100644
 --- a/src/Entity/Storage/ContentEntityStorageTrait.php
 +++ b/src/Entity/Storage/ContentEntityStorageTrait.php
-@@ -428,41 +428,6 @@ trait ContentEntityStorageTrait {
+@@ -432,41 +432,6 @@ trait ContentEntityStorageTrait {
+     return $branch;
+   }
  
-   /**
-    * {@inheritdoc}
+-  /**
+-   * {@inheritdoc}
 -   *
 -   * @todo Revisit this logic with forward revisions in mind.
 -   */
@@ -63,13 +65,11 @@ index 9278b83..1a8cc0c 100644
 -    return parent::doSave($id, $entity);
 -  }
 -
--  /**
--   * {@inheritdoc}
+   /**
+    * {@inheritdoc}
     */
-   public function delete(array $entities) {
-     // Entities are always "deleted" as new revisions when using a Multiversion
 diff --git a/src/MultiversionServiceProvider.php b/src/MultiversionServiceProvider.php
-index 5696ed7..9706761 100644
+index 5696ed7..fe8e4fa 100644
 --- a/src/MultiversionServiceProvider.php
 +++ b/src/MultiversionServiceProvider.php
 @@ -17,20 +17,6 @@ class MultiversionServiceProvider extends ServiceProviderBase {
@@ -93,10 +93,11 @@ index 5696ed7..9706761 100644
      // Override the redirect.repository class with a new class.
      try {
        $definition = $container->getDefinition('redirect.repository');
-@@ -42,14 +28,6 @@ class MultiversionServiceProvider extends ServiceProviderBase {
+@@ -41,15 +27,6 @@ class MultiversionServiceProvider extends ServiceProviderBase {
+     catch (InvalidArgumentException $e) {
        // Do nothing, Redirect module is not installed.
      }
- 
+-
 -    // Override the access_check.node.revision class with a new class.
 -    try {
 -      $definition = $container->getDefinition('access_check.node.revision');

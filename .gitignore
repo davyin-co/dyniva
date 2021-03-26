@@ -1,4 +1,6 @@
 .DS_Store
+composer.lock
+site-config
 bin/
 docroot/
 vendor/

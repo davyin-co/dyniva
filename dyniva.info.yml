@@ -58,7 +58,6 @@ install:
   - layout_builder_browser
   - module_filter
   - dyniva_backoffice 
-  - dyniva_article
   - dyniva_event
 themes:
   - bartik

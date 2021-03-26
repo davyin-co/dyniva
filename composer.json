@@ -282,7 +282,8 @@
             "drupal/multiversion": {
                 "Argument 1 passed to RedirectRepository::__construct() must be an instance of EntityManagerInterface": "https://www.drupal.org/files/issues/2019-12-18/fix-constructor-argument-3101924-2.patch",
                 "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.": "https://www.drupal.org/files/issues/2020-01-10/multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
-                "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch"
+                "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch",
+                "Compatible with the latest changes related to url aliases in Drupal 8.8.x": "https://www.drupal.org/files/issues/2020-02-17/3090566-17.patch"
             },
             "drupal/paragraphs": {
                 "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"

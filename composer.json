@@ -277,7 +277,8 @@
                 "content_moderation_workspace_access() breaks Workspace in Drupal 8.8.": "https://www.drupal.org/files/issues/2020-01-10/multiversion-content-moderation-workspace-access-breaks-multiversion-D8.8-3100692-11.patch",
                 "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch",
                 "Rm default enable entity types": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/rm_default_enabled_entity_types.patch",
-                "Fix multiversion paragraph update used in group": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_multiversion_paragraph_update_used_in_group.patch"
+                "Fix multiversion paragraph update used in group": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_multiversion_paragraph_update_used_in_group.patch",
+                "Fix \\RedirectRepository::__construct() must be an instance of Drupal\\Core\\Entity\\EntityManagerInterface": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix-constructor-argument.patch"
             },
             "drupal/paragraphs": {
                 "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"

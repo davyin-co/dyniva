@@ -1,0 +1,22 @@
+diff --git a/src/Redirect/RedirectRepository.php b/src/Redirect/RedirectRepository.php
+index 831628e..87a15d4 100644
+--- a/src/Redirect/RedirectRepository.php
++++ b/src/Redirect/RedirectRepository.php
+@@ -4,7 +4,7 @@ namespace Drupal\multiversion\Redirect;
+ 
+ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\Database\Connection;
+-use Drupal\Core\Entity\EntityManagerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Language\Language;
+ use Drupal\Core\State\StateInterface;
+ use Drupal\multiversion\Workspace\WorkspaceManagerInterface;
+@@ -29,7 +29,7 @@ class RedirectRepository extends ContribRedirectRepository {
+   /**
+    * {@inheritdoc}
+    */
+-  public function __construct(EntityManagerInterface $manager, Connection $connection, ConfigFactoryInterface $config_factory, WorkspaceManagerInterface $workspace_manager, StateInterface $state) {
++  public function __construct(EntityTypeManagerInterface $manager, Connection $connection, ConfigFactoryInterface $config_factory, WorkspaceManagerInterface $workspace_manager, StateInterface $state) {
+     parent::__construct($manager, $connection, $config_factory);
+     $this->workspaceManager = $workspace_manager;
+     $this->state = $state;

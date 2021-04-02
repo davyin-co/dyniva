@@ -343,7 +343,7 @@
                 "fix excerpt empty bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/search_api_fix_chinese_excerpt.patch"
             },
             "drupal/pathauto": {
-                "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",
+                "multilanguage bug fix": "https://www.drupal.org/files/issues/2021-04-02/pathauto_multilanguage_state_fix-3131794-12.patch",
                 "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
             },
             "drupal/shs": {

@@ -46,6 +46,7 @@ install:
   - metatag
   - moderation_dashboard
   - moderation_sidebar
+  - module_filter
   - lightning_core
   - lightning_layout
   - lightning_media
@@ -55,8 +56,8 @@ install:
   - lightning_media_document
   - lightning_media_image
   - lightning_media_video
-  - layout_builder_browser
-  - module_filter
+  - layout_builder_operation_link
+  - dyniva_article
   - dyniva_backoffice 
   - dyniva_event
 themes:

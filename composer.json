@@ -10,7 +10,7 @@
     },
     "require": {
         "ext-dom": "*",
-        "acquia/lightning": "~4.1.5",
+        "acquia/lightning": "~5.1.2",
         "cweagans/composer-patches": "^1.7",
         "davyin/boost": "1.x-dev",
         "davyin/dyniva_admin": "1.x-dev",
@@ -37,19 +37,11 @@
         "drupal/asset_injector": "^2.2",
         "drupal/atomic_block": "^1.1",
         "drupal/autosave_form": "^1.2",
-        "drupal/baidu_analytics": "1.x-dev",
         "drupal/better_exposed_filters": "^5.0",
         "drupal/calendar": "1.x-dev",
         "drupal/cas_attributes": "^1.0-beta1",
         "drupal/chosen": "^3.0",
-        "drupal/ckeditor_autosave": "^1.0@beta",
-        "drupal/ckeditor_copyformatting": "^1.0",
         "drupal/ckeditor_font": "^1.0",
-        "drupal/ckeditor_lineheight": "^1.1",
-        "drupal/ckeditor_pasteexcel": "^1.0@alpha",
-        "drupal/ckeditor_pasteimage": "^1.0@alpha",
-        "drupal/ckeditor_textindent": "^1.0@alpha",
-        "drupal/ckeditor_uploadimage": "^1.5",
         "drupal/coffee": "^1.0",
         "drupal/colorbox": "^1.6",
         "drupal/colorbutton": "^1.1",
@@ -57,8 +49,7 @@
         "drupal/config_split": "^1.4",
         "drupal/confirm_leave": "^1.0@beta",
         "drupal/content_lock": "^2.1",
-        "drupal/core": "^8.9",
-        "drupal/core-composer-scaffold": "^8.9",
+        "drupal/core-composer-scaffold": "^9.1",
         "drupal/diff": "^1.0",
         "drupal/elasticsearch_connector": "^7.0@alpha",
         "drupal/facets": "^1.6",
@@ -67,12 +58,8 @@
         "drupal/field_name_prefix_remove": "^1.0",
         "drupal/field_permissions": "^1.0",
         "drupal/focal_point": "^1.4",
-        "drupal/fontawesome": "^1.2",
-        "drupal/fontawesome_iconpicker": "^1.0",
-        "drupal/footable": "1.x-dev",
         "drupal/google_analytics": "^3.1",
         "drupal/jsonapi_extras": "^3.0",
-        "drupal/key_value": "^1.1",
         "drupal/layout_builder_blocks": "^1.0",
         "drupal/layout_builder_browser": "^1.2",
         "drupal/layout_builder_component_attributes": "^1.1",
@@ -81,51 +68,32 @@
         "drupal/layout_builder_styles": "^1.0@beta",
         "drupal/layout_builder_title_link": "^1.0@beta",
         "drupal/length_indicator": "^1.1",
-        "drupal/library": "^1.0@beta",
-        "drupal/locker": "1.0",
         "drupal/login_emailusername": "^1.1",
         "drupal/menu_breadcrumb": "^1.13",
-        "drupal/menu_item_extras": "2.7",
         "drupal/menu_multilingual": "^1.0",
         "drupal/menu_trail_by_path": "^1.3",
         "drupal/migrate_plus": "^5.1",
         "drupal/migrate_source_csv": "^3.1",
-        "drupal/migrate_spreadsheet": "^1.1",
         "drupal/migrate_tools": "^5.0",
         "drupal/moderation_dashboard": "^1.0@beta",
         "drupal/moderation_sidebar": "^1.4",
         "drupal/module_filter": "^3.1",
         "drupal/multiselect": "^1.0",
-        "drupal/multiversion": "1.0-beta34",
         "drupal/page_load_progress": "^1.4",
         "drupal/password_encrypt": "^1.0",
         "drupal/password_policy": "^3.0@alpha",
         "drupal/pathauto": "^1.8",
         "drupal/production_checklist": "^1.0@alpha",
-        "drupal/r4032login": "^1.0@beta",
         "drupal/redirect": "^1.3",
         "drupal/redis": "^1.1",
-        "drupal/replication": "^1.0",
         "drupal/reroute_email": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/scheduled_updates": "^1.0@alpha",
         "drupal/search_api_autocomplete": "^1.0",
         "drupal/select2": "^1.12",
         "drupal/shs": "^1.0",
-        "drupal/sitemap": "^1.5",
-        "drupal/sms": "^1.1",
         "drupal/stage_file_proxy": "^1.0",
         "drupal/styleguide": "^1.0@alpha",
         "drupal/swiftmailer": "^2.0",
-        "drupal/toolbar_visibility": "^1.2",
-        "drupal/user_default_page": "^2.0",
-        "drupal/varbase_carousels": "^7.7",
-        "drupal/varbase_core": "^8.28",
-        "drupal/varbase_editor": "^7.13",
-        "drupal/varbase_heroslider_media": "^7.16",
-        "drupal/varbase_layout_builder": "^1.24",
-        "drupal/varbase_workflow": "^2.0",
-        "drupal/vartheme_bs4": "^6.26",
         "drupal/vartheme_claro": "^2.1",
         "drupal/views_add_button": "^1.6",
         "drupal/views_bulk_operations": "^3.3",
@@ -142,8 +110,7 @@
     "require-dev": {
         "drush/drush": "^10.3",
         "drupal/devel": "^4.0",
-        "drupal/devel_php": "^1.0",
-        "drupal/devel_entity_updates": "^1.0"
+        "drupal/devel_php": "^1.0"
     },
     "replace": {
         "drupal/lightning_workflow": "*",
@@ -256,14 +223,7 @@
                 "Fatal error update 8702 createHandlerInstance invoked with NULL class object.": "https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",
                 "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
                 "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
-                "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
-                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch"
-            },
-            "drupal/panels": {
-                "ipe js translation": "https://www.drupal.org/files/issues/ipe_js_translation-2882645-4.patch"
-            },
-            "drupal/panelizer": {
-                "preview node bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/preview_bug_when_node_is_new.patch"
+                "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch"
             },
             "drupal/multiversion": {
                 "Argument 1 passed to RedirectRepository::__construct() must be an instance of EntityManagerInterface": "https://www.drupal.org/files/issues/2019-12-18/fix-constructor-argument-3101924-2.patch",
@@ -273,21 +233,9 @@
             "drupal/paragraphs": {
                 "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"
             },
-            "drupal/replication": {
-                "content entity normalizer bug fix": "https://www.drupal.org/files/issues/2890261-6.patch",
-                "content entity normalizer entity revision id fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_content_entity_revision_id_fix.patch",
-                "content crop normalizer error fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_crop_normalizer_error_fix.patch",
-                "keep file uri": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_keep_file_uri.patch",
-                "add drupal datetime normalizer": "https://www.drupal.org/files/issues/2019-03-04/added-datetime-normalizer-2936153-6.patch",
-                "Field _deleted is unknown": "https://www.drupal.org/files/issues/2020-02-14/3113016-2.patch",
-                "large file memory overflow": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/replication_large_file_memory_overflow_bug_fix.patch"
-            },
             "drupal/cas": {
                 "Logout error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_logout_error-2948185-2.patch",
                 "Redirect loop with distnation": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_distination_redirect_error.patch"
-            },
-            "drupal/cas_attributes": {
-                "Mapping add telephone type": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_attributes_mapping_add_telephone_type.patch"
             },
             "drupal/footable": {
                 "empty display fix ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/table_empty_colspan_remove.patch"

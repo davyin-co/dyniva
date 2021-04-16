@@ -493,10 +493,16 @@ function dyniva_alter_frontpage_view() {
  * Implements hook_modules_installed().
  */
 function dyniva_modules_installed(array $modules) {
+  //js & css optimize disable by default
   Drupal::configFactory()
     ->getEditable('system.performance')
-    ->set('js.preprocess:', false)
-    ->set('css.preprocess:', false)
+    ->set('js.preprocess', false)
+    ->set('css.preprocess', false)
+    ->save(TRUE);
+  //Disable details cron logging
+  Drupal::configFactory()
+    ->getEditable('system.cron')
+    ->set('logging', false)
     ->save(TRUE);
   if (\Drupal::isConfigSyncing()) {
     return;

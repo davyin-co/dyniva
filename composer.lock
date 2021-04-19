@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8455d514405a5a5e783aff577760af8d",
+    "content-hash": "6a38bd7a6371da81f8e181e583146310",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -216,7 +216,7 @@
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -947,12 +947,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_admin.git",
-                "reference": "7f9f5ba9b9e25ca683cd35f768ae87a7b3b15428"
+                "reference": "55e0ce7f6c77edec22ca1ce07d9d9ad03b1baf73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_admin/zipball/7f9f5ba9b9e25ca683cd35f768ae87a7b3b15428",
-                "reference": "7f9f5ba9b9e25ca683cd35f768ae87a7b3b15428",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_admin/zipball/55e0ce7f6c77edec22ca1ce07d9d9ad03b1baf73",
+                "reference": "55e0ce7f6c77edec22ca1ce07d9d9ad03b1baf73",
                 "shasum": ""
             },
             "require": {
@@ -976,7 +976,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_admin/issues",
                 "source": "https://github.com/davyin-co/dyniva_admin/tree/1.x"
             },
-            "time": "2020-12-24T08:22:02+00:00"
+            "time": "2021-04-19T02:49:04+00:00"
         },
         {
             "name": "davyin/dyniva_article",
@@ -984,18 +984,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_article.git",
-                "reference": "8758778f1a0553418e5add7cc7478533d1d24951"
+                "reference": "1449fb029445adb849aac7420ae43bf589eede43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_article/zipball/8758778f1a0553418e5add7cc7478533d1d24951",
-                "reference": "8758778f1a0553418e5add7cc7478533d1d24951",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_article/zipball/1449fb029445adb849aac7420ae43bf589eede43",
+                "reference": "1449fb029445adb849aac7420ae43bf589eede43",
                 "shasum": ""
             },
             "require": {
-                "drupal/core": "^8.6 || ^9",
-                "drupal/field_group": "^3.1",
-                "drupal/views_add_button": "^1.6"
+                "drupal/core": "^8.6 || ^9"
             },
             "default-branch": true,
             "type": "drupal-custom-module",
@@ -1003,13 +1001,13 @@
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "description": "Content type article for drupal 8 +.",
+            "description": "dyniva_article for drupal 8 +.",
             "homepage": "https://github.com/davyin-co/dyniva_article",
             "support": {
                 "issues": "https://github.com/davyin-co/dyniva_article/issues",
                 "source": "https://github.com/davyin-co/dyniva_article/tree/1.x"
             },
-            "time": "2021-04-12T03:52:39+00:00"
+            "time": "2021-04-19T01:17:54+00:00"
         },
         {
             "name": "davyin/dyniva_backoffice",
@@ -1017,18 +1015,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_backoffice.git",
-                "reference": "ec55791eb0f0fee28097857dfbdca3a3d46a3f52"
+                "reference": "3e06a7866e2c8cb0ed1f6a2047140864ee9fd419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_backoffice/zipball/ec55791eb0f0fee28097857dfbdca3a3d46a3f52",
-                "reference": "ec55791eb0f0fee28097857dfbdca3a3d46a3f52",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_backoffice/zipball/3e06a7866e2c8cb0ed1f6a2047140864ee9fd419",
+                "reference": "3e06a7866e2c8cb0ed1f6a2047140864ee9fd419",
                 "shasum": ""
             },
             "require": {
                 "davyin/dyniva_admin": "1.x-dev",
-                "drupal/core": "^8.8 || ^9",
-                "drupal/switch_page_theme": "^1.0",
+                "drupal/core": "^8.6 || ^9",
+                "drupal/theme_switcher": "1.x-dev",
                 "drupal/toolbar_menu": "^2.2"
             },
             "default-branch": true,
@@ -1037,13 +1035,13 @@
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "description": "Dyniva Backoffice for drupal 8 +.",
+            "description": "dyniva_backoffice for drupal 8 +.",
             "homepage": "https://github.com/davyin-co/dyniva_backoffice",
             "support": {
                 "issues": "https://github.com/davyin-co/dyniva_backoffice/issues",
                 "source": "https://github.com/davyin-co/dyniva_backoffice/tree/1.x"
             },
-            "time": "2021-02-22T09:05:48+00:00"
+            "time": "2021-04-19T01:59:41+00:00"
         },
         {
             "name": "davyin/dyniva_baidu",
@@ -1051,12 +1049,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_baidu.git",
-                "reference": "55c2b350c1f378a8d355d8fe03ff1b80d5957278"
+                "reference": "58d9b5959f99b1e6385fe8ea3c7ca64b54cb2ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_baidu/zipball/55c2b350c1f378a8d355d8fe03ff1b80d5957278",
-                "reference": "55c2b350c1f378a8d355d8fe03ff1b80d5957278",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_baidu/zipball/58d9b5959f99b1e6385fe8ea3c7ca64b54cb2ee2",
+                "reference": "58d9b5959f99b1e6385fe8ea3c7ca64b54cb2ee2",
                 "shasum": ""
             },
             "require": {
@@ -1074,7 +1072,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_baidu/issues",
                 "source": "https://github.com/davyin-co/dyniva_baidu/tree/1.x"
             },
-            "time": "2020-12-24T08:30:54+00:00"
+            "time": "2021-04-19T01:18:45+00:00"
         },
         {
             "name": "davyin/dyniva_calendar",
@@ -1082,12 +1080,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_calendar.git",
-                "reference": "2bb52f5c86e3c0ad56e381392b69fb731e7d514a"
+                "reference": "410549e087005f779f1a03d750ef52e715ad3dd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_calendar/zipball/2bb52f5c86e3c0ad56e381392b69fb731e7d514a",
-                "reference": "2bb52f5c86e3c0ad56e381392b69fb731e7d514a",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_calendar/zipball/410549e087005f779f1a03d750ef52e715ad3dd6",
+                "reference": "410549e087005f779f1a03d750ef52e715ad3dd6",
                 "shasum": ""
             },
             "require": {
@@ -1105,7 +1103,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_calendar/issues",
                 "source": "https://github.com/davyin-co/dyniva_calendar/tree/1.x"
             },
-            "time": "2020-12-24T08:30:36+00:00"
+            "time": "2021-04-19T01:18:22+00:00"
         },
         {
             "name": "davyin/dyniva_checklist",
@@ -1113,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_checklist.git",
-                "reference": "6a44fed65e324ca7ef8d437e5d99bcf05d54794a"
+                "reference": "2b7b9ed3863570587677e5c9e08c2867ca5ee8ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_checklist/zipball/6a44fed65e324ca7ef8d437e5d99bcf05d54794a",
-                "reference": "6a44fed65e324ca7ef8d437e5d99bcf05d54794a",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_checklist/zipball/2b7b9ed3863570587677e5c9e08c2867ca5ee8ac",
+                "reference": "2b7b9ed3863570587677e5c9e08c2867ca5ee8ac",
                 "shasum": ""
             },
             "require": {
@@ -1136,7 +1134,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_checklist/issues",
                 "source": "https://github.com/davyin-co/dyniva_checklist/tree/1.x"
             },
-            "time": "2020-12-24T08:31:01+00:00"
+            "time": "2021-04-19T01:18:50+00:00"
         },
         {
             "name": "davyin/dyniva_connect",
@@ -1144,12 +1142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_connect.git",
-                "reference": "cda9c9f3b18f1ded279aeae302ed6f138f47edf2"
+                "reference": "89ac05dc938a16486ec3fd5b4344c7870939065e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_connect/zipball/cda9c9f3b18f1ded279aeae302ed6f138f47edf2",
-                "reference": "cda9c9f3b18f1ded279aeae302ed6f138f47edf2",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_connect/zipball/89ac05dc938a16486ec3fd5b4344c7870939065e",
+                "reference": "89ac05dc938a16486ec3fd5b4344c7870939065e",
                 "shasum": ""
             },
             "require": {
@@ -1167,7 +1165,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_connect/issues",
                 "source": "https://github.com/davyin-co/dyniva_connect/tree/1.x"
             },
-            "time": "2020-12-24T08:29:59+00:00"
+            "time": "2021-04-19T01:17:49+00:00"
         },
         {
             "name": "davyin/dyniva_content_moderation",
@@ -1175,12 +1173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_content_moderation.git",
-                "reference": "f5d853f36f7feaa7e76cc7384b5d95548d984167"
+                "reference": "3fd2e376054bcc9ce3869163193cc2f75b7cfbef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_content_moderation/zipball/f5d853f36f7feaa7e76cc7384b5d95548d984167",
-                "reference": "f5d853f36f7feaa7e76cc7384b5d95548d984167",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_content_moderation/zipball/3fd2e376054bcc9ce3869163193cc2f75b7cfbef",
+                "reference": "3fd2e376054bcc9ce3869163193cc2f75b7cfbef",
                 "shasum": ""
             },
             "require": {
@@ -1198,7 +1196,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_content_moderation/issues",
                 "source": "https://github.com/davyin-co/dyniva_content_moderation/tree/1.x"
             },
-            "time": "2021-03-15T07:59:57+00:00"
+            "time": "2021-04-19T01:24:48+00:00"
         },
         {
             "name": "davyin/dyniva_core",
@@ -1206,12 +1204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_core.git",
-                "reference": "2d08dc9ea9de36e77c36bb176bd4c1968a961aeb"
+                "reference": "1100e0b3cf5d01a24ce0d6968b1f18454a01012b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_core/zipball/2d08dc9ea9de36e77c36bb176bd4c1968a961aeb",
-                "reference": "2d08dc9ea9de36e77c36bb176bd4c1968a961aeb",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_core/zipball/1100e0b3cf5d01a24ce0d6968b1f18454a01012b",
+                "reference": "1100e0b3cf5d01a24ce0d6968b1f18454a01012b",
                 "shasum": ""
             },
             "require": {
@@ -1229,7 +1227,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_core/issues",
                 "source": "https://github.com/davyin-co/dyniva_core/tree/1.x"
             },
-            "time": "2021-01-19T16:55:21+00:00"
+            "time": "2021-04-19T01:18:56+00:00"
         },
         {
             "name": "davyin/dyniva_elastic_search",
@@ -1268,12 +1266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_event.git",
-                "reference": "bbfdd27d63a1dbc467e604f8c56980ecd0fd315d"
+                "reference": "01c75bb2c84e2f99588185182fdf8a91d185121c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_event/zipball/bbfdd27d63a1dbc467e604f8c56980ecd0fd315d",
-                "reference": "bbfdd27d63a1dbc467e604f8c56980ecd0fd315d",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_event/zipball/01c75bb2c84e2f99588185182fdf8a91d185121c",
+                "reference": "01c75bb2c84e2f99588185182fdf8a91d185121c",
                 "shasum": ""
             },
             "require": {
@@ -1291,7 +1289,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_event/issues",
                 "source": "https://github.com/davyin-co/dyniva_event/tree/1.x"
             },
-            "time": "2020-12-31T02:32:25+00:00"
+            "time": "2021-04-19T01:18:00+00:00"
         },
         {
             "name": "davyin/dyniva_flowchart",
@@ -1299,12 +1297,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_flowchart.git",
-                "reference": "f7f325e31dd0009d7d49bd29e114495e1e82502a"
+                "reference": "a1aec8ac5e7aa1cc134edb44877dd956547cfff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_flowchart/zipball/f7f325e31dd0009d7d49bd29e114495e1e82502a",
-                "reference": "f7f325e31dd0009d7d49bd29e114495e1e82502a",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_flowchart/zipball/a1aec8ac5e7aa1cc134edb44877dd956547cfff2",
+                "reference": "a1aec8ac5e7aa1cc134edb44877dd956547cfff2",
                 "shasum": ""
             },
             "require": {
@@ -1322,7 +1320,72 @@
                 "issues": "https://github.com/davyin-co/dyniva_flowchart/issues",
                 "source": "https://github.com/davyin-co/dyniva_flowchart/tree/1.x"
             },
-            "time": "2020-12-24T08:30:16+00:00"
+            "time": "2021-04-19T01:18:06+00:00"
+        },
+        {
+            "name": "davyin/dyniva_layout_builder",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davyin-co/dyniva_layout_builder.git",
+                "reference": "a826cc72d132e61399e0955eedfe3fe40971740f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_layout_builder/zipball/a826cc72d132e61399e0955eedfe3fe40971740f",
+                "reference": "a826cc72d132e61399e0955eedfe3fe40971740f",
+                "shasum": ""
+            },
+            "require": {
+                "cweagans/composer-patches": "^1.7",
+                "drupal/bootstrap_barrio": "^5.1",
+                "drupal/bootstrap_layout_builder": "^2.0",
+                "drupal/layout_builder_blocks": "^1.0",
+                "drupal/layout_builder_browser": "^1.2",
+                "drupal/layout_builder_component_attributes": "^1.1",
+                "drupal/layout_builder_kit": "^1.0@beta",
+                "drupal/layout_builder_modal": "^1.1",
+                "drupal/layout_builder_operation_link": "^1.0",
+                "drupal/layout_builder_st": "^1.0@alpha",
+                "drupal/layout_builder_styles": "^1.0@beta",
+                "drupal/layout_builder_title_link": "^1.0@beta",
+                "drupal/lb_ux": "^1.0@beta",
+                "drupal/lightning_layout": "^2.9"
+            },
+            "default-branch": true,
+            "type": "drupal-custom-module",
+            "extra": {
+                "enable-patching": "true",
+                "patchLevel": {
+                    "drupal/core": "-p2"
+                },
+                "patches": {
+                    "drupal/core": {
+                        "Fix multilingual site's layout edit context issue with TypeError: Argument 1 passed to UrlHelper::buildQuery() must be of the type array, null given": "https://www.drupal.org/files/issues/2019-12-19/3101231-19.patch",
+                        "Add getter for layout object in Layout Builder's ConfigureSectionForm": "https://www.drupal.org/files/issues/2019-10-31/expose-properties-config-section-form-with-tests-3044117-13.patch"
+                    },
+                    "drupal/lb_ux": {
+                        "Fix RuntimeException: Callable LayoutBuilderAccessCheck::access requires a value for the $section_storage argument": "https://www.drupal.org/files/issues/2020-10-11/3150012-12_0.patch"
+                    },
+                    "drupal/lightning_layout": {
+                        "Missing block is causing a fatal error when editing layout": "https://www.drupal.org/files/issues/2019-12-19/lightning_layout__fix_broken_inline_block_fatal_error-3102025-3.patch"
+                    },
+                    "drupal/layout_builder_styles": {
+                        "Incompatible with Layout Builder UX module": "https://www.drupal.org/files/issues/2021-04-14/3180131-5.patch"
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Dyniva Layout builder for drupal 8 +.",
+            "homepage": "https://github.com/davyin-co/dyniva_layout_builder",
+            "support": {
+                "issues": "https://github.com/davyin-co/dyniva_layout_builder/issues",
+                "source": "https://github.com/davyin-co/dyniva_layout_builder/tree/1.x"
+            },
+            "time": "2021-04-19T03:14:04+00:00"
         },
         {
             "name": "davyin/dyniva_media",
@@ -1361,12 +1424,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_migrate.git",
-                "reference": "d7f7cc86ffc6b321fc582c56eb4b42b84a9e75fe"
+                "reference": "2ace695afdbe3e1fa2fb4f0bb32a5335579f8135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_migrate/zipball/d7f7cc86ffc6b321fc582c56eb4b42b84a9e75fe",
-                "reference": "d7f7cc86ffc6b321fc582c56eb4b42b84a9e75fe",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_migrate/zipball/2ace695afdbe3e1fa2fb4f0bb32a5335579f8135",
+                "reference": "2ace695afdbe3e1fa2fb4f0bb32a5335579f8135",
                 "shasum": ""
             },
             "require": {
@@ -1384,7 +1447,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_migrate/issues",
                 "source": "https://github.com/davyin-co/dyniva_migrate/tree/1.x"
             },
-            "time": "2020-12-24T08:29:43+00:00"
+            "time": "2021-04-19T01:17:17+00:00"
         },
         {
             "name": "davyin/dyniva_permission",
@@ -1392,12 +1455,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_permission.git",
-                "reference": "ce223e7e81a988edc8e56c6407466423b76818a1"
+                "reference": "3a3fa3f5a7fff1d3436defa81ff20a279cd91199"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_permission/zipball/ce223e7e81a988edc8e56c6407466423b76818a1",
-                "reference": "ce223e7e81a988edc8e56c6407466423b76818a1",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_permission/zipball/3a3fa3f5a7fff1d3436defa81ff20a279cd91199",
+                "reference": "3a3fa3f5a7fff1d3436defa81ff20a279cd91199",
                 "shasum": ""
             },
             "require": {
@@ -1415,7 +1478,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_permission/issues",
                 "source": "https://github.com/davyin-co/dyniva_permission/tree/1.x"
             },
-            "time": "2020-12-24T08:31:59+00:00"
+            "time": "2021-04-19T01:19:49+00:00"
         },
         {
             "name": "davyin/dyniva_scheduled_updates",
@@ -1454,12 +1517,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_ui.git",
-                "reference": "1cb4586470d195086d42d5decd3929ce47c90cd2"
+                "reference": "b6918a7bc8d5f8adf9433bc2eef6f6b1e7970875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_ui/zipball/1cb4586470d195086d42d5decd3929ce47c90cd2",
-                "reference": "1cb4586470d195086d42d5decd3929ce47c90cd2",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_ui/zipball/b6918a7bc8d5f8adf9433bc2eef6f6b1e7970875",
+                "reference": "b6918a7bc8d5f8adf9433bc2eef6f6b1e7970875",
                 "shasum": ""
             },
             "require": {
@@ -1482,7 +1545,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_ui/issues",
                 "source": "https://github.com/davyin-co/dyniva_ui/tree/2.x"
             },
-            "time": "2021-04-12T06:20:16+00:00"
+            "time": "2021-04-19T02:49:40+00:00"
         },
         {
             "name": "davyin/dyniva_ui_patterns",
@@ -1490,12 +1553,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_ui_patterns.git",
-                "reference": "b63117ae476a79bc97418e36bdc872e987e51659"
+                "reference": "e32bfb0a3a3fdf5f05e6a30894af837c6761d867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_ui_patterns/zipball/b63117ae476a79bc97418e36bdc872e987e51659",
-                "reference": "b63117ae476a79bc97418e36bdc872e987e51659",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_ui_patterns/zipball/e32bfb0a3a3fdf5f05e6a30894af837c6761d867",
+                "reference": "e32bfb0a3a3fdf5f05e6a30894af837c6761d867",
                 "shasum": ""
             },
             "require": {
@@ -1513,7 +1576,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_ui_patterns/issues",
                 "source": "https://github.com/davyin-co/dyniva_ui_patterns/tree/1.x"
             },
-            "time": "2020-12-24T08:30:29+00:00"
+            "time": "2021-04-19T01:18:16+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -2449,17 +2512,17 @@
         },
         {
             "name": "drupal/blazy",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/blazy.git",
-                "reference": "8.x-2.1"
+                "reference": "8.x-2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/blazy-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "bbdc3d9b5a49dca8e59373fd80739db84f8fa64a"
+                "url": "https://ftp.drupal.org/files/projects/blazy-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "ed2aed0ba8d51ef7ad4ad41c30c0185938d14d53"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -2467,8 +2530,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1589120601",
+                    "version": "8.x-2.2",
+                    "datestamp": "1618669374",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2509,6 +2572,111 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/blazy",
                 "issues": "https://drupal.org/project/issues/blazy"
+            }
+        },
+        {
+            "name": "drupal/bootstrap_barrio",
+            "version": "5.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bootstrap_barrio.git",
+                "reference": "5.1.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bootstrap_barrio-5.1.4.zip",
+                "reference": "5.1.4",
+                "shasum": "957a76d18eecfb1062088f22d3ba9ae9b79af240"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "twbs/bootstrap": "^4.4.1"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "5.1.4",
+                    "datestamp": "1603660710",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alberto Siles",
+                    "homepage": "https://www.drupal.org/user/2824325",
+                    "email": "alberto@siles.pe"
+                },
+                {
+                    "name": "hatuhay",
+                    "homepage": "https://www.drupal.org/user/827704"
+                }
+            ],
+            "description": "Bootstrap 4 base theme.",
+            "homepage": "https://www.drupal.org/project/bootstrap_barrio",
+            "support": {
+                "source": "https://git.drupalcode.org/project/bootstrap_barrio"
+            }
+        },
+        {
+            "name": "drupal/bootstrap_layout_builder",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bootstrap_layout_builder.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bootstrap_layout_builder-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "b7e5f12135faeac527b71258680d952900c52566"
+            },
+            "require": {
+                "drupal/bootstrap_styles": "^1.0",
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1610601327",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "AaronChristian",
+                    "homepage": "https://www.drupal.org/user/445890"
+                },
+                {
+                    "name": "mahmoud-zayed",
+                    "homepage": "https://www.drupal.org/user/2947001"
+                }
+            ],
+            "description": "Add Bootstrap Grid support to Layout Builder module.",
+            "homepage": "https://www.drupal.org/project/bootstrap_layout_builder",
+            "keywords": [
+                "Bootstrap",
+                "Drupal",
+                "Grid",
+                "Layout Builder"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/bootstrap_layout_builder"
             }
         },
         {
@@ -2573,7 +2741,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/calendar.git",
-                "reference": "d22601e4a5962ed8e51adb96f88742e770851830"
+                "reference": "f91dbcdcd735777203657ce320be040083e3d3e6"
             },
             "require": {
                 "drupal/calendar_datetime": "*",
@@ -2586,8 +2754,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha3+9-dev",
-                    "datestamp": "1612431041",
+                    "version": "8.x-1.0-alpha3+12-dev",
+                    "datestamp": "1618649981",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -2616,6 +2784,10 @@
                 {
                     "name": "joelpittet",
                     "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "paulocs",
+                    "homepage": "https://www.drupal.org/user/3640109"
                 },
                 {
                     "name": "solide-echt",
@@ -2667,6 +2839,10 @@
                 {
                     "name": "joelpittet",
                     "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "paulocs",
+                    "homepage": "https://www.drupal.org/user/3640109"
                 },
                 {
                     "name": "solide-echt",
@@ -3184,7 +3360,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.7",
-                    "datestamp": "1614960641",
+                    "datestamp": "1615218004",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3214,6 +3390,10 @@
                 {
                     "name": "Sam152",
                     "homepage": "https://www.drupal.org/user/1485048"
+                },
+                {
+                    "name": "frjo",
+                    "homepage": "https://www.drupal.org/user/5546"
                 },
                 {
                     "name": "jdwfly",
@@ -4174,35 +4354,38 @@
         },
         {
             "name": "drupal/ctools",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ctools.git",
-                "reference": "8.x-3.4"
+                "reference": "8.x-3.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.4.zip",
-                "reference": "8.x-3.4",
-                "shasum": "016ca5abb7ac4ca720352a72e8989f3ef0e20539"
+                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.5.zip",
+                "reference": "8.x-3.5",
+                "shasum": "0113cd1e787ff3bde088c836c2d79d14136b0013"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9"
+                "drupal/core": "^8.8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.4",
-                    "datestamp": "1585763383",
+                    "version": "8.x-3.5",
+                    "datestamp": "1618592931",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "branch-alias": {
+                    "dev-8.x-3.x": "3.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -4264,16 +4447,16 @@
         },
         {
             "name": "drupal/ctools_block",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "require": {
-                "drupal/core": "^8 || ^9",
+                "drupal/core": "^8.8 || ^9",
                 "drupal/ctools": "*"
             },
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.4",
-                    "datestamp": "1585763383",
+                    "version": "8.x-3.5",
+                    "datestamp": "1618592931",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6305,6 +6488,124 @@
             }
         },
         {
+            "name": "drupal/layout_builder_modal",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_modal.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_modal-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "5063c2d5e33265c92bfeed34df6682d74c973c51"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1588175915",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "John Svensson",
+                    "homepage": "https://www.drupal.org/u/johndevman",
+                    "email": "john@kodamera.se",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Emil Johnsson",
+                    "homepage": "https://www.drupal.org/u/johnzzon",
+                    "email": "emil@kodamera.se",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Henrik Larsson",
+                    "homepage": "https://www.drupal.org/u/henriklarsson",
+                    "email": "henrik@kodamera.se",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "twfahey",
+                    "homepage": "https://www.drupal.org/user/3403722"
+                }
+            ],
+            "description": "Open blocks in a modal in the Layout Builder UI.",
+            "homepage": "https://www.drupal.org/project/layout_builder_modal",
+            "support": {
+                "source": "http://cgit.drupalcode.org/layout_builder_modal",
+                "issues": "https://www.drupal.org/project/issues/layout_builder_modal"
+            }
+        },
+        {
+            "name": "drupal/layout_builder_operation_link",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_operation_link.git",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_operation_link-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "9ac58f3f1060c89d13909f783f154af4dd896ca0"
+            },
+            "require": {
+                "drupal/core": "^8.8.4 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0",
+                    "datestamp": "1594055282",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Sembrat (Webbeh)",
+                    "homepage": "https://www.drupal.org/u/webbeh",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Chris Burge (chris-burge)",
+                    "homepage": "https://www.drupal.org/u/chris-burge",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Adds a Layout operation link for Layout Builder-enabled content",
+            "homepage": "https://www.drupal.org/project/layout_builder_operation_link",
+            "keywords": [
+                "Drupal",
+                "Layout Builder"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_operation_link",
+                "issues": "https://drupal.org/project/issues/layout_builder_operation_link"
+            }
+        },
+        {
             "name": "drupal/layout_builder_restrictions",
             "version": "2.8.0",
             "source": {
@@ -6591,6 +6892,59 @@
             "homepage": "https://www.drupal.org/project/layout_library",
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_library"
+            }
+        },
+        {
+            "name": "drupal/lb_ux",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/lb_ux.git",
+                "reference": "6f2fb8e11b2fa4d526f6ea883844bb7fbeeb6377"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta2+1-dev",
+                    "datestamp": "1601321096",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "DyanneNova",
+                    "homepage": "https://www.drupal.org/user/277051"
+                },
+                {
+                    "name": "starshaped",
+                    "homepage": "https://www.drupal.org/user/522252"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
+                },
+                {
+                    "name": "zrpnr",
+                    "homepage": "https://www.drupal.org/user/1448368"
+                }
+            ],
+            "description": "Alters the Layout Builder UI for better usability",
+            "homepage": "https://www.drupal.org/project/lb_ux",
+            "support": {
+                "source": "https://git.drupalcode.org/project/lb_ux"
             }
         },
         {
@@ -7963,10 +8317,6 @@
                     "name": "Lucas Hedding",
                     "homepage": "https://www.drupal.org/u/heddn",
                     "role": "Maintainer"
-                },
-                {
-                    "name": "heddn",
-                    "homepage": "https://www.drupal.org/user/1463982"
                 }
             ],
             "description": "CSV source migration.",
@@ -10092,17 +10442,17 @@
         },
         {
             "name": "drupal/slick",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/slick.git",
-                "reference": "8.x-2.2"
+                "reference": "8.x-2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/slick-8.x-2.2.zip",
-                "reference": "8.x-2.2",
-                "shasum": "789395b52697b6cee27648e478c4e579eee9540b"
+                "url": "https://ftp.drupal.org/files/projects/slick-8.x-2.3.zip",
+                "reference": "8.x-2.3",
+                "shasum": "5974f94c8b2d3e791e8ff9092b1bb566a27ad8f6"
             },
             "require": {
                 "drupal/blazy": "~2.0",
@@ -10111,8 +10461,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.2",
-                    "datestamp": "1588861104",
+                    "version": "8.x-2.3",
+                    "datestamp": "1618668938",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -10436,49 +10786,14 @@
             }
         },
         {
-            "name": "drupal/switch_page_theme",
-            "version": "dev-1.x",
+            "name": "drupal/theme_switcher",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/switch_page_theme.git",
-                "reference": "ac38137f43cc72a8efba04bc127b87fbf2c28e06"
+                "url": "https://git.drupalcode.org/project/theme_switcher.git",
+                "reference": "8.x-1.x"
             },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0+5-dev",
-                    "datestamp": "1614281183",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "ashish-deynap",
-                    "homepage": "https://www.drupal.org/user/3417767"
-                },
-                {
-                    "name": "deepali_agarwal",
-                    "homepage": "https://www.drupal.org/user/2438242"
-                }
-            ],
-            "description": "Switches active theme on specific pages.",
-            "homepage": "https://www.drupal.org/project/switch_page_theme",
-            "support": {
-                "source": "https://git.drupalcode.org/project/switch_page_theme"
-            }
+            "type": "drupal-module"
         },
         {
             "name": "drupal/token",
@@ -10591,6 +10906,81 @@
             "homepage": "https://www.drupal.org/project/toolbar_menu",
             "support": {
                 "source": "https://git.drupalcode.org/project/toolbar_menu"
+            }
+        },
+        {
+            "name": "drupal/total_control",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/total_control.git",
+                "reference": "8.x-2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/total_control-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "67e4bcf348fbc4647402de7903b48fc6414beece"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/ctools": "~3.0",
+                "drupal/page_manager": "~4.0",
+                "drupal/panels": "~4.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0",
+                    "datestamp": "1583399169",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "branch-alias": {
+                    "dev-8.x-2.x": "8.2.x-dev"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jen Lampton",
+                    "homepage": "https://www.drupal.org/u/jenlampton",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Mohammed J. Razem",
+                    "homepage": "https://www.drupal.org/u/mohammed-j-razem",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Abdulla Abu-Zakham",
+                    "homepage": "https://www.drupal.org/u/abu-zakham",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Rajab Natshah",
+                    "homepage": "https://www.drupal.org/u/rajabnatshah",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "populist",
+                    "homepage": "https://www.drupal.org/user/58600"
+                },
+                {
+                    "name": "squiggy",
+                    "homepage": "https://www.drupal.org/user/44299"
+                }
+            ],
+            "description": "Total Control Administration Dashboard",
+            "homepage": "https://www.drupal.org/project/total_control",
+            "support": {
+                "source": "https://git.drupalcode.org/project/total_control/tree/8.x-2.x",
+                "issues": "https://www.drupal.org/project/issues/total_control"
             }
         },
         {
@@ -10776,7 +11166,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-3.12",
-                    "datestamp": "1616148482",
+                    "datestamp": "1616148518",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -12352,16 +12742,16 @@
         },
         {
             "name": "league/csv",
-            "version": "9.7.0",
+            "version": "9.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "4cacd9c72c4aa8bdbef43315b2ca25c46a0f833f"
+                "reference": "0ec57e8264ec92565974ead0d1724cf1026e10c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/4cacd9c72c4aa8bdbef43315b2ca25c46a0f833f",
-                "reference": "4cacd9c72c4aa8bdbef43315b2ca25c46a0f833f",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/0ec57e8264ec92565974ead0d1724cf1026e10c1",
+                "reference": "0ec57e8264ec92565974ead0d1724cf1026e10c1",
                 "shasum": ""
             },
             "require": {
@@ -12432,7 +12822,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-26T22:08:10+00:00"
+            "time": "2021-04-17T16:32:08+00:00"
         },
         {
             "name": "league/event",
@@ -14073,16 +14463,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v3.46.0",
+            "version": "v3.47.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "cc408812fc927e265da158bf68239530740ab4cc"
+                "reference": "0f8548c0d443fa37f10a45948d5f2babf685c657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/cc408812fc927e265da158bf68239530740ab4cc",
-                "reference": "cc408812fc927e265da158bf68239530740ab4cc",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/0f8548c0d443fa37f10a45948d5f2babf685c657",
+                "reference": "0f8548c0d443fa37f10a45948d5f2babf685c657",
                 "shasum": ""
             },
             "type": "library",
@@ -14128,9 +14518,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v3.46.0"
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v3.47.1"
             },
-            "time": "2021-03-31T18:50:40+00:00"
+            "time": "2021-04-15T21:56:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -16876,6 +17266,67 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "twbs/bootstrap",
+            "version": "v4.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/6ffb0b48e455430f8a5359ed689ad64c1143fac2",
+                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com/",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v4.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/bootstrap",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-01-19T16:16:38+00:00"
+        },
+        {
             "name": "twig/twig",
             "version": "v2.14.4",
             "source": {
@@ -18200,26 +18651,26 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "1.4.3",
+            "version": "1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c"
+                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4650c8b30c753a76bf44fb2ed00117d6f367490c",
-                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
+                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^7.0",
-                "phpstan/phpstan": "^0.11",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-strict-rules": "^0.11",
+                "doctrine/coding-standard": "^8.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
@@ -18276,7 +18727,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/1.4.x"
+                "source": "https://github.com/doctrine/inflector/tree/1.4.4"
             },
             "funding": [
                 {
@@ -18292,7 +18743,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-29T07:19:59+00:00"
+            "time": "2021-04-16T17:34:40+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -19076,6 +19527,7 @@
         "davyin/dyniva_elastic_search": 20,
         "davyin/dyniva_event": 20,
         "davyin/dyniva_flowchart": 20,
+        "davyin/dyniva_layout_builder": 20,
         "davyin/dyniva_media": 20,
         "davyin/dyniva_migrate": 20,
         "davyin/dyniva_permission": 20,

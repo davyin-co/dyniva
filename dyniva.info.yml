@@ -58,6 +58,7 @@ install:
   - layout_builder_operation_link
   - dyniva_article
   - dyniva_layout_builder
+  - dyniva_layout_builder_blocks
   - dyniva_backoffice 
 themes:
   - bartik

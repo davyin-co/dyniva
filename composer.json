@@ -349,7 +349,7 @@
                 "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
             },
             "drupal/field_group": {
-                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2021-02-26/3059614-field_group-8.x-dev-fix-undefined-property-48.     patch"
+                 "Undefined property: stdClass::$region in field_group_form_process()": "https://www.drupal.org/files/issues/2021-02-26/3059614-field_group-8.x-dev-fix-undefined-property-48.patch"
             },
             "drupal/shs": {
                 "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",

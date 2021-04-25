@@ -246,7 +246,7 @@
                 "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
                 "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
                 "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
-                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-08-26/path-alias-8.9.3-3099084-152.patch",
+                "Base table or view not found: 1146 Table 'drupal.path_alias' doesn't exist. Update to 8.8.0 fails.": "https://www.drupal.org/files/issues/2020-12-22/drupal-system-3099084-160.patch",
                 "Color add less support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/color_less_support.patch",
                 "Statistics taxonomy page": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/update_statistics_to_count_taxonomy_page_85.patch",
                 "select options list attributes ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/select_options_list_attributes.patch",

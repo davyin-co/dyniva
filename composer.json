@@ -5,6 +5,9 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "ext-dom": "*",
         "cweagans/composer-patches": "^1.7",
@@ -152,7 +155,8 @@
         "drupal/core-composer-scaffold": "^8.9",
         "drupal/moderation_dashboard": "^1.0@beta",
         "drupal/moderation_sidebar": "^1.4",
-        "drupal/autosave_form": "^1.2"
+        "drupal/autosave_form": "^1.2",
+        "davyin/lightning_workflow": "^3.0"
     },
     "replace": {
         "drupal/lightning_workflow": "*"
@@ -255,7 +259,6 @@
                 "image filter imporve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/text_filter_secure_image_improve.patch",
                 "options label add token support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/add_token_support_on_options_label.patch",
                 "Config translation edit link destination": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/config_translation_edit_link_destination_fix.patch",
-                "content moderation delete bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_moderation_multiversion_delete_bug.patch",
                 "tokens in text editor": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/allow_tokens_in_text_editor-2830210-14.patch",
                 "editor file reference filter improve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/editor_file_reference_filter_improve.patch",
                 "500 error page": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/error_500_page.patch",

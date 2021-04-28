@@ -5,6 +5,9 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "ext-dom": "*",
         "cweagans/composer-patches": "^1.7",
@@ -152,7 +155,8 @@
         "drupal/core-composer-scaffold": "^8.9",
         "drupal/moderation_dashboard": "^1.0@beta",
         "drupal/moderation_sidebar": "^1.4",
-        "drupal/autosave_form": "^1.2"
+        "drupal/autosave_form": "^1.2",
+        "davyin/lightning_workflow": "^3.0"
     },
     "replace": {
         "drupal/lightning_workflow": "*"
@@ -255,7 +259,6 @@
                 "image filter imporve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/text_filter_secure_image_improve.patch",
                 "options label add token support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/add_token_support_on_options_label.patch",
                 "Config translation edit link destination": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/config_translation_edit_link_destination_fix.patch",
-                "content moderation delete bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_moderation_multiversion_delete_bug.patch",
                 "tokens in text editor": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/allow_tokens_in_text_editor-2830210-14.patch",
                 "editor file reference filter improve": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/editor_file_reference_filter_improve.patch",
                 "500 error page": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/error_500_page.patch",
@@ -278,8 +281,7 @@
                 "Multiversion breaks block plugin definition caching": "https://www.drupal.org/files/issues/2020-11-25/break_block_plugins_cache-3182819-5.patch",
                 "Rm default enable entity types": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/rm_default_enabled_entity_types.patch",
                 "Fix multiversion paragraph update used in group": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_multiversion_paragraph_update_used_in_group.patch",
-                "Fix \\RedirectRepository::__construct() must be an instance of Drupal\\Core\\Entity\\EntityManagerInterface": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix-constructor-argument.patch",
-                "content moderation multiversion delete bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/content_moderation_multiversion_delete_bug.patch"
+                "Fix \\RedirectRepository::__construct() must be an instance of Drupal\\Core\\Entity\\EntityManagerInterface": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix-constructor-argument.patch"
 
             },
             "drupal/paragraphs": {

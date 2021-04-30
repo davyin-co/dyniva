@@ -13,6 +13,7 @@ install:
   - ckeditor
   - config
   - contextual
+  - color
   - menu_link_content
   - datetime
   - quickedit

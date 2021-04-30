@@ -95,12 +95,12 @@ function dyniva_set_default_theme() {
  * Set the path to the logo, favicon and README file based on install directory.
  */
 function dyniva_set_logo() {
-  $dyniva_path = drupal_get_path('profile', 'dyniva');
+  $dyniva_path = drupal_get_path('theme', 'dyniva_ui');
 
   Drupal::configFactory()
     ->getEditable('system.theme.global')
     ->set('logo', [
-      'path' => $dyniva_path . '/dyniva.png',
+      'path' => $dyniva_path . '/logo.png',
       'url' => '',
       'use_default' => FALSE,
     ])

@@ -16,7 +16,6 @@
         "davyin/dyniva_admin": "1.x-dev",
         "davyin/dyniva_article": "1.x-dev",
         "davyin/dyniva_backoffice": "1.x-dev",
-        "davyin/dyniva_baidu": "1.x-dev",
         "davyin/dyniva_calendar": "1.x-dev",
         "davyin/dyniva_checklist": "1.x-dev",
         "davyin/dyniva_connect": "1.x-dev",
@@ -24,7 +23,6 @@
         "davyin/dyniva_core": "1.x-dev",
         "davyin/dyniva_elastic_search": "1.x-dev",
         "davyin/dyniva_event": "1.x-dev",
-        "davyin/dyniva_flowchart": "1.x-dev",
         "davyin/dyniva_layout_builder": "1.x-dev",
         "davyin/dyniva_media": "1.x-dev",
         "davyin/dyniva_migrate": "1.x-dev",
@@ -36,7 +34,6 @@
         "drupal/admin_toolbar": "^2.3",
         "drupal/allowed_formats": "^1.1",
         "drupal/asset_injector": "^2.2",
-        "drupal/atomic_block": "^1.1",
         "drupal/autosave_form": "^1.2",
         "drupal/better_exposed_filters": "^5.0",
         "drupal/block_list_override": "^1.0",
@@ -54,7 +51,6 @@
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/default_content": "^2.0@alpha",
         "drupal/diff": "^1.0",
-        "drupal/elasticsearch_connector": "^7.0@alpha",
         "drupal/entity_browser_block": "^1.1",
         "drupal/facets": "^1.6",
         "drupal/features": "^3.11",
@@ -99,7 +95,6 @@
         "drupal/views_bulk_operations": "^3.3",
         "drupal/views_entity_form_field": "^1.0@beta",
         "drupal/views_infinite_scroll": "^1.7",
-        "drupal/views_templates": "^1.1",
         "drupal/viewsreference": "^2.0",
         "drupal/xmlsitemap": "^1.0@alpha",
         "furf/jquery-ui-touch-punch": "dev-master",
@@ -271,9 +266,6 @@
             "drupal/message": {
                 "views plugin directory fix": "https://www.drupal.org/files/issues/2018-05-25/message-views_plugin_case-2891680-14.patch",
                 "views create bug fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/message_views_create_bug.patch"
-            },
-            "drupal/relaxed": {
-                "rm ensure full commit event loop": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/relaxed_rm_ensure_full_commit_event_dispatch.patch"
             },
             "drupal/autofill_fields": {
                 "autofill fields entity bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_autofill_fields_add_media_bug.patch"

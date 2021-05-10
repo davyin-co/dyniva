@@ -101,7 +101,7 @@
         "drupal/toolbar_visibility": "^1.2",
         "drupal/jsonapi_extras": "^3.0",
         "drupal/site_settings": "^1.12",
-        "drupal/devel": "^4.0",
+        "drupal/devel": "^2.0 || ^4.0",
         "drupal/coffee": "^1.0",
         "drupal/baidu_analytics": "1.x-dev",
         "drupal/google_analytics": "^3.1",

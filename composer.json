@@ -298,9 +298,6 @@
                 "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",
                 "Updating core 8.7 -> 8.8 with pathauto not possible": "https://www.drupal.org/files/issues/2020-04-27/3131286-3.patch"
             },
-            "drupal/lightning_layout": {
-                "Missing block is causing a fatal error when editing layout":"https://www.drupal.org/files/issues/2019-12-19/lightning_layout__fix_broken_inline_block_fatal_error-3102025-3.patch"
-            },
             "drupal/shs": {
                 "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
                 "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"

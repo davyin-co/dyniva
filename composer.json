@@ -282,7 +282,8 @@
                 "Rm default enable entity types": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/rm_default_enabled_entity_types.patch",
                 "Fix multiversion paragraph update used in group": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_multiversion_paragraph_update_used_in_group.patch",
                 "Fix \\RedirectRepository::__construct() must be an instance of Drupal\\Core\\Entity\\EntityManagerInterface": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix-constructor-argument.patch",
-                "Fix When enable pathauto module,deleting a translated entity removes all path alias for the entity": "https://www.drupal.org/files/issues/2021-05-08/fix_remove_all_path_alias_when_remove_translate_entity.patch"
+                "Fix When enable pathauto module,deleting a translated entity removes all path alias for the entity": "https://www.drupal.org/files/issues/2021-05-08/fix_remove_all_path_alias_when_remove_translate_entity.patch",
+                "Trying to access array offset on value of type": "https://www.drupal.org/files/issues/2021-05-18/multiversion-curly-braces-3214637-2.patch"
             },
             "drupal/paragraphs": {
                 "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"

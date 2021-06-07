@@ -236,8 +236,7 @@
                 "Fatal error update 8702 createHandlerInstance invoked with NULL class object.": "https://www.drupal.org/files/issues/2019-05-13/3053865-7.patch",
                 "datetime elements #states": "https://www.drupal.org/files/issues/2019-01-19/2419131-111.full_.patch",
                 "Confirm form cancle url bug fix": "https://www.drupal.org/files/issues/2020-01-30/confirmation_page_cancel_link_build_fix-2582295-45_0.patch",
-                "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
-                "Fix Route serialization incompatibilities between PHP 7.4 and 7.3": "https://www.drupal.org/files/issues/2020-06-04/3145563-23.patch"
+                "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch"
             },
             "drupal/multiversion": {
                 "Argument 1 passed to RedirectRepository::__construct() must be an instance of EntityManagerInterface": "https://www.drupal.org/files/issues/2019-12-18/fix-constructor-argument-3101924-2.patch",

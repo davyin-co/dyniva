@@ -109,7 +109,6 @@
         "oomphinc/composer-installers-extender": "^2.0"
     },
     "require-dev": {
-        "drush/drush": "^10.3",
         "drupal/devel": "^4.0",
         "drupal/devel_php": "^1.0"
     },

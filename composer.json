@@ -11,6 +11,8 @@
     "require": {
         "ext-dom": "*",
         "acquia/lightning": "~5.1.2",
+        "ckeditor/colorbutton": "^4.16",
+        "ckeditor/panelbutton": "^4.16",
         "cweagans/composer-patches": "^1.7",
         "davyin/boost": "1.x-dev",
         "davyin/dyniva_admin": "1.x-dev",
@@ -42,9 +44,10 @@
         "drupal/cas_attributes": "^1.0-beta1",
         "drupal/chosen": "^3.0",
         "drupal/ckeditor_font": "^1.0",
+        "drupal/ckeditor_templates_ui": "^1.4",
         "drupal/coffee": "^1.0",
         "drupal/colorbox": "^1.6",
-        "drupal/colorbutton": "^1.1",
+        "drupal/colorbutton": "^1.2",
         "drupal/config_ignore": "^2.1",
         "drupal/config_split": "^1.4",
         "drupal/confirm_leave": "^1.0@beta",
@@ -62,6 +65,7 @@
         "drupal/focal_point": "^1.4",
         "drupal/gin_lb": "^1.0@beta",
         "drupal/google_analytics": "^3.1",
+        "drupal/image_effects": "^3.1",
         "drupal/jsonapi_extras": "^3.0",
         "drupal/length_indicator": "^1.1",
         "drupal/login_emailusername": "^1.1",
@@ -156,6 +160,30 @@
                     "url": "https://github.com/furf/jquery-ui-touch-punch",
                     "type": "git",
                     "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/colorbutton",
+                "type": "drupal-library",
+                "version": "4.16.1",
+                "dist": {
+                    "url": "https://download.ckeditor.com/colorbutton/releases/colorbutton_4.16.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/panelbutton",
+                "type": "drupal-library",
+                "version": "4.16.1",
+                "dist": {
+                    "url": "https://download.ckeditor.com/panelbutton/releases/panelbutton_4.16.1.zip",
+                    "type": "zip"
                 }
             }
         },
@@ -293,6 +321,9 @@
             },
             "drupal/search_api": {
                 "fix excerpt empty bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/search_api_fix_chinese_excerpt.patch"
+            },
+            "drupal/page_manager": {
+                "page_variant entity type does not exist when installing or enabling": "https://www.drupal.org/files/issues/2876880-page-varient-cache-2.patch"
             },
             "drupal/pathauto": {
                 "multilanguage bug fix": "https://www.drupal.org/files/issues/2020-07-10/pathauto_multilanguage_state_fix-3131794-10.patch",

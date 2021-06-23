@@ -11,6 +11,8 @@
     "require": {
         "ext-dom": "*",
         "acquia/lightning": "~5.1.2",
+        "bower-asset/jqueryui-touch-punch": "dev-gh-pages",
+        "bower-asset/slick": "dev-josegonzalez-patch-1",
         "ckeditor/colorbutton": "^4.16",
         "ckeditor/panelbutton": "^4.16",
         "cweagans/composer-patches": "^1.7",
@@ -107,8 +109,6 @@
         "drupal/webform": "^6.0",
         "drupal/webform_views": "^5.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
-        "furf/jquery-ui-touch-punch": "dev-master",
-        "kenwheeler/slick": "^1.8",
         "mnsami/composer-custom-directory-installer": "^2.0",
         "oomphinc/composer-installers-extender": "^2.0"
     },
@@ -153,19 +153,6 @@
         {
             "type": "package",
             "package": {
-                "name": "furf/jquery-ui-touch-punch",
-                "type": "drupal-library",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/furf/jquery-ui-touch-punch",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "ckeditor/colorbutton",
                 "type": "drupal-library",
                 "version": "4.16.1",
@@ -183,18 +170,6 @@
                 "version": "4.16.1",
                 "dist": {
                     "url": "https://download.ckeditor.com/panelbutton/releases/panelbutton_4.16.1.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "kenwheeler/slick",
-                "type": "drupal-library",
-                "version": "1.8.0",
-                "dist": {
-                    "url": "https://github.com/kenwheeler/slick/archive/1.8.0.zip",
                     "type": "zip"
                 }
             }

@@ -1,0 +1,8 @@
+uuid: f62b201b-dc3a-45e4-a049-5853e52107bd
+langcode: und
+status: true
+dependencies: {  }
+id: standard
+label: Standard
+locked: false
+pattern: 'Y-m-d H:i:s'

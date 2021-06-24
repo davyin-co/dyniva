@@ -11,7 +11,7 @@
     "require": {
         "ext-dom": "*",
         "acquia/lightning": "~5.1.2",
-        "bower-asset/jqueryui-touch-punch": "dev-gh-pages",
+        "bower-asset/jqueryui-touch-punch": "dev-master",
         "bower-asset/slick": "dev-josegonzalez-patch-1",
         "ckeditor/colorbutton": "^4.16",
         "ckeditor/panelbutton": "^4.16",

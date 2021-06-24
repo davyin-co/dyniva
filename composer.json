@@ -11,7 +11,6 @@
     "require": {
         "ext-dom": "*",
         "acquia/lightning": "~5.1.2",
-        "bower-asset/jqueryui-touch-punch": "dev-master",
         "bower-asset/slick": "dev-josegonzalez-patch-1",
         "ckeditor/colorbutton": "^4.16",
         "ckeditor/panelbutton": "^4.16",
@@ -110,6 +109,7 @@
         "drupal/webform_views": "^5.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
         "mnsami/composer-custom-directory-installer": "^2.0",
+        "npm-asset/jquery-ui-touch-punch": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0"
     },
     "require-dev": {

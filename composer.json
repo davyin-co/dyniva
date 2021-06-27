@@ -109,6 +109,7 @@
         "drupal/webform_views": "^5.0@alpha",
         "drupal/xmlsitemap": "^1.0@alpha",
         "mnsami/composer-custom-directory-installer": "^2.0",
+        "npm-asset/blazy": "^1.8",
         "npm-asset/jquery-ui-touch-punch": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0"
     },

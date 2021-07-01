@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "198bf6ded5290c0f7afbdce76bc6ac12",
+    "content-hash": "e208e27014844e3a68ca69f3418c8e6e",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -228,21 +228,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "bower-asset/slick",
-            "version": "dev-josegonzalez-patch-1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:shashankmehta/slick.js.git",
-                "reference": "ce20afabd1898e002c4a5a9b0c21281a2592889d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/shashankmehta/slick.js/zipball/ce20afabd1898e002c4a5a9b0c21281a2592889d",
-                "reference": "ce20afabd1898e002c4a5a9b0c21281a2592889d"
-            },
-            "type": "bower-asset"
         },
         {
             "name": "bower-asset/slick-carousel",
@@ -1306,6 +1291,37 @@
             "time": "2021-05-06T03:07:58+00:00"
         },
         {
+            "name": "davyin/dyniva_document",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davyin-co/dyniva_document.git",
+                "reference": "f9589a25c55adb2e305dc7d103ea0cb49a121cd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_document/zipball/f9589a25c55adb2e305dc7d103ea0cb49a121cd5",
+                "reference": "f9589a25c55adb2e305dc7d103ea0cb49a121cd5",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/core": "^8.6 || ^9"
+            },
+            "default-branch": true,
+            "type": "drupal-custom-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "dyniva_document for drupal 8 +.",
+            "homepage": "https://github.com/davyin-co/dyniva_document",
+            "support": {
+                "issues": "https://github.com/davyin-co/dyniva_document/issues",
+                "source": "https://github.com/davyin-co/dyniva_document/tree/1.x"
+            },
+            "time": "2021-04-19T01:19:32+00:00"
+        },
+        {
             "name": "davyin/dyniva_elastic_search",
             "version": "1.x-dev",
             "source": {
@@ -1387,12 +1403,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/davyin-co/dyniva_layout_builder.git",
-                "reference": "5745f6fbbbb0384c856b00341eb855798c1ad9fa"
+                "reference": "e87d8745f18a9af7a0f65cdc977e0ad9b8e72e9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davyin-co/dyniva_layout_builder/zipball/5745f6fbbbb0384c856b00341eb855798c1ad9fa",
-                "reference": "5745f6fbbbb0384c856b00341eb855798c1ad9fa",
+                "url": "https://api.github.com/repos/davyin-co/dyniva_layout_builder/zipball/e87d8745f18a9af7a0f65cdc977e0ad9b8e72e9f",
+                "reference": "e87d8745f18a9af7a0f65cdc977e0ad9b8e72e9f",
                 "shasum": ""
             },
             "require": {
@@ -1433,6 +1449,9 @@
                         "Workaround for Call to a member function getLabel() after enabling layout_builder": "https://www.drupal.org/files/issues/2020-04-08/2985882-field-85.patch",
                         "Add getter for layout object in Layout Builder's ConfigureSectionForm": "https://www.drupal.org/files/issues/2019-10-31/expose-properties-config-section-form-with-tests-3044117-13.patch"
                     },
+                    "drupal/bootstrap_layout_builder": {
+                        "support-percetage-width": "https://raw.githubusercontent.com/davyin-co/dyniva_layout_builder/1.x/support-percetage-width.patch"
+                    },
                     "drupal/layout_builder_tabs": {
                         "compitable with layout_builder_kit": "https://www.drupal.org/files/issues/2021-06-02/compitable-with-layout_builder_kit.patch",
                         "layout builder bug": "https://www.drupal.org/files/issues/2020-07-27/layout_builder_tabs-user_errors-3150894-5.patch"
@@ -1458,7 +1477,7 @@
                 "issues": "https://github.com/davyin-co/dyniva_layout_builder/issues",
                 "source": "https://github.com/davyin-co/dyniva_layout_builder/tree/1.x"
             },
-            "time": "2021-06-27T03:58:25+00:00"
+            "time": "2021-06-27T14:03:59+00:00"
         },
         {
             "name": "davyin/dyniva_media",
@@ -11899,6 +11918,55 @@
             }
         },
         {
+            "name": "drupal/slick_extras",
+            "version": "1.0.0-rc4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/slick_extras.git",
+                "reference": "8.x-1.0-rc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slick_extras-8.x-1.0-rc4.zip",
+                "reference": "8.x-1.0-rc4",
+                "shasum": "908ea70bd8dc22bf35ea53353464414a42ade35b"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/slick": "*"
+            },
+            "require-dev": {
+                "drupal/slick": "*",
+                "drupal/slick_views": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-rc4",
+                    "datestamp": "1618671310",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "gausarts",
+                    "homepage": "https://www.drupal.org/user/159062"
+                }
+            ],
+            "description": "Provides Slick carousel extras.",
+            "homepage": "https://www.drupal.org/project/slick_extras",
+            "support": {
+                "source": "https://git.drupalcode.org/project/slick_extras"
+            }
+        },
+        {
             "name": "drupal/slick_paragraphs",
             "version": "2.1.0",
             "source": {
@@ -11955,6 +12023,58 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/slick_paragraphs",
                 "issues": "https://drupal.org/project/issues/slick_paragraphs"
+            }
+        },
+        {
+            "name": "drupal/slick_views",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/slick_views.git",
+                "reference": "8.x-2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slick_views-8.x-2.4.zip",
+                "reference": "8.x-2.4",
+                "shasum": "297bbf60834f3f3331a45177c5e4aff52942195a"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/slick": "~2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.4",
+                    "datestamp": "1618668307",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "gausarts",
+                    "homepage": "https://www.drupal.org/user/159062"
+                }
+            ],
+            "description": "Provides Slick carousel integration with Views. Slick carousel, the last carousel you'll ever need.",
+            "homepage": "https://drupal.org/project/slick_views",
+            "keywords": [
+                "Drupal",
+                "carousel",
+                "slideshow",
+                "views"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/slick_views",
+                "issues": "https://drupal.org/project/issues/slick_views"
             }
         },
         {
@@ -15064,6 +15184,18 @@
                 "reference": "4bc009145202d9c7483ba85f3a236a8f3470354d"
             },
             "type": "npm-asset"
+        },
+        {
+            "name": "npm-asset/slick",
+            "version": "1.12.2",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/slick/-/slick-1.12.2.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT (http://mootools.net/license.txt)"
+            ]
         },
         {
             "name": "nyholm/dsn",
@@ -20003,7 +20135,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bower-asset/slick": 20,
         "davyin/boost": 20,
         "davyin/dyniva_admin": 20,
         "davyin/dyniva_article": 20,
@@ -20013,6 +20144,7 @@
         "davyin/dyniva_connect": 20,
         "davyin/dyniva_content_moderation": 20,
         "davyin/dyniva_core": 20,
+        "davyin/dyniva_document": 20,
         "davyin/dyniva_elastic_search": 20,
         "davyin/dyniva_event": 20,
         "davyin/dyniva_layout_builder": 20,
@@ -20031,6 +20163,7 @@
         "drupal/moderation_dashboard": 10,
         "drupal/password_policy": 15,
         "drupal/production_checklist": 15,
+        "drupal/slick_extras": 5,
         "drupal/styleguide": 15,
         "drupal/views_entity_form_field": 10,
         "drupal/webform_views": 15,

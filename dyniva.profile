@@ -531,7 +531,7 @@ function dyniva_user_role_presave(RoleInterface $role) {
  * Implements hook_toolbar_alter().
  */
 function dyniva_toolbar_alter(&$items) {
-  if (\Drupal::currentUser()->hasPermission('access toolbar')
+  if (!\Drupal::moduleHandler()->moduleExists('gin_toolbar') && \Drupal::currentUser()->hasPermission('access toolbar')
     && !empty($items['admin_toolbar_tools'])) {
     $items['admin_toolbar_tools']['#attached']['library'][] = 'dyniva/toolbar.icon';
   }

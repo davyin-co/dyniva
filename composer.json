@@ -60,24 +60,16 @@
         "drupal/extlink": "^1.6",
         "drupal/facets": "^1.6",
         "drupal/features": "^3.11",
-        "drupal/field_group": "^3.1",
         "drupal/field_name_prefix_remove": "^1.0",
-        "drupal/field_permissions": "^1.0",
         "drupal/focal_point": "^1.4",
         "drupal/gin_lb": "^1.0@beta",
         "drupal/google_analytics": "^3.1",
         "drupal/image_effects": "^3.1",
         "drupal/jsonapi_extras": "^3.0",
-        "drupal/length_indicator": "^1.1",
         "drupal/login_emailusername": "^1.1",
         "drupal/masquerade": "^2.0@beta",
-        "drupal/media_entity_download": "^2.0",
         "drupal/menu_breadcrumb": "^1.13",
-        "drupal/menu_multilingual": "^1.0",
         "drupal/menu_trail_by_path": "^1.3",
-        "drupal/migrate_plus": "^5.1",
-        "drupal/migrate_source_csv": "^3.1",
-        "drupal/migrate_tools": "^5.0",
         "drupal/moderation_dashboard": "^1.0@beta",
         "drupal/moderation_sidebar": "^1.4",
         "drupal/module_filter": "^3.1",
@@ -101,7 +93,6 @@
         "drupal/swiftmailer": "^2.0",
         "drupal/total_control": "^2.0",
         "drupal/twig_tweak": "^3.1",
-        "drupal/vartheme_claro": "^2.1",
         "drupal/views_add_button": "^1.6",
         "drupal/views_bulk_operations": "^3.3",
         "drupal/views_entity_form_field": "^1.0@beta",
@@ -251,27 +242,8 @@
                 "Logout error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_logout_error-2948185-2.patch",
                 "Redirect loop with distnation": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/cas_distination_redirect_error.patch"
             },
-            "drupal/footable": {
-                "empty display fix ": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/table_empty_colspan_remove.patch"
-            },
-            "drupal/toolbar_visibility": {
-                "Add domain support": "https://www.drupal.org/files/issues/2018-04-19/add_domain_settings_support-2962280-3.patch"
-            },
-            "drupal/migrate_plus": {
-                "Add source or destination module": "https://www.drupal.org/files/issues/2018-03-22/migrate_plus_include_new_annotations-2955386-2.patch"
-            },
-            "drupal/flag": {
-                "user cancle error": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/flag_user_cancle_error.patch"
-            },
             "drupal/menu_trail_by_path": {
                 "add context module support": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/add_context_module_support.patch"
-            },
-            "drupal/message_ui": {
-                "views plugin directory fix": "https://www.drupal.org/files/issues/2018-06-21/message_ui-views_plugin_case_2917574-1.patch"
-            },
-            "drupal/message": {
-                "views plugin directory fix": "https://www.drupal.org/files/issues/2018-05-25/message-views_plugin_case-2891680-14.patch",
-                "views create bug fix": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/message_views_create_bug.patch"
             },
             "drupal/autofill_fields": {
                 "autofill fields entity bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/fix_autofill_fields_add_media_bug.patch"
@@ -284,9 +256,6 @@
             },
             "drupal/password_policy": {
                 "show policy for all": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/show_policy_for_all.patch"
-            },
-            "drupal/scheduled_updates": {
-                "rm entity validate": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/scheduled_updates_rm_entity_validate.patch"
             },
             "drupal/crop": {
                 "crop_file_url_alter_hook remove": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/crop_file_url_alter_hook_remove.patch"

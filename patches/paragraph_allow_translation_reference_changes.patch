@@ -1,0 +1,14 @@
+diff --git a/src/Plugin/Field/FieldWidget/ParagraphsWidget.php b/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
+index 6625db3..8559cd0 100644
+--- a/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
++++ b/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
+@@ -2673,7 +2673,8 @@ class ParagraphsWidget extends WidgetBase {
+    *   TRUE if we can allow reference changes, otherwise FALSE.
+    */
+   protected function allowReferenceChanges() {
+-    return !$this->isTranslating;
++    //return !$this->isTranslating;
++    return TRUE;
+   }
+ 
+   /**

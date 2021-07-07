@@ -286,7 +286,8 @@
                 "Trying to access array offset on value of type": "https://www.drupal.org/files/issues/2021-05-18/multiversion-curly-braces-3214637-2.patch"
             },
             "drupal/paragraphs": {
-                "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch"
+                "Field weight settings": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraphs_field_setttings_weight.patch",
+                "Allow translation reference change": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/paragraph_allow_translation_reference_changes.patch"
             },
             "drupal/replication": {
                 "content entity normalizer bug fix": "https://www.drupal.org/files/issues/2890261-6.patch",

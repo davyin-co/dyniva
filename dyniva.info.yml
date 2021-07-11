@@ -59,6 +59,7 @@ install:
   - dyniva_layout_builder:dyniva_layout_builder
   - dyniva_layout_builder:dyniva_layout_builder_blocks
   - dyniva_backoffice:dyniva_backoffice
+  - dyniva_elastic_search:dyniva_elastic_search
 themes:
   - bartik
   - dyniva_ui

@@ -30,7 +30,7 @@
         "davyin/dyniva_content_moderation": "1.x-dev",
         "davyin/dyniva_core": "1.x-dev",
         "davyin/dyniva_document": "1.x-dev",
-        "davyin/dyniva_elastic_search": "1.x-dev",
+        "davyin/dyniva_elastic_search": "2.x-dev",
         "davyin/dyniva_event": "1.x-dev",
         "davyin/dyniva_layout_builder": "1.x-dev",
         "davyin/dyniva_media": "1.x-dev",
@@ -89,7 +89,6 @@
         "drupal/redis": "^1.1",
         "drupal/reroute_email": "^1.0",
         "drupal/responsive_preview": "^1.0",
-        "drupal/search_api_autocomplete": "^1.0",
         "drupal/select2": "^1.12",
         "drupal/shs": "^1.0",
         "drupal/slick_extras": "^1.0@RC",
@@ -265,9 +264,6 @@
             },
             "drupal/crop": {
                 "crop_file_url_alter_hook remove": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/crop_file_url_alter_hook_remove.patch"
-            },
-            "drupal/search_api": {
-                "fix excerpt empty bug": "https://raw.githubusercontent.com/davyin-co/dyniva/1.1.x/patches/search_api_fix_chinese_excerpt.patch"
             },
             "drupal/page_manager": {
                 "page_variant entity type does not exist when installing or enabling": "https://www.drupal.org/files/issues/2876880-page-varient-cache-2.patch"

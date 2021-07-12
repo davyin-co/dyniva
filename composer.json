@@ -273,6 +273,9 @@
             "drupal/shs": {
                 "ArgumentCountError Too few arguments to function ": "https://www.drupal.org/files/issues/2020-10-06/shs-too-few-arguments-function-error-3168295-7.patch",
                 "SHS Chosen and Views Exposed Taxonomy Filter issue": "https://www.drupal.org/files/issues/2018-09-04/shs-fix-chosen-exposed-filter-2997344-1.patch"
+            },
+            "drupal/twig_tweak": {
+                "You are not allowed to specify an external URL together with internal": "https://www.drupal.org/files/issues/2021-07-12/fix_not_support_external_link-3223186_1.patch"
             }
         },
         "patches-ignore": {

@@ -96,7 +96,6 @@
         "drupal/stage_file_proxy": "^1.0",
         "drupal/styleguide": "^1.0@alpha",
         "drupal/swiftmailer": "^2.0",
-        "drupal/total_control": "^2.0",
         "drupal/twig_tweak": "^3.1",
         "drupal/views_add_button": "^1.6",
         "drupal/views_bulk_operations": "^3.3",

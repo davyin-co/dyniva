@@ -19,7 +19,7 @@ settings:
   label: manage
   provider: system
   label_display: '0'
-  level: 1
+  level: 2
   depth: 0
   expand_all_items: false
 visibility: {  }
